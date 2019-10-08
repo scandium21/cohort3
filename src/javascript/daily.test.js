@@ -35,3 +35,7 @@ test("Check function assertEquals", () => {
     expect(assertEquals("2","2")).toBe(true);
     expect(assertEquals(()=>{},()=>{})).toBe(false);
 });
+
+test("test testing", () => {
+    console.log("hello world");
+});
