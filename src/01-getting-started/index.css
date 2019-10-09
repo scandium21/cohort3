@@ -65,6 +65,10 @@ html {
     width: 50px;
 }
 
+.calculator-frame {
+    display: block;
+}
+
 
 /* Turn off parallax scrolling for tablets and phones */
 
