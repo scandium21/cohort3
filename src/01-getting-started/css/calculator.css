@@ -1,9 +1,75 @@
 .calculator-frame {
-    border: 1px solid #333;
+    border: 1px solid #b3b3b3;
     box-sizing: border-box;
+    height: 210px;
     margin: 100px auto;
     max-width: 300px;
     padding: 20px;
+}
+
+#idInput {
+    margin: auto;
+    text-align: right; 
+}
+
+.number-keypad {
+    display: grid;
+    float: left;
+    grid-gap: 5px;
+    grid-template-columns: 1fr 1fr 1fr;
+    left: 10px;
+    margin-top: 15px;
+    position: relative;
+    width: 70%;
+}
+
+.numkey, 
+.clear, 
+#idDot, 
+#idEnter,
+#idDelete
+{
+    background-color: #f1f3f4;
+    border: none;
+    border-radius: 10%;
+}
+
+#idEnter {
+    background-color: #4285f4;
+}
+
+.clear, #idDelete, .operator {
+    background-color: #dfe1e5;
+    border: none;
+    border-radius: 10%;
+}
+
+.numkey:hover, #idDot:hover {
+    background-color: #e0e0e0;
+    cursor: pointer;
+}
+
+#idEnter:hover {
+    background-color: #5e99f8;
+    cursor: pointer;
+}
+
+.clear:hover, #idDelete:hover, .operator:hover {
+    background-color: #d1d2d4;
+    cursor: pointer;
+}
+
+.operation {
+    display: grid;
+    float: right;
+    grid-template-columns: 1fr;
+    grid-gap: 7px;
+    position: relative;
+    top: -50px;
+}
+
+.pressed {
+    background-color: lightblue;
 }
 
 .window {
