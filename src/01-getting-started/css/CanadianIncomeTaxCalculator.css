@@ -1,0 +1,29 @@
+.tax-cal-frame {
+    border: 1px solid #b3b3b3;
+    box-sizing: border-box;
+    margin: 100px auto;
+    max-width: 800px;
+    padding: 20px;
+}
+
+.grid-wrapper {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+}
+
+.btn {
+    left: 20%;
+    position: relative;
+}
+
+.income {
+    margin-bottom: 15px;
+}
+
+.province {
+    margin-bottom: 15px;
+}
+
+#idFedTaxList {
+    font-size: 0.8em;
+}
