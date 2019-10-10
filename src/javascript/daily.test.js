@@ -1,4 +1,4 @@
-import assertEquals from "./daily"
+import functions from "./daily"
 
 /*  10/7/19 daily exercise test from EvolveU cohort 3
     -------------------------------------------------
@@ -29,13 +29,28 @@ import assertEquals from "./daily"
 */
 
 test("Check function assertEquals", () => {
-    expect(assertEquals(1,2)).toBe(false);
-    expect(assertEquals(1,1)).toBe(true);
-    expect(assertEquals({},{})).toBe(false);
-    expect(assertEquals("2","2")).toBe(true);
-    expect(assertEquals(()=>{},()=>{})).toBe(false);
+    expect(functions.assertEquals(1,2)).toBe(false);
+    expect(functions.assertEquals(1,1)).toBe(true);
+    expect(functions.assertEquals({},{})).toBe(false);
+    expect(functions.assertEquals("2","2")).toBe(true);
+    expect(functions.assertEquals(()=>{},()=>{})).toBe(false);
 });
 
 test("test testing", () => {
     console.log("hello world");
+});
+
+
+/*
+    2019-10-09 daily exercise: Write a function to format an email based on an array.
+*/
+
+test('email builder from an array', () => {
+    const name = ["first", "last"];
+    expect(functions.makeEmailArr(name))
+        .toEqual("first.last@evolveu.ca");
+    expect(functions.makeEmailArr(["First", "Last"]))
+        .toEqual("first.last@evolveu.ca");
+    expect(functions.makeEmailArr(["Bill", "Smith"]))
+        .toEqual("bill.smith@evolveu.ca");
 });

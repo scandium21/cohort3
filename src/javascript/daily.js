@@ -26,20 +26,32 @@
 */
 
 // Write the function after this comment ---
-const assertEquals = (p1, p2) => {
-    if (p1 === p2) return true;
-    let string = `*** the two values are not the same:\n\tp1--> ${p1}\n\tp2--> ${p2}\n`;
-    console.log(string);
-    return false;
-}
+const functions = {
+    assertEquals: (p1, p2) => {
+        if (p1 === p2) return true;
+        let string = `*** the two values are not the same:\n\tp1--> ${p1}\n\tp2--> ${p2}\n`;
+        console.log(string);
+        return false;
+    },
+
+
+    /* 
+        2019 - 10 - 09 daily exercise
+        Write a function that will receive an array. The first entree in the array is the first name, the second entree is the last name. The array only has one person in it. Create an evolveu email from the array. 
+    */
+    makeEmailArr: (name) => {
+        let string = name[0].toLowerCase() + "." + name[1].toLowerCase() + "@evolveu.ca";
+        return string;
+    }
+} 
 
 // and before this comment ---
 
-assertEquals("a","b");
-assertEquals("a","a");
-assertEquals(1,2);
-assertEquals(2,2);
-assertEquals("2",2);
-assertEquals("This value","This value");
+functions.assertEquals("a","b");
+functions.assertEquals("a","a");
+functions.assertEquals(1,2);
+functions.assertEquals(2,2);
+functions.assertEquals("2",2);
+functions.assertEquals("This value","This value");
 
-export default assertEquals;
+export default functions;
