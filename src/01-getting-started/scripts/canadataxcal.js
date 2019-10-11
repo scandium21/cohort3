@@ -64,7 +64,7 @@ const taxCal = (income) => {
 }
 
 idSubmitBtn.addEventListener("click", ()=>{
-    idFedTax.textContent = taxCal(Math.round(parseFloat(idIncome.value)*100)/100).toFixed(2);
+    idFedTax.textContent = taxCal(Math.round(parseFloat(idIncome.value)*100)/100);
 });
 
 
