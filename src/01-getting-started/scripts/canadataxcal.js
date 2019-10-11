@@ -24,7 +24,7 @@ class SinglyLinkedList {
             this.tail = newNode;
         }
         this.length += 1;
-        return this.head;
+        return this;
     }
 
 
@@ -53,7 +53,7 @@ const taxCalHelper = (income, node) => {
     }
     if (income > node.val) {
         let tax = (income - node.val) * node.percent;
-        return tax + taxCalHelper(income, node.next);
+        return tax + taxCalHelper(node.val, node.next);
     } else {
         return taxCalHelper(income, node.next);
     }
