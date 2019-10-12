@@ -1,4 +1,4 @@
-.Working-with-Arrays-frame {
+.Working-with-Arrays-frame, .Working-with-Dic-frame {
     border: 3px solid #333;
     box-sizing: border-box;
     margin: 25px auto;
@@ -6,6 +6,6 @@
     padding: 10px 20px;
 }
 
-#idArrInput {
+#idArrInput, #idDicInput {
     margin-bottom: 15px;
 }
