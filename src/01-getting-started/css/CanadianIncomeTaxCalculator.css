@@ -6,6 +6,7 @@
     padding: 20px;
 }
 
+
 .grid-wrapper {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -13,7 +14,12 @@
 
 .btn {
     left: 20%;
+    margin: 25px;
     position: relative;
+}
+
+#idProvince {
+    margin-top: 10px;
 }
 
 .income {
@@ -26,4 +32,19 @@
 
 #idFedTaxList {
     font-size: 0.8em;
+}
+
+.fedTaxResult, .provTaxResult, .remainingAmount {
+    margin: 5px;
+}
+
+#idFedTaxHeading {
+    text-align: center;
+}
+
+.tax-heading {
+    margin-bottom: 5px;
+    position: relative;
+    text-align: center;
+    top: -5px;
 }

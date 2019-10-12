@@ -32,6 +32,7 @@ test("Check function assertEquals", () => {
     expect(functions.assertEquals(1,2)).toBe(false);
     expect(functions.assertEquals(1,1)).toBe(true);
     expect(functions.assertEquals({},{})).toBe(false);
+    expect(functions.assertEquals(NaN,0/0)).toBe(false);
     expect(functions.assertEquals("2","2")).toBe(true);
     expect(functions.assertEquals(()=>{},()=>{})).toBe(false);
 });

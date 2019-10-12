@@ -1,0 +1,11 @@
+.Working-with-Arrays-frame {
+    border: 3px solid #333;
+    box-sizing: border-box;
+    margin: 25px auto;
+    max-width: 500px;
+    padding: 10px 20px;
+}
+
+#idArrInput {
+    margin-bottom: 15px;
+}
