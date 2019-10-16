@@ -1,6 +1,88 @@
 import functions from "./daily"
+/* 2019 - 10 - 16,17 test array functions: map(), filter(), reduce()  */
+test ('more arr functions', () => {
+    let arr = ['fire', 'earth', 'air', 'water'];
+    let arr2 = ['Monica', 'Rachel', 'Phoebe', 'Chandler', 'Ross', 'Joey'];
+    expect(functions.arrSlice1to3(arr)).toEqual(['earth','air']);
+    expect(functions.arrSliceLastTwo(arr)).toEqual(['air','water']);
+    expect(functions.arrSpliceInsertOne(arr2, 3, 'SC'))
+        .toEqual(['Monica', 'Rachel', 'Phoebe', 'SC', 'Chandler', 'Ross', 'Joey']);
+    expect(functions.arrSpliceChangeVal(arr2, 0, 'SC'))
+        .toEqual(['SC', 'Rachel', 'Phoebe', 'SC', 'Chandler', 'Ross', 'Joey']);
+});
 
-/*  10/7/19 daily exercise test from EvolveU cohort 3
+test('testing map, filter, reduce, and sort functions', () => {
+    const studentGrades = [ 
+        {name: 'Joe', grade: 88},
+        {name: 'Jen', grade: 94},
+        {name: 'Steph', grade: 77},
+        {name: 'Allen', grade: 60},
+        {name: 'Gina', grade: 54},
+    ];
+    const studentLetterGrades = [ 
+        {name: 'Joe', grade: 'b'},
+        {name: 'Jen', grade: 'a'},
+        {name: 'Steph', grade: 'c'},
+        {name: 'Allen', grade: 'd'},
+        {name: 'Gina', grade: 'f'},
+    ];
+    const studentAboveF = [ 
+        {name: 'Joe', grade: 88},
+        {name: 'Jen', grade: 94},
+        {name: 'Steph', grade: 77},
+        {name: 'Allen', grade: 60},
+    ];
+    const grades = [60, 55, 80];
+    expect(functions.arrMap(studentGrades)).toEqual(studentLetterGrades);
+    expect(functions.arrFilter(studentGrades)).toEqual(studentAboveF);
+    expect(functions.arrForEachModify(studentGrades)).toEqual(studentLetterGrades);
+    expect(functions.arrReduce(grades)).toEqual(195);
+    expect(functions.arrSort(grades)).toEqual([55,60,80]);
+});
+
+
+
+
+/* 2019 - 10 - 15 test array basic loop functions  */
+test ('basic loop funcs for arrays', () => {
+    let arr = ['fire', 'earth', 'air', 'water'];
+    expect(functions.arrLoopsFuncs[2](arr)).toEqual(['fire','air']);
+    expect(functions.arrLoopsFuncs[3](arr)).toEqual(['earth','water']);
+    expect(functions.arrLoopsFuncs[4](arr)).toEqual(['fire','air']);
+    expect(functions.arrLoopsFuncs[5](arr)).toEqual(['fire-', 'earth-', 'air-', 'water-']);
+    expect(functions.arrLoopsFuncs[6](arr)).toEqual(['fire_', 'earth_', 'air_', 'water_']);
+});
+
+/*
+    2019 - 10 - 11
+	Write the function to format an email based on an object / map
+*/
+
+test('email builder from an object / map', () => {
+    const name = { fname: 'first', lname: 'last' };
+    expect(functions.makeEmailObj(name))
+        .toEqual("first.last@evolveu.ca");
+    expect(functions.makeEmailObj({ fname: 'First', lname: 'Last' }))
+        .toEqual("first.last@evolveu.ca");
+    expect(functions.makeEmailObj({ fname: "Bill", lname: "Smith" }))
+        .toEqual("bill.smith@evolveu.ca");
+});
+
+/*
+    2019-10-09 daily exercise: Write a function to format an email based on an array.
+*/
+
+test('email builder from an array', () => {
+    const name = ["first", "last"];
+    expect(functions.makeEmailArr(name))
+        .toEqual("first.last@evolveu.ca");
+    expect(functions.makeEmailArr(["First", "Last"]))
+        .toEqual("first.last@evolveu.ca");
+    expect(functions.makeEmailArr(["Bill", "Smith"]))
+        .toEqual("bill.smith@evolveu.ca");
+});
+
+/*  2019 - 10 -07 daily exercise test from EvolveU cohort 3
     -------------------------------------------------
     Write a function that will receive two parameters. The function will compare the parameters and do the following:
 
@@ -42,16 +124,3 @@ test("test testing", () => {
 });
 
 
-/*
-    2019-10-09 daily exercise: Write a function to format an email based on an array.
-*/
-
-test('email builder from an array', () => {
-    const name = ["first", "last"];
-    expect(functions.makeEmailArr(name))
-        .toEqual("first.last@evolveu.ca");
-    expect(functions.makeEmailArr(["First", "Last"]))
-        .toEqual("first.last@evolveu.ca");
-    expect(functions.makeEmailArr(["Bill", "Smith"]))
-        .toEqual("bill.smith@evolveu.ca");
-});
