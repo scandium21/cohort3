@@ -8,6 +8,7 @@ let prov = {
     ON:"Ontario",
     PE:"Prince Edward Island",
     SK:"Saskatchewan",
+    QC: "Quebec",
     NT:"Northwest Territories",
     NU:"Nunavut",
     YT:"Yukon",
