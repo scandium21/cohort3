@@ -1,0 +1,23 @@
+.main {
+    border: solid #333 3px;
+    height: 300px;
+    margin: auto;
+    width: 300px;
+}
+
+h1 {
+    text-align: center;
+}
+
+.btn {
+    margin-top: 12%;
+    text-align: center;
+}
+
+.ol {
+    font-size: 1.2em;
+    left: 10%;
+    line-height: 1.3em;
+    position: relative;
+    top: 5%;
+}
