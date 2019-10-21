@@ -1,27 +1,60 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="stylesheet" href="index.css">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <link rel="stylesheet" href="index.css" />
     <title>02 - DOM</title>
-</head>
-<body>
-    <div class="main">
-        <h1>Basic DOM</h1>
-        <ol class='ol'>This is a list of stuff
-            <!-- <li class="item">Item 1</li>
-            <li class="item">Item 2</li>
-            <li class="item">Item 3</li> -->
-        </ol>
-        <div class='btn'>
-            <button id="idShow">Show</button>
-            <button id="idAdd">Add</button>
-            <button id="idDelete">Delete</button>
-        </div>
+  </head>
+  <body>
+    <!-- Divider between different projects -->
+    <div class="divider">
+      <div class="divider-div">
+        <span class="divider-text">Basic DOM</span>
+      </div>
     </div>
-    <script type="module" src="./scripts/app.js"></script>
-    <script type="module" src="./scripts/main.js"></script>
-</body>
+
+    <div class="main">
+      <h1>Basic DOM</h1>
+      <p id="idText">This is a list of stuff</p>
+      <ol class="ol"></ol>
+
+      <!-- The basic DOM -->
+      <div class="btn">
+        <button id="idShow" class="btn-item">Show</button>
+        <button id="idHide" class="btn-item">Hide</button>
+
+        <button id="idAddTop" class="btn-item">Add to Top</button>
+        <button id="idAddBtm" class="btn-item">Add to Btm</button>
+
+        <button id="idDeletet" class="btn-item">Delete from Top</button>
+        <button id="idDeleteb" class="btn-item">Delete from Btm</button>
+      </div>
+    </div>
+
+    <!-- Divider between different projects -->
+    <div class="divider">
+      <div class="divider-div">
+        <span class="divider-text">working with cards</span>
+      </div>
+    </div>
+
+    <!-- Working with cards -->
+    <div class="wc-container">
+      <div class="left-panel">
+        <h2 class="l-heading">Working with Cards</h2>
+        <div class="left-wrapper">
+          <button class="main-add">Add Card</button>
+        </div>
+      </div>
+      <div class="right-panel">
+        </div>
+      </div>
+    </div>
+
+    <script src="./scripts/basicDOM.js"></script>
+    <script src="./scripts/workingwithcards.js"></script>
+    <!-- <script type="module" src="./scripts/main.js"></script> -->
+  </body>
 </html>
