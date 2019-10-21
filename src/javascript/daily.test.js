@@ -1,56 +1,109 @@
-import functions from "./daily"
+import functions from './daily';
+
+/*
+Sample data for the next few exercises.
+*/
+
+const data = {
+  staff: [
+    { fname: 'Jane', lname: 'Smith', balance: 10 },
+    { fname: 'Liam', lname: 'Henry', balance: 1000 },
+    { fname: 'Emma', lname: 'Jones', balance: 1330 },
+    { fname: 'Olivia', lname: 'Notly', balance: 310 },
+    { fname: 'Noah', lname: 'Ho', balance: 503 },
+    { fname: 'William', lname: 'Lee', balance: 520 },
+    { fname: 'Benjamin', lname: 'Amis', balance: 150 }
+  ],
+  company: 'EvolveU',
+  city: 'Calgary',
+  prov: 'Alberta'
+};
+
+/*	
+  2019 - 10 -21 Write the function to build email addresses for the company.
+*/
+test('email builder for company', () => {
+  const staffEmail = functions.loopStaff(data.staff);
+  expect(staffEmail[0]).toEqual('jane.smith@evolveu.ca');
+  expect(staffEmail[3]).toEqual('olivia.notly@evolveu.ca');
+  expect(staffEmail[6]).toEqual('benjamin.amis@evolveu.ca');
+});
+
 /* 2019 - 10 - 16,17 test array functions: map(), filter(), reduce()  */
-test ('more arr functions', () => {
-    let arr = ['fire', 'earth', 'air', 'water'];
-    let arr2 = ['Monica', 'Rachel', 'Phoebe', 'Chandler', 'Ross', 'Joey'];
-    expect(functions.arrSlice1to3(arr)).toEqual(['earth','air']);
-    expect(functions.arrSliceLastTwo(arr)).toEqual(['air','water']);
-    expect(functions.arrSpliceInsertOne(arr2, 3, 'SC'))
-        .toEqual(['Monica', 'Rachel', 'Phoebe', 'SC', 'Chandler', 'Ross', 'Joey']);
-    expect(functions.arrSpliceChangeVal(arr2, 0, 'SC'))
-        .toEqual(['SC', 'Rachel', 'Phoebe', 'SC', 'Chandler', 'Ross', 'Joey']);
+test('more arr functions', () => {
+  let arr = ['fire', 'earth', 'air', 'water'];
+  let arr2 = ['Monica', 'Rachel', 'Phoebe', 'Chandler', 'Ross', 'Joey'];
+  expect(functions.arrSlice1to3(arr)).toEqual(['earth', 'air']);
+  expect(functions.arrSliceLastTwo(arr)).toEqual(['air', 'water']);
+  expect(functions.arrSpliceInsertOne(arr2, 3, 'SC')).toEqual([
+    'Monica',
+    'Rachel',
+    'Phoebe',
+    'SC',
+    'Chandler',
+    'Ross',
+    'Joey'
+  ]);
+  expect(functions.arrSpliceChangeVal(arr2, 0, 'SC')).toEqual([
+    'SC',
+    'Rachel',
+    'Phoebe',
+    'SC',
+    'Chandler',
+    'Ross',
+    'Joey'
+  ]);
 });
 
 test('testing map, filter, reduce, and sort functions', () => {
-    const studentGrades = [ 
-        {name: 'Joe', grade: 88},
-        {name: 'Jen', grade: 94},
-        {name: 'Steph', grade: 77},
-        {name: 'Allen', grade: 60},
-        {name: 'Gina', grade: 54},
-    ];
-    const studentLetterGrades = [ 
-        {name: 'Joe', grade: 'b'},
-        {name: 'Jen', grade: 'a'},
-        {name: 'Steph', grade: 'c'},
-        {name: 'Allen', grade: 'd'},
-        {name: 'Gina', grade: 'f'},
-    ];
-    const studentAboveF = [ 
-        {name: 'Joe', grade: 88},
-        {name: 'Jen', grade: 94},
-        {name: 'Steph', grade: 77},
-        {name: 'Allen', grade: 60},
-    ];
-    const grades = [60, 55, 80];
-    expect(functions.arrMap(studentGrades)).toEqual(studentLetterGrades);
-    expect(functions.arrFilter(studentGrades)).toEqual(studentAboveF);
-    expect(functions.arrForEachModify(studentGrades)).toEqual(studentLetterGrades);
-    expect(functions.arrReduce(grades)).toEqual(195);
-    expect(functions.arrSort(grades)).toEqual([55,60,80]);
+  const studentGrades = [
+    { name: 'Joe', grade: 88 },
+    { name: 'Jen', grade: 94 },
+    { name: 'Steph', grade: 77 },
+    { name: 'Allen', grade: 60 },
+    { name: 'Gina', grade: 54 }
+  ];
+  const studentLetterGrades = [
+    { name: 'Joe', grade: 'b' },
+    { name: 'Jen', grade: 'a' },
+    { name: 'Steph', grade: 'c' },
+    { name: 'Allen', grade: 'd' },
+    { name: 'Gina', grade: 'f' }
+  ];
+  const studentAboveF = [
+    { name: 'Joe', grade: 88 },
+    { name: 'Jen', grade: 94 },
+    { name: 'Steph', grade: 77 },
+    { name: 'Allen', grade: 60 }
+  ];
+  const grades = [60, 55, 80];
+  expect(functions.arrMap(studentGrades)).toEqual(studentLetterGrades);
+  expect(functions.arrFilter(studentGrades)).toEqual(studentAboveF);
+  expect(functions.arrForEachModify(studentGrades)).toEqual(
+    studentLetterGrades
+  );
+  expect(functions.arrReduce(grades)).toEqual(195);
+  expect(functions.arrSort(grades)).toEqual([55, 60, 80]);
 });
 
-
-
-
 /* 2019 - 10 - 15 test array basic loop functions  */
-test ('basic loop funcs for arrays', () => {
-    let arr = ['fire', 'earth', 'air', 'water'];
-    expect(functions.arrLoopsFuncs[2](arr)).toEqual(['fire','air']);
-    expect(functions.arrLoopsFuncs[3](arr)).toEqual(['earth','water']);
-    expect(functions.arrLoopsFuncs[4](arr)).toEqual(['fire','air']);
-    expect(functions.arrLoopsFuncs[5](arr)).toEqual(['fire-', 'earth-', 'air-', 'water-']);
-    expect(functions.arrLoopsFuncs[6](arr)).toEqual(['fire_', 'earth_', 'air_', 'water_']);
+test('basic loop funcs for arrays', () => {
+  let arr = ['fire', 'earth', 'air', 'water'];
+  expect(functions.arrLoopsFuncs[2](arr)).toEqual(['fire', 'air']);
+  expect(functions.arrLoopsFuncs[3](arr)).toEqual(['earth', 'water']);
+  expect(functions.arrLoopsFuncs[4](arr)).toEqual(['fire', 'air']);
+  expect(functions.arrLoopsFuncs[5](arr)).toEqual([
+    'fire-',
+    'earth-',
+    'air-',
+    'water-'
+  ]);
+  expect(functions.arrLoopsFuncs[6](arr)).toEqual([
+    'fire_',
+    'earth_',
+    'air_',
+    'water_'
+  ]);
 });
 
 /*
@@ -59,13 +112,14 @@ test ('basic loop funcs for arrays', () => {
 */
 
 test('email builder from an object / map', () => {
-    const name = { fname: 'first', lname: 'last' };
-    expect(functions.makeEmailObj(name))
-        .toEqual("first.last@evolveu.ca");
-    expect(functions.makeEmailObj({ fname: 'First', lname: 'Last' }))
-        .toEqual("first.last@evolveu.ca");
-    expect(functions.makeEmailObj({ fname: "Bill", lname: "Smith" }))
-        .toEqual("bill.smith@evolveu.ca");
+  const name = { fname: 'first', lname: 'last' };
+  expect(functions.makeEmailObj(name)).toEqual('first.last@evolveu.ca');
+  expect(functions.makeEmailObj({ fname: 'First', lname: 'Last' })).toEqual(
+    'first.last@evolveu.ca'
+  );
+  expect(functions.makeEmailObj({ fname: 'Bill', lname: 'Smith' })).toEqual(
+    'bill.smith@evolveu.ca'
+  );
 });
 
 /*
@@ -73,13 +127,14 @@ test('email builder from an object / map', () => {
 */
 
 test('email builder from an array', () => {
-    const name = ["first", "last"];
-    expect(functions.makeEmailArr(name))
-        .toEqual("first.last@evolveu.ca");
-    expect(functions.makeEmailArr(["First", "Last"]))
-        .toEqual("first.last@evolveu.ca");
-    expect(functions.makeEmailArr(["Bill", "Smith"]))
-        .toEqual("bill.smith@evolveu.ca");
+  const name = ['first', 'last'];
+  expect(functions.makeEmailArr(name)).toEqual('first.last@evolveu.ca');
+  expect(functions.makeEmailArr(['First', 'Last'])).toEqual(
+    'first.last@evolveu.ca'
+  );
+  expect(functions.makeEmailArr(['Bill', 'Smith'])).toEqual(
+    'bill.smith@evolveu.ca'
+  );
 });
 
 /*  2019 - 10 -07 daily exercise test from EvolveU cohort 3
@@ -110,17 +165,15 @@ test('email builder from an array', () => {
     p2--> 2
 */
 
-test("Check function assertEquals", () => {
-    expect(functions.assertEquals(1,2)).toBe(false);
-    expect(functions.assertEquals(1,1)).toBe(true);
-    expect(functions.assertEquals({},{})).toBe(false);
-    expect(functions.assertEquals(NaN,0/0)).toBe(false);
-    expect(functions.assertEquals("2","2")).toBe(true);
-    expect(functions.assertEquals(()=>{},()=>{})).toBe(false);
+test('Check function assertEquals', () => {
+  expect(functions.assertEquals(1, 2)).toBe(false);
+  expect(functions.assertEquals(1, 1)).toBe(true);
+  expect(functions.assertEquals({}, {})).toBe(false);
+  expect(functions.assertEquals(NaN, 0 / 0)).toBe(false);
+  expect(functions.assertEquals('2', '2')).toBe(true);
+  expect(functions.assertEquals(() => {}, () => {})).toBe(false);
 });
 
-test("test testing", () => {
-    console.log("hello world");
+test('test testing', () => {
+  console.log('hello world');
 });
-
-
