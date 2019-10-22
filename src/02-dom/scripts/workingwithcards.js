@@ -1,142 +1,102 @@
-// define UI var
-const leftPanel = document.querySelector('.left-panel');
-const right = document.querySelector('.right-panel');
+const wc = {
+  // define UI var
+  leftPanel: document.querySelector(".left-panel"),
+  right: document.querySelector(".right-panel"),
+  // card index
+  index: 0,
+  // create h2 elem
+  createH2: (text, index) => {
+    let h2 = document.createElement("h2");
+    h2.appendChild(document.createTextNode(`${text} ${index}`));
+    h2.id = "r" + index;
+    return h2;
+  },
 
-// load all event listeners
-loadEventListeners();
+  // create p element
+  createP: index => {
+    let p = document.createElement("p");
+    p.appendChild(document.createTextNode(`Card ${index}`));
+    p.id = `p${index}`;
+    return p;
+  },
 
-function loadEventListeners() {
-  leftPanel.addEventListener('click', takeAction);
-}
+  // create div with the passed classname
+  createDiv: (className, id) => {
+    let div = document.createElement("div");
+    div.className = className;
+    div.id = id;
+    return div;
+  },
 
-// decide what to do based on the button clicked
-function takeAction(e) {
-  let ptoAppend;
-  if (e.target.classList.contains('main-add')) {
-    ptoAppend = e.target.parentElement;
-    addCardB(ptoAppend);
-  } else if (e.target.classList.contains('add-after')) {
-    ptoAppend = e.target.parentElement.parentElement.parentElement;
-    addCardB(ptoAppend);
-  } else if (e.target.classList.contains('add-before')) {
-    ptoAppend = e.target.parentElement.parentElement.parentElement;
-    addCardT(ptoAppend);
-  } else if (e.target.classList.contains('delete')) {
-    deleteCurrCard(e);
+  // create button with the passed classname
+  createButton: className => {
+    let btn = document.createElement("button");
+    btn.className = className;
+    btn.appendChild(
+      document.createTextNode(
+        className.includes("before")
+          ? "Add Before"
+          : className.includes("after")
+          ? "Add After"
+          : "Delete"
+      )
+    );
+    return btn;
+  },
+
+  // create left card
+  createLeftCard: index => {
+    // create generic wrapper
+    let lc = wc.createDiv("card-wrapper", `l${index}`);
+    // create p element and assign text
+    // append p to lc
+    lc.appendChild(wc.createP(index));
+    let div = wc.createDiv("card", ``);
+    lc.appendChild(div);
+    // create buttons with passed classname
+    div.appendChild(wc.createButton("add-before"));
+    div.appendChild(wc.createButton("add-after"));
+    div.appendChild(wc.createButton("delete"));
+    wc.index += 1;
+    return lc;
+  },
+
+  // create right card
+  createRightCard: (text, index) => {
+    // create generic wrapper
+    let rc = wc.createDiv("right-card", `rc${index}`);
+    rc.appendChild(wc.createH2(text, index));
+    return rc;
+  },
+
+  // add card to bottom
+  addCardB: (ptoAppend, right, index) => {
+    // create left card and append it
+    let lc = wc.createLeftCard(index);
+    ptoAppend.appendChild(lc);
+    // create right card and append it
+    right.appendChild(wc.createRightCard("Right Side", index));
+  },
+
+  // add card to top
+  addCardT: (ptoAppend, right, index) => {
+    // create new cards
+    let nlc = wc.createLeftCard(index);
+    let nrc = wc.createRightCard("Right Side", index);
+    ptoAppend.insertBefore(nlc, ptoAppend.firstChild);
+    right.insertBefore(nrc, right.firstChild);
+  },
+
+  // delete the card when 'delete' button is pressed
+  deleteCurrCard: (itemToDelete, right) => {
+    itemToDelete.remove();
+    let rightChildToRemove = Array.from(right.children).filter(function(item) {
+      return item.id.includes(
+        itemToDelete.id.charAt(itemToDelete.id.length - 1)
+      );
+    });
+    right.removeChild(rightChildToRemove[0]);
   }
-}
+};
 
-// delete the card when 'delete' button is pressed
-function deleteCurrCard(e) {
-  let lctoBeRemoved = e.target.parentElement.parentElement;
-  // get index to remove the right card at index - 1
-  let index = Array.from(lctoBeRemoved.parentElement.children).indexOf(
-    lctoBeRemoved
-  );
-  lctoBeRemoved.remove();
-  right.removeChild(right.children[index - 1]);
-}
-
-// add card to top
-function addCardT(ptoAppend) {
-  // create new cards
-  let nlc = createLeft(ptoAppend);
-  let nrc = createRight('Right Side');
-  ptoAppend.insertBefore(
-    nlc,
-    ptoAppend.firstChild.nextElementSibling.nextElementSibling
-  );
-  fixNumbering(ptoAppend);
-  right.insertBefore(nrc, right.firstChild);
-}
-
-// fix numbering when adding to front
-function fixNumbering(ptoAppend) {
-  Array.from(ptoAppend.children).forEach((item, index) => {
-    if (item.firstChild && item.firstChild.textContent.includes('Card '))
-      item.firstChild.textContent = `Card ${index}`;
-  });
-}
-
-// add card to bottom
-function addCardB(ptoAppend) {
-  // create left card and append it
-  let lc = createLeft(ptoAppend);
-  ptoAppend.appendChild(lc);
-  // create right card and append it
-  right.appendChild(createRight('Right Side'));
-}
-
-// create left card
-function createLeft(parent) {
-  // create generic wrapper
-  let lc = createDiv('card-wrapper');
-  // create p element and assign text
-  // append p to lc
-  lc.appendChild(createP(parent));
-  let div = createDiv('card');
-  lc.appendChild(div);
-  // create buttons with passed classname
-  div.appendChild(createButton('add-before'));
-  div.appendChild(createButton('add-after'));
-  div.appendChild(createButton('delete'));
-  return lc;
-}
-
-// create right card
-function createRight(text) {
-  // create generic wrapper
-  let rc = createDiv('right-card');
-  rc.appendChild(createH2(text));
-  return rc;
-}
-
-// create div with the passed classname
-function createDiv(className) {
-  let div = document.createElement('div');
-  div.className = className;
-  return div;
-}
-
-// create button with the passed classname
-function createButton(className) {
-  let btn = document.createElement('button');
-  btn.className = className;
-  btn.appendChild(
-    document.createTextNode(
-      className.includes('before')
-        ? 'Add Before'
-        : className.includes('after')
-        ? 'Add After'
-        : 'Delete'
-    )
-  );
-  return btn;
-}
-
-// create p element
-function createP(parent) {
-  let p = document.createElement('p');
-  p.appendChild(document.createTextNode(`Card ${cardNumGen(parent)}`));
-  return p;
-}
-
-// generate card numbers
-function cardNumGen(parent) {
-  if (parent.childElementCount === 1) {
-    return 1;
-  }
-  // get last child numbering
-  let elem = parent.lastChild.firstChild.textContent;
-  let num = elem.charAt(elem.length - 1);
-  return parseInt(num) + 1;
-}
-
-// create h2 elem
-function createH2(text) {
-  let h2 = document.createElement('h2');
-  h2.appendChild(document.createTextNode(text));
-  return h2;
-}
-
-// export { addCard };
+export default wc;
