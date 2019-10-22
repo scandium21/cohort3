@@ -1,20 +1,20 @@
 const wc = {
   // define UI var
-  leftPanel: document.querySelector('.left-panel'),
-  rightPanel: document.querySelector('.right-panel'),
+  leftPanel: document.querySelector(".left-panel"),
+  rightPanel: document.querySelector(".right-panel"),
   // card index
   index: 1,
   // create h2 elem
   createH2: (text, index) => {
-    let h2 = document.createElement('h2');
+    let h2 = document.createElement("h2");
     h2.appendChild(document.createTextNode(`${text} ${index}`));
-    h2.id = 'r' + index;
+    h2.id = "r" + index;
     return h2;
   },
 
   // create p element
   createP: index => {
-    let p = document.createElement('p');
+    let p = document.createElement("p");
     p.appendChild(document.createTextNode(`Card ${index}`));
     p.id = `p${index}`;
     return p;
@@ -22,7 +22,7 @@ const wc = {
 
   // create div with the passed classname
   createDiv: (className, id) => {
-    let div = document.createElement('div');
+    let div = document.createElement("div");
     div.className = className;
     div.id = id;
     return div;
@@ -30,15 +30,15 @@ const wc = {
 
   // create button with the passed classname
   createButton: className => {
-    let btn = document.createElement('button');
+    let btn = document.createElement("button");
     btn.className = className;
     btn.appendChild(
       document.createTextNode(
-        className.includes('before')
-          ? 'Add Before'
-          : className.includes('after')
-          ? 'Add After'
-          : 'Delete'
+        className.includes("before")
+          ? "Add Before"
+          : className.includes("after")
+          ? "Add After"
+          : "Delete"
       )
     );
     return btn;
@@ -47,16 +47,16 @@ const wc = {
   // create left card
   createLeftCard: index => {
     // create generic wrapper
-    let lc = wc.createDiv('card-wrapper', `l${index}`);
+    let lc = wc.createDiv("card-wrapper", `l${index}`);
     // create p element and assign text
     // append p to lc
     lc.appendChild(wc.createP(index));
-    let div = wc.createDiv('card', ``);
+    let div = wc.createDiv("card", ``);
     lc.appendChild(div);
     // create buttons with passed classname
-    div.appendChild(wc.createButton('add-before'));
-    div.appendChild(wc.createButton('add-after'));
-    div.appendChild(wc.createButton('delete'));
+    div.appendChild(wc.createButton("add-before"));
+    div.appendChild(wc.createButton("add-after"));
+    div.appendChild(wc.createButton("delete"));
     wc.index += 1;
     return lc;
   },
@@ -64,26 +64,28 @@ const wc = {
   // create right card
   createRightCard: (text, index) => {
     // create generic wrapper
-    let rc = wc.createDiv('right-card', `rc${index}`);
+    let rc = wc.createDiv("right-card", `rc${index}`);
     rc.appendChild(wc.createH2(text, index));
     return rc;
   },
 
   // add card to bottom
-  addCardB: (ptoAppend, right = rightPanel, index) => {
+  addCardB: (ptoAppend, right = wc.rightPanel, index) => {
     // create left card
     let lc = wc.createLeftCard(index);
     // create right card
-    let rc = wc.createRightCard('Right Side', index);
-    if (ptoAppend.textContent.includes('Add Card')) {
+    let rc = wc.createRightCard("Right Side", index);
+    if (ptoAppend.classList.contains("left-wrapper")) {
       ptoAppend.appendChild(lc);
       right.appendChild(rc);
     } else {
       if (ptoAppend.nextSibling) {
         let parent = ptoAppend.parentElement;
+        let toInsertBefore = ptoAppend.nextSibling;
         parent.insertBefore(lc, ptoAppend.nextSibling);
-        let id = `#rc${ptoAppend.id.charAt(ptoAppend.id.length - 1)}`;
-        let currCard = document.querySelector(id);
+
+        let id = `#rc${toInsertBefore.id.charAt(toInsertBefore.id.length - 1)}`;
+        let currCard = right.querySelector(id);
         right.insertBefore(rc, currCard);
       } else {
         ptoAppend.parentElement.appendChild(lc);
@@ -96,7 +98,7 @@ const wc = {
   addCardT: (ptoAppend, right = rightPanel, index) => {
     // create new cards
     let nlc = wc.createLeftCard(index);
-    let nrc = wc.createRightCard('Right Side', index);
+    let nrc = wc.createRightCard("Right Side", index);
     let parent = ptoAppend.parentElement;
     parent.insertBefore(nlc, ptoAppend);
     right.insertBefore(
