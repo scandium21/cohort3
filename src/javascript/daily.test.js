@@ -29,7 +29,7 @@ const staffEmailList = [
   "benjamin.amis@evolveu.ca"
 ];
 
-const testArrLoop = (textMessage, testFunc) => {
+const testArrLoopFunc = (textMessage, testFunc) => {
   let staffEmailListGen = testFunc(data.staff);
   test(textMessage, () => {
     expect(staffEmailListGen.length).toBe(staffEmailList.length);
@@ -43,15 +43,15 @@ const testArrLoop = (textMessage, testFunc) => {
   2019 - 10 - 24
   Do the same assignment as the last one using the two forms of the “for” statement. Create your own tests but use the function names that are provided below.
 */
-testArrLoop("testing loopStaffIn()", functions.loopStaffIn);
-testArrLoop("testing loopStaffOf()", functions.loopStaffOf);
+testArrLoopFunc("testing loopStaffIn()", functions.loopStaffIn);
+testArrLoopFunc("testing loopStaffOf()", functions.loopStaffOf);
 
 // Write your tests here
 
 /*	
   2019 - 10 -21 Write the function to build email addresses for the company.
 */
-testArrLoop("testing loopStaffOf()", functions.loopStaff);
+testArrLoopFunc("testing loopStaffOf()", functions.loopStaff);
 
 /* 2019 - 10 - 16,17 test array functions: map(), filter(), reduce()  */
 test("more arr functions", () => {
