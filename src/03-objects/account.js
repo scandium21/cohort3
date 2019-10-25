@@ -1,7 +1,7 @@
 export class Account {
-  constructor(name = "checkingAccount", initbalance = 0) {
+  constructor(name, initbalance = 0) {
     this.name = name;
-    this.balance = initbalance;
+    this.balance = initbalance || 0;
   }
 
   deposit(amt) {
@@ -25,7 +25,7 @@ export class Account {
 }
 
 export class AccountController {
-  constructor(holder, accList = []) {
+  constructor(holder = 'Default', accList = []) {
     this.holder = holder;
     this.accList = accList;
   }
@@ -34,7 +34,7 @@ export class AccountController {
     return this.accList;
   }
 
-  addAccount(name, initbalance) {
+  addAccount(name, initbalance = 0) {
     let newAcc = new Account(name, initbalance);
     this.accList.push(newAcc);
     return newAcc;
@@ -45,7 +45,7 @@ export class AccountController {
     this.accList.forEach((acc, index) => {
       if (acc.name === name) toRemove.push(index, acc);
     });
-    if (toRemove.length === 0) return "Account not found";
+    if (toRemove.length === 0) return 'Account not found';
     this.accList.splice(toRemove[0], 1);
     return toRemove[1];
   }
@@ -59,7 +59,7 @@ export class AccountController {
 
   getHighestAcc() {
     if (this.accList.length === 0) {
-      return "No account found";
+      return 'No account found';
     }
     let max = 0;
     let accIndex = 0;
@@ -74,7 +74,7 @@ export class AccountController {
 
   getLowestAcc() {
     if (this.accList.length === 0) {
-      return "No account found";
+      return 'No account found';
     }
     let min = this.accList[0].getBalance();
     let accIndex = 0;

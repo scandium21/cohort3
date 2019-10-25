@@ -5,22 +5,13 @@ export const ao = {
   leftPanel: document.querySelector('.left-panel'),
   rightPanel: document.querySelector('.right-panel'),
   addAcc: document.querySelector('#add-acc'),
-  // card index
-  index: 1,
+  select: document.querySelector('#accounts'),
+  accCtrl: new AccountController(),
   // create h2 elem
-  createH2: (text, index) => {
+  createH2: text => {
     let h2 = document.createElement('h2');
-    h2.appendChild(document.createTextNode(`${text} ${index}`));
-    h2.id = 'r' + index;
+    h2.appendChild(document.createTextNode(`${text}`));
     return h2;
-  },
-
-  // create p element
-  createP: index => {
-    let p = document.createElement('p');
-    p.appendChild(document.createTextNode(`Card ${index}`));
-    p.id = `p${index}`;
-    return p;
   },
 
   // create div with the passed classname
@@ -32,89 +23,115 @@ export const ao = {
   },
 
   // create button with the passed classname
-  createButton: className => {
+  createButton: id => {
     let btn = document.createElement('button');
-    btn.className = className;
-    btn.appendChild(
-      document.createTextNode(
-        className.includes('before')
-          ? 'Add Before'
-          : className.includes('after')
-          ? 'Add After'
-          : 'Delete'
-      )
-    );
+    btn.id = id;
+    let name = id.charAt(0).toUpperCase() + id.slice(1);
+    btn.appendChild(document.createTextNode(name));
     return btn;
   },
 
-  // create left card
-  createLeftCard: index => {
-    // create generic wrapper
-    let lc = wc.createDiv('card-wrapper', `l${index}`);
-    // create p element and assign text
-    // append p to lc
-    lc.appendChild(wc.createP(index));
-    let div = wc.createDiv('card', ``);
-    lc.appendChild(div);
-    // create buttons with passed classname
-    div.appendChild(wc.createButton('add-before'));
-    div.appendChild(wc.createButton('add-after'));
-    div.appendChild(wc.createButton('delete'));
-    wc.index += 1;
-    return lc;
+  // create label
+  createLabel: text => {
+    let l = document.createElement('label');
+    l.textContent = text;
+    return l;
+  },
+
+  // create input field of certain id
+  createInput: (id, type) => {
+    let input = document.createElement('input');
+    input.id = id;
+    input.type = type;
+    return input;
   },
 
   // create right card
-  createRightCard: (text, index) => {
+  createRightCard: text => {
     // create generic wrapper
-    let rc = wc.createDiv('right-card', `rc${index}`);
-    rc.appendChild(wc.createH2(text, index));
+    let rc = ao.createDiv('new-acc', 'new-acc');
+    rc.appendChild(ao.createH2(text));
+    rc.appendChild(ao.createLabel('Account Name: '));
+    rc.appendChild(ao.createInput('new-acc-name', 'text'));
+    rc.appendChild(document.createElement('br'));
+    rc.appendChild(ao.createLabel('Initial Deposit: '));
+    rc.appendChild(ao.createInput('new-acc-init-bal', 'number'));
+    rc.appendChild(document.createElement('br'));
+    rc.appendChild(ao.createButton('submit'));
+    rc.appendChild(ao.createButton('cancel'));
+    ao.rightPanel.appendChild(rc);
     return rc;
   },
 
-  // add card to bottom
-  addCardB: (ptoAppend, right = wc.rightPanel, index) => {
-    // create left card
-    let lc = wc.createLeftCard(index);
-    // create right card
-    let rc = wc.createRightCard('Right Side', index);
-    if (ptoAppend.classList.contains('left-wrapper')) {
-      ptoAppend.appendChild(lc);
-      right.appendChild(rc);
+  // show/hide elements
+  toggleHidden: () => {
+    let hidden = true;
+    let hiddenElems = document.querySelectorAll('.hidden');
+    if (ao.accCtrl.checkAccounts().length === 0) {
+      hiddenElems.forEach(item => {
+        item.style.display = 'none';
+      });
+      hidden = true;
     } else {
-      if (ptoAppend.nextSibling) {
-        let parent = ptoAppend.parentElement;
-        let toInsertBefore = ptoAppend.nextSibling;
-        parent.insertBefore(lc, ptoAppend.nextSibling);
+      hiddenElems.forEach(item => {
+        item.style.display = 'block';
+      });
+      hidden = false;
+    }
+    return hidden;
+  },
 
-        let id = `#rc${toInsertBefore.id.charAt(toInsertBefore.id.length - 1)}`;
-        let currCard = right.querySelector(id);
-        right.insertBefore(rc, currCard);
-      } else {
-        ptoAppend.parentElement.appendChild(lc);
-        right.appendChild(rc);
-      }
+  // populate select once accounts are added
+  populateSelect: accCtrl => {
+    let accnts = ao.leftPanel.querySelector('#accounts');
+    let acc = accCtrl.checkAccounts()[accCtrl.checkAccounts().length - 1];
+    let opt = document.createElement('option');
+    opt.text = acc.name;
+    opt.value = acc.name.replace(/\s/g, '');
+    accnts.insertBefore(opt, accnts.children[1]);
+  },
+
+  // remove right side once user submit new acc info
+  removeRightSide: rightPanel => {
+    while (rightPanel.firstChild) {
+      rightPanel.removeChild(rightPanel.firstChild);
     }
   },
 
-  // add card to top
-  addCardT: (ptoAppend, right = rightPanel, index) => {
-    // create new cards
-    let nlc = wc.createLeftCard(index);
-    let nrc = wc.createRightCard('Right Side', index);
-    let parent = ptoAppend.parentElement;
-    parent.insertBefore(nlc, ptoAppend);
-    right.insertBefore(
-      nrc,
-      right.querySelector(`#rc${ptoAppend.id.charAt(ptoAppend.id.length - 1)}`)
-    );
+  // check repeated names
+  duplicateAccName: accname => {
+    let dup = false;
+    ao.accCtrl.checkAccounts().forEach(item => {
+      if (item.name.toLowerCase() === accname.toLowerCase()) {
+        dup = true;
+      }
+    });
+    return dup;
   },
 
-  // delete the card when 'delete' button is pressed
-  deleteCurrCard: (itemToDelete, right = wc.rightPanel) => {
-    let id = `#rc${itemToDelete.id.charAt(itemToDelete.id.length - 1)}`;
-    let rtoremove = right.querySelector(id);
-    right.removeChild(rtoremove);
-    itemToDelete.remove();
+  // store user input to create new account
+  storeAccInfo: btn => {
+    let accName = btn.parentElement.querySelector('#new-acc-name');
+    let accInitBal = btn.parentElement.querySelector('#new-acc-init-bal');
+    if (accName.value === '') {
+      alert('Must enter valid name!');
+      return;
+    }
+    // check duplicate acc name
+    if (ao.duplicateAccName(accName.value)) {
+      alert('Account name already exists, please choose another one.');
+      return;
+    }
+    if ((parseFloat(accInitBal.value) || 0) < 0) {
+      alert(`Can't go negative on balance!`);
+      return;
+    }
+    ao.accCtrl.addAccount(accName.value, parseFloat(accInitBal.value) || 0);
+    ao.populateSelect(ao.accCtrl);
+    ao.toggleHidden();
+    // remove right portion
+    ao.removeRightSide(ao.rightPanel);
+    ao.addAcc.disabled = false;
+    return ao.accCtrl;
   }
 };

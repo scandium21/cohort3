@@ -1,0 +1,146 @@
+body,
+html {
+  height: 100%;
+  margin: 0;
+}
+
+/* Basic DOM */
+
+.main {
+  border: solid #333 3px;
+  height: 400px;
+  margin: 2% auto;
+  position: relative;
+  /* overflow: auto;
+  resize: both; */
+  width: 400px;
+}
+
+h1 {
+  text-align: center;
+}
+
+.btn {
+  display: grid;
+  column-gap: 2%;
+  row-gap: 5%;
+  grid-template-columns: 30% 30%;
+  justify-content: center;
+  margin-top: 2%;
+  text-align: center;
+}
+
+.ol {
+  font-size: 1.2em;
+  left: 15%;
+  line-height: 1.3em;
+  position: relative;
+}
+
+#idText {
+  font-size: 1.2em;
+  text-align: center;
+}
+
+.divider {
+  background-image: url(https://source.unsplash.com/random);
+  background-attachment: fixed;
+  background-size: cover;
+  background-position: center center;
+  background-repeat: repeat;
+
+  min-height: 200px;
+  position: relative;
+}
+
+.divider-div {
+  left: 50%;
+  mix-blend-mode: difference;
+  position: absolute;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.divider-text {
+  color: white;
+  font-size: 36px;
+  font-weight: bold;
+  text-transform: capitalize;
+}
+
+/* Working with Cards */
+
+.wc-container {
+  align-content: center;
+  /* background-color: #eee; */
+  column-gap: 3%;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  justify-content: center;
+  margin: 2%;
+}
+
+.card {
+  align-content: center;
+  display: grid;
+  grid-gap: 1%;
+  grid-template-columns: 20% 20%;
+  justify-content: center;
+  margin-top: 4%;
+  row-gap: 10%;
+}
+
+.card-wrapper {
+  background-color: #eee;
+  height: 120px;
+  width: 500px;
+  margin: 2% auto;
+}
+
+.card-label {
+  margin: 3%;
+  position: relative;
+  top: 10px;
+}
+
+.left-panel {
+  background-color: white;
+  max-height: 700px;
+  overflow: auto;
+  text-align: center;
+  justify-self: center;
+}
+
+.right-panel {
+  background-color: #eee;
+  display: grid;
+  grid-template-columns: 80%;
+  justify-content: center;
+  max-height: 700px;
+  max-width: 700px;
+  overflow: auto;
+  text-align: center;
+}
+.delete {
+  grid-column: span 2;
+  justify-self: center;
+}
+
+.add-before {
+  justify-self: right;
+}
+.add-after {
+  justify-self: left;
+}
+
+.right-card {
+  background-color: white;
+  height: 350px;
+  width: 350px;
+  margin: 3% auto;
+  justify-self: center;
+}
+
+/* .hidden {
+  display: none;
+} */
