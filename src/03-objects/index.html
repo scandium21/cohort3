@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>03 - objects</title>
+  </head>
+  <body>
+    <div class="wc-container">
+      <div class="left-panel">
+        <h2 class="l-heading">Welcome to Your Accounts!</h2>
+        <div class="left-wrapper">
+          <button id="add-acc">Open New Account</button><br />
+          <br />
+          <label for="accounts">Select existing account:</label>
+          <select name="accounts" id="accounts">
+            <option label=" "></option>
+            <option value="high-bal">With Highest Balance</option>
+            <option value="low-bal">With Lowest Balance</option>
+          </select>
+          <!-- only show when an account is selected -->
+          <button id="del-acc">Delete Account</button><br />
+          <br />
+          <!-- only show when user has at least 1 account -->
+          <button class="get-bal" id="get-total">
+            Get Total Accounts Balance</button
+          ><br />
+        </div>
+      </div>
+    </div>
+    <div class="right-panel"></div>
+    <!-- Single Account Page -->
+    <script type="module" src="./index.js"></script>
+  </body>
+</html>
