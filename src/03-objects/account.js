@@ -61,9 +61,6 @@ export class AccountController {
     if (this.accList.length === 0) {
       return "No account found";
     }
-    if (this.accList.length === 1) {
-      return this.accList[0];
-    }
     let max = 0;
     let accIndex = 0;
     this.accList.forEach((acc, index) => {
@@ -78,9 +75,6 @@ export class AccountController {
   getLowestAcc() {
     if (this.accList.length === 0) {
       return "No account found";
-    }
-    if (this.accList.length === 1) {
-      return this.accList[0];
     }
     let min = this.accList[0].getBalance();
     let accIndex = 0;
