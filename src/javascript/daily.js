@@ -8,11 +8,11 @@ const functions = {
 
   loopStaffForEach: arr => {
     let list = [];
-    list.push(
-      arr.forEach(item => {
-        return functions.makeEmailObj(item);
-      })
-    );
+
+    arr.forEach(item => {
+      list.push(functions.makeEmailObj(item));
+    });
+
     return list;
   },
 
