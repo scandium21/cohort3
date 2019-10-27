@@ -1,4 +1,4 @@
-import { getFirstName } from './fetch.js';
+import { functions } from './fetch.js';
 
 const data = [
   {
@@ -32,5 +32,5 @@ const dataName = [
 ];
 
 test('test getFirstName()', () => {
-  expect(getAllFirstNames(data)).toEqual(dataName);
+  expect(functions.getAllFirstNames(data)).toEqual(dataName);
 });
