@@ -129,6 +129,7 @@ export const ao = {
     let opt = document.createElement('option');
     opt.text = acc.name;
     opt.value = acc.name.replace(/\s/g, '');
+    opt.id = acc.name.replace(/\s/g, '');
     accnts.insertBefore(opt, accnts.children[0]);
     return opt;
   },
@@ -228,5 +229,39 @@ export const ao = {
     input.value = '';
 
     return acc.getBalance();
+  },
+
+  // get total balance
+  getTotalBal: accCtrl => {
+    let rc = ao.createDiv('show-total', 'show-total');
+    ao.rightPanel.appendChild(rc);
+    rc.appendChild(ao.createH2(`Total Balance of All Accounts`));
+    rc.appendChild(ao.createLabel(`Total Balance ($): ${accCtrl.getTotal()}`));
+    rc.appendChild(document.createElement('br'));
+    let accNum = ao.accCtrl.checkAccounts().length;
+    if (accNum > 0) {
+      rc.appendChild(ao.createH2(`Individual Account Balance`));
+      for (let acc of accCtrl.checkAccounts()) {
+        rc.appendChild(ao.createLabel(`${acc.name} ($): ${acc.getBalance()}`));
+        rc.appendChild(document.createElement('br'));
+      }
+    }
+  },
+
+  // get highest account
+  getHigh: accCtrl => {
+    let accName = accCtrl.getHighestAcc().name.replace(/\s/g, '');
+    let accOpt = ao.leftPanel.querySelector(`#${accName}`);
+    ao.removeRightSide(ao.rightPanel);
+    ao.createRightCardShow(accOpt);
+    return accCtrl.getHighestAcc();
+  },
+
+  getLow: accCtrl => {
+    let accName = accCtrl.getLowestAcc().name.replace(/\s/g, '');
+    let accOpt = ao.leftPanel.querySelector(`#${accName}`);
+    ao.removeRightSide(ao.rightPanel);
+    ao.createRightCardShow(accOpt);
+    return accCtrl.getLowestAcc();
   }
 };

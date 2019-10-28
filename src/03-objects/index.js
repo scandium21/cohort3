@@ -20,6 +20,18 @@ function loadEventListeners() {
         let accounts = e.target.parentElement.querySelector('#accounts');
         ao.createRightCardShow(accounts.options[accounts.selectedIndex]);
         break;
+      case 'get-total':
+        ao.removeRightSide(ao.rightPanel);
+        ao.getTotalBal(ao.accCtrl);
+        break;
+      case 'get-high':
+        ao.removeRightSide(ao.rightPanel);
+        ao.getHigh(ao.accCtrl);
+        break;
+      case 'get-low':
+        ao.removeRightSide(ao.rightPanel);
+        ao.getLow(ao.accCtrl);
+        break;
     }
   });
 
@@ -28,6 +40,7 @@ function loadEventListeners() {
     switch (e.target.id) {
       case 'submit':
         ao.storeAccInfo(e.target);
+        ao.createRightCardShow(accounts.options[accounts.selectedIndex]);
         break;
       case 'cancel':
         ao.removeRightSide(ao.rightPanel);

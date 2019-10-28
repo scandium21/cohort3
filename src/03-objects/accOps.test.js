@@ -162,25 +162,125 @@ test('clearing all elements', () => {
   expect(div).toEqual(document.createElement('div'));
 });
 
-// test('testing updateAccBal()', () => {
-//   // create new set of divs
-//   let div4 = document.createElement('div');
-//   div.appendChild(div4);
-//   ao.accCtrl = new AccountController();
+test('testing updateAccBal()', () => {
+  // create new set of divs
+  let div4 = document.createElement('div');
+  div.appendChild(div4);
+  ao.accCtrl = new AccountController();
 
-//   // create elements to simulate real html environment
-//   let selCRCS = document.createElement('select');
-//   selCRCS.id = 'accounts';
-//   div4.appendChild(selCRCS);
-//   ao.accCtrl.addAccount('checking', 333);
-//   ao.leftPanel = div4;
-//   ao.rightPanel = div4;
-//   expect(ao.populateSelect(ao.accCtrl).text).toEqual('checking');
-//   expect(selCRCS.childElementCount).toEqual(1);
-//   selCRCS.children[0].selected = 'selected';
+  // create elements to simulate real html environment
+  let selCRCS = document.createElement('select');
+  selCRCS.id = 'accounts';
+  div4.appendChild(selCRCS);
+  ao.accCtrl.addAccount('checking', 333);
+  ao.leftPanel = div4;
+  ao.rightPanel = div4;
+  expect(ao.populateSelect(ao.accCtrl).text).toEqual('checking');
+  expect(selCRCS.childElementCount).toEqual(1);
+  selCRCS.children[0].selected = 'selected';
 
-//   // set up resulting div
-//   ao.createRightCardShow(selCRCS.children[0]);
-//   expect(div4.childElementCount).toEqual(2);
+  // set up resulting div
+  ao.createRightCardShow(selCRCS.children[0]);
+  expect(div4.childElementCount).toEqual(2);
+  expect(div4.querySelectorAll('input').length).toBe(2);
+  expect(div4.querySelectorAll('input')[0].id).toBe('acc-dep-amt');
+  div4.querySelectorAll('input')[0].value = 2;
+  expect(div4.querySelectorAll('input')[1].id).toBe('acc-wid-amt');
+  div4.querySelectorAll('input')[1].value = 4;
+  expect(ao.updateAccBal(div4.querySelectorAll('input')[0], 'checking')).toBe(
+    335
+  );
+  expect(ao.updateAccBal(div4.querySelectorAll('input')[1], 'checking')).toBe(
+    331
+  );
+  div4.querySelectorAll('input')[0].value = -34;
+  expect(ao.updateAccBal(div4.querySelectorAll('input')[0], 'checking')).toBe(
+    undefined
+  );
+  div4.querySelectorAll('input')[0].value = 2;
+  expect(ao.updateAccBal(div4.querySelectorAll('input')[0], 'checking')).toBe(
+    333
+  );
+  div4.querySelectorAll('input')[1].value = 28374;
+  expect(ao.updateAccBal(div4.querySelectorAll('input')[1], 'checking')).toBe(
+    0
+  );
+});
 
-// });
+// delete all previous elements
+test('clearing all elements', () => {
+  // remove all div2 children
+  removeAllChildren(div);
+  expect(div.childElementCount).toBe(0);
+  expect(div).toEqual(document.createElement('div'));
+});
+
+// test getLow
+test('testing getLow', () => {
+  // create new set of divs
+  let div4 = document.createElement('div');
+  div.appendChild(div4);
+  ao.leftPanel = div4;
+  ao.rightPanel = div4;
+  // create elements to simulate real html environment
+  let selCRCS = document.createElement('select');
+  selCRCS.id = 'accounts';
+  div4.appendChild(selCRCS);
+
+  ao.accCtrl = new AccountController();
+  ao.accCtrl.addAccount('saving', 3333);
+  expect(ao.populateSelect(ao.accCtrl).text).toEqual('saving');
+  ao.accCtrl.addAccount('checking', 333);
+
+  expect(ao.populateSelect(ao.accCtrl).text).toEqual('checking');
+  expect(div4.querySelector('#accounts')).toEqual(selCRCS);
+  expect(selCRCS.childElementCount).toEqual(2);
+  expect(selCRCS.children[0].id).toEqual('checking');
+  expect(selCRCS.children[1].id).toEqual('saving');
+  expect(selCRCS.children[0].text).toEqual('checking');
+  expect(selCRCS.children[1].text).toEqual('saving');
+  expect(ao.leftPanel.querySelector('#checking').text).toEqual('checking');
+  expect(ao.leftPanel.querySelector('#saving').text).toEqual('saving');
+  selCRCS.children[0].selected = 'selected';
+  expect(ao.accCtrl.checkAccounts().length).toBe(2);
+  expect(ao.getLow(ao.accCtrl)).toEqual(new Account('checking', 333));
+});
+
+// delete all previous elements
+test('clearing all elements', () => {
+  // remove all div2 children
+  removeAllChildren(div);
+  expect(div.childElementCount).toBe(0);
+  expect(div).toEqual(document.createElement('div'));
+});
+
+// test getHigh
+test('testing getHigh', () => {
+  // create new set of divs
+  let div4 = document.createElement('div');
+  div.appendChild(div4);
+  ao.leftPanel = div4;
+  ao.rightPanel = div4;
+  // create elements to simulate real html environment
+  let selCRCS = document.createElement('select');
+  selCRCS.id = 'accounts';
+  div4.appendChild(selCRCS);
+
+  ao.accCtrl = new AccountController();
+  ao.accCtrl.addAccount('saving', 3333);
+  expect(ao.populateSelect(ao.accCtrl).text).toEqual('saving');
+  ao.accCtrl.addAccount('checking', 333);
+
+  expect(ao.populateSelect(ao.accCtrl).text).toEqual('checking');
+  expect(div4.querySelector('#accounts')).toEqual(selCRCS);
+  expect(selCRCS.childElementCount).toEqual(2);
+  expect(selCRCS.children[0].id).toEqual('checking');
+  expect(selCRCS.children[1].id).toEqual('saving');
+  expect(selCRCS.children[0].text).toEqual('checking');
+  expect(selCRCS.children[1].text).toEqual('saving');
+  expect(ao.leftPanel.querySelector('#checking').text).toEqual('checking');
+  expect(ao.leftPanel.querySelector('#saving').text).toEqual('saving');
+  selCRCS.children[0].selected = 'selected';
+  expect(ao.accCtrl.checkAccounts().length).toBe(2);
+  expect(ao.getHigh(ao.accCtrl)).toEqual(new Account('saving', 3333));
+});
