@@ -284,3 +284,32 @@ test('testing getHigh', () => {
   expect(ao.accCtrl.checkAccounts().length).toBe(2);
   expect(ao.getHigh(ao.accCtrl)).toEqual(new Account('saving', 3333));
 });
+
+// delete all previous elements
+test('clearing all elements', () => {
+  // remove all div2 children
+  removeAllChildren(div);
+  expect(div.childElementCount).toBe(0);
+  expect(div).toEqual(document.createElement('div'));
+});
+
+// test get total bal
+test('testing getTotalBal()', () => {
+  // create new set of divs
+  let div4 = document.createElement('div');
+  div.appendChild(div4);
+  ao.leftPanel = div4;
+  ao.rightPanel = div4;
+  // create elements to simulate real html environment
+  let selCRCS = document.createElement('select');
+  selCRCS.id = 'accounts';
+  div4.appendChild(selCRCS);
+
+  ao.accCtrl = new AccountController();
+  ao.accCtrl.addAccount('saving', 3333);
+  expect(ao.populateSelect(ao.accCtrl).text).toEqual('saving');
+  ao.accCtrl.addAccount('checking', 333);
+  expect(ao.populateSelect(ao.accCtrl).text).toEqual('checking');
+
+  expect(ao.getTotalBal(ao.accCtrl)).toEqual(3666);
+});

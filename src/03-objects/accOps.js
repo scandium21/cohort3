@@ -246,6 +246,7 @@ export const ao = {
         rc.appendChild(document.createElement('br'));
       }
     }
+    return accCtrl.getTotal();
   },
 
   // get highest account
