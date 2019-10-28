@@ -74,7 +74,7 @@ export class Community {
     this.cities.forEach((c, index) => {
       if (c.show() === city.show()) toRemove.push(c, index);
     });
-    if (toRemove.length === 0) return this.cities.length;
+    if (toRemove.length === 0) return null;
     return this.cities.splice(toRemove[1], 1)[0];
   }
 
