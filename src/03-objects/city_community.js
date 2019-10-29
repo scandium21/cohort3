@@ -1,5 +1,5 @@
 export class City {
-  constructor(name, latitude, longitude, population) {
+  constructor(name = 'Default', latitude = 0, longitude = 0, population = 0) {
     this.name = name.charAt(0).toUpperCase() + name.slice(1);
     this.latitude = latitude;
     this.longitude = longitude;

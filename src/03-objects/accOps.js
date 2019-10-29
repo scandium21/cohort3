@@ -196,6 +196,8 @@ export const ao = {
     // if (!confirmed) return;
     ao.removeRightSide(ao.rightPanel);
     accounts.removeChild(accounts.options[accounts.selectedIndex]);
+    let nextToShow = accounts.children[0];
+    if (nextToShow) ao.createRightCardShow(nextToShow);
     let removedAcc = ao.accCtrl.removeAccount(accName);
     ao.toggleHidden();
     return removedAcc;

@@ -8,6 +8,12 @@
     <title>03 - objects</title>
   </head>
   <body>
+    <div class="divider">
+      <div class="divider-div">
+        <span class="divider-text">Accounts</span>
+      </div>
+    </div>
+    <!-- Divider between different projects -->
     <div class="wc-container">
       <div class="left-panel">
         <h2 class="l-heading">Welcome to Your Accounts!</h2>
@@ -17,7 +23,6 @@
           <label for="accounts" class="hidden">Select existing account:</label>
           <select name="accounts" class="hidden" id="accounts"> </select>
           <!-- only show when an account is selected -->
-          <button id="show-acc" class="hidden">Show Account Info</button>
           <button id="del-acc" class="hidden">Delete Account</button><br />
           <br />
           <!-- only show when user has at least 1 account -->
@@ -34,7 +39,38 @@
       </div>
       <div class="right-panel"></div>
     </div>
-    <!-- Single Account Page -->
+    <!-- Divider between different projects -->
+    <div class="divider">
+      <div class="divider-div">
+        <span class="divider-text">City and Communty</span>
+      </div>
+    </div>
+    <!-- City and Community -->
+    <div class="wc-container">
+      <div class="left-panelc">
+        <h2 class="l-heading">Welcome to the Cities!</h2>
+        <div class="left-wrapper">
+          <button id="add-city">Add New City</button><br />
+          <br />
+          <label for="cities" class="hidden2">Select existing cities:</label>
+          <select name="cities" class="hidden2" id="cities"> </select>
+          <!-- only show when an account is selected -->
+          <button id="del-city" class="hidden2">Remove City</button><br />
+          <br />
+          <!-- only show when user has at least 1 account -->
+          <button class="get-pop-all hidden2" id="get-totalpop">
+            Get Community Population
+          </button>
+          <button class="get-h-acc hidden2" id="get-northern">
+            Most Northern City
+          </button>
+          <button class="get-l-acc hidden2" id="get-southern">
+            Most Southern City</button
+          ><br />
+        </div>
+      </div>
+      <div class="right-panelc"></div>
+    </div>
     <script type="module" src="./index.js"></script>
   </body>
 </html>

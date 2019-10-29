@@ -103,7 +103,8 @@ h1 {
   top: 10px;
 }
 
-.left-panel {
+.left-panel,
+.left-panelc {
   background-color: white;
   max-height: 700px;
   overflow: auto;
@@ -111,7 +112,8 @@ h1 {
   justify-self: center;
 }
 
-.right-panel {
+.right-panel,
+.right-panelc {
   background-color: #eee;
   display: grid;
   grid-template-columns: 80%;
