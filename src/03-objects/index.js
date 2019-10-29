@@ -5,7 +5,9 @@ import { co } from './communityOps.js';
 loadEventListeners();
 
 function loadEventListeners() {
-  document.addEventListener('DOMContentLoaded', ao.toggleHidden);
+  document.addEventListener('DOMContentLoaded', () => {
+    ao.toggleHidden();
+  });
   ao.leftPanel.addEventListener('click', e => {
     switch (e.target.id) {
       case 'add-acc':

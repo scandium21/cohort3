@@ -1,5 +1,8 @@
 import { City, Community } from './city_community.js';
 import { co } from './communityOps.js';
+// require('babel-core/register');
+// require('babel-polyfill');
+global.fetch = require('node-fetch');
 
 let div = document.createElement('div');
 let divr = document.createElement('div');
@@ -28,7 +31,7 @@ function removeAllChildren(elem) {
   }
 }
 
-test('testing addNewCity()', () => {
+test('testing addNewCity()', async () => {
   // reset
   reset();
   expect(div.childElementCount).toBe(2);
@@ -37,4 +40,8 @@ test('testing addNewCity()', () => {
   expect(co.addNewCity()).toEqual(1);
   expect(co.addNewCity()).toEqual(2);
   expect(divr.children[0].childElementCount).toEqual(15);
+
+  let data = await co.postData(co.url + 'clear');
+  data = await co.initData();
+  console.log(data);
 });
