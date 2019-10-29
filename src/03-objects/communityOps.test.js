@@ -1,7 +1,6 @@
 import { City, Community } from './city_community.js';
 import { co } from './communityOps.js';
-// require('babel-core/register');
-// require('babel-polyfill');
+
 global.fetch = require('node-fetch');
 
 let div = document.createElement('div');

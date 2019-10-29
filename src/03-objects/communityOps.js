@@ -1,6 +1,4 @@
 import { City, Community } from './city_community.js';
-require('babel-core/register');
-require('babel-polyfill');
 
 export const co = {
   // define UI var
