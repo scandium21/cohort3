@@ -1,5 +1,5 @@
 export class City {
-  constructor(name = 'Default', latitude = 0, longitude = 0, population = 0) {
+  constructor(name = "Default", latitude = 0, longitude = 0, population = 0) {
     this.name = name.charAt(0).toUpperCase() + name.slice(1);
     this.latitude = latitude;
     this.longitude = longitude;
@@ -16,22 +16,23 @@ export class City {
   }
 
   movedOut(num) {
-    if (num > 0) this.population -= num;
+    if (num >= this.population) this.population = 0;
+    else if (num > 0) this.population -= num;
     return this.population;
   }
 
   howBig() {
-    if (this.population > 100000) return 'City';
-    else if (this.population > 20000) return 'Large town';
-    else if (this.population > 1000) return 'Town';
-    else if (this.population > 100) return 'Village';
-    else return 'Hamlet';
+    if (this.population > 100000) return "City";
+    else if (this.population > 20000) return "Large town";
+    else if (this.population > 1000) return "Town";
+    else if (this.population > 100) return "Village";
+    else return "Hamlet";
   }
 
   whichSphere() {
-    if (this.latitude > 0) return 'Northern Hemisphere';
-    else if (this.latitude < 0) return 'Southern Hemisphere';
-    else return 'The Equator';
+    if (this.latitude > 0) return "Northern Hemisphere";
+    else if (this.latitude < 0) return "Southern Hemisphere";
+    else return "The Equator";
   }
 
   getPop() {
@@ -52,7 +53,7 @@ export class City {
 }
 
 export class Community {
-  constructor(name = 'Empty', cities = []) {
+  constructor(name = "Empty", cities = []) {
     this.name = name;
     this.cities = cities;
   }
@@ -70,16 +71,8 @@ export class Community {
     return this.cities;
   }
 
-  static createCityFromClass(city, name, latitude, longitude, population) {
-    if (city === undefined)
-      return new City(name, latitude, longitude, population);
-    let newCity = new City(
-      city['name'],
-      city['latitude'],
-      city['longitude'],
-      city['population']
-    );
-    return newCity;
+  static createCityFromClass(name, latitude, longitude, population) {
+    return new City(name, latitude, longitude, population);
   }
 
   createCity(name, latitude, longitude, population) {
