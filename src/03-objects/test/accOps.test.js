@@ -1,5 +1,5 @@
-import { ao } from './accOps.js';
-import { Account, AccountController } from './account.js';
+import { ao } from '../accOps.js';
+import { Account, AccountController } from '../account.js';
 
 // mimicing html environment
 let div = document.createElement('div');

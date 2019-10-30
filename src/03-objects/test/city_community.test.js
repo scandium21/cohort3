@@ -1,4 +1,4 @@
-import { City, Community } from './city_community.js';
+import { City, Community } from '../city_community.js';
 
 const beijing = new City('beijing', 39.913818, 116.363625, 20035455);
 const calgary = new City('calgary', 51.04427, -114.062019, 1267344);

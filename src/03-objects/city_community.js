@@ -52,9 +52,14 @@ export class City {
 }
 
 export class Community {
-  constructor(name = 'Default', cities = []) {
+  constructor(name = 'Empty', cities = []) {
     this.name = name;
     this.cities = cities;
+  }
+
+  changeCommunityName(newName) {
+    this.name = newName;
+    return newName;
   }
 
   getNumOfCities() {
@@ -65,8 +70,24 @@ export class Community {
     return this.cities;
   }
 
+  static createCityFromClass(city, name, latitude, longitude, population) {
+    if (city === undefined)
+      return new City(name, latitude, longitude, population);
+    let newCity = new City(
+      city['name'],
+      city['latitude'],
+      city['longitude'],
+      city['population']
+    );
+    return newCity;
+  }
+
   createCity(name, latitude, longitude, population) {
     return this.cities.push(new City(name, latitude, longitude, population));
+  }
+
+  createCityfromCity(city) {
+    return this.cities.push(city);
   }
 
   deleteCity(city) {

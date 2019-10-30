@@ -5,8 +5,10 @@ import { co } from './communityOps.js';
 loadEventListeners();
 
 function loadEventListeners() {
-  document.addEventListener('DOMContentLoaded', () => {
+  document.addEventListener('DOMContentLoaded', async () => {
     ao.toggleHidden();
+    await co.retrieveData();
+    co.toggleHidden();
   });
   ao.leftPanel.addEventListener('click', e => {
     switch (e.target.id) {
@@ -67,15 +69,23 @@ function loadEventListeners() {
   co.leftPanel.addEventListener('click', e => {
     switch (e.target.id) {
       case 'add-city':
-        co.addNewCity();
+        e.target.disabled = true;
+        co.removeRightSide(co.rightPanel);
+        co.createAddCityUI('Adding New City');
     }
+  });
+
+  co.select.addEventListener('change', e => {
+    co.removeRightSide(co.rightPanel);
+    let cities = e.target.parentElement.querySelector('#cities');
+    co.createRightCardShow(cities.options[cities.selectedIndex]);
   });
 
   co.rightPanel.addEventListener('click', e => {
     let cityName = e.target.parentElement.querySelector('h2').textContent;
     switch (e.target.id) {
       case 'submit':
-        co.storeAccInfo(e.target);
+        co.storeCityInfo(e.target.parentElement);
         co.createRightCardShow(cities.options[cities.selectedIndex]);
         break;
       case 'cancel':

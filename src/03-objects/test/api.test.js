@@ -18,15 +18,18 @@ test('test that the fetch works?', async () => {
   let data = await postData(url + 'clear');
 
   data = await postData(url + 'all');
+  console.log(data);
   expect(data.status).toEqual(200);
   expect(data.length).toBe(0);
 
   data = await postData(url + 'add', clients[0]);
+  console.log(data);
   expect(data.status).toEqual(200);
 
   data = await postData(url + 'all');
   expect(data.status).toEqual(200);
   expect(data.length).toBe(1);
+  console.log(data);
   expect(data[0].name).toBe('Larry');
 
   // add a second with the same key which should be an error
@@ -40,6 +43,7 @@ test('test that the fetch works?', async () => {
   data = await postData(url + 'all');
   expect(data.status).toEqual(200);
   expect(data.length).toBe(2);
+  console.log(data);
   expect(data[1].name).toBe('Lorraine');
 
   data = await postData(url + 'read', { key: 1 });

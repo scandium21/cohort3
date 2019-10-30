@@ -5,14 +5,66 @@ export const co = {
   leftPanel: document.querySelector('.left-panelc'),
   rightPanel: document.querySelector('.right-panelc'),
   addCity: document.querySelector('#add-city'),
-  //select: document.querySelector('#cities'),
+  select: document.querySelector('#cities'),
+  lastKey: 0,
+  // key-city pair for server
+  keys: [],
   cityCtrl: new Community(),
   url: 'http://localhost:5000/',
+  // show/hide starting UI elements
+  toggleHidden: () => {
+    let hidden = true;
+    let hiddenElems = co.leftPanel.querySelectorAll('.hidden2');
+    if (co.cityCtrl.getNumOfCities() === 0) {
+      hiddenElems.forEach(item => {
+        item.style.display = 'none';
+      });
+      hidden = true;
+    } else {
+      hiddenElems.forEach(item => {
+        item.style.display = 'block';
+      });
+      hidden = false;
+    }
+    return hidden;
+  },
   //retrieve and process server data
-  async initData() {
+  async retrieveData() {
     let initdata = await co.postData(co.url + 'all');
     // initdata operation
-    return initdata;
+    /* data format :  
+    [ 
+      {
+        city: 
+        {
+          name: 'Beijing', 
+          latitude: 39.913818, 
+          longitude: 116.363625, 
+          population: 20035455 
+        },
+        key: 1,
+      }
+   ]
+    */
+    if (initdata.length !== 0) {
+      // getting the cities
+      initdata.forEach((item, index) => {
+        co.cityCtrl.createCity(
+          item.city['name'],
+          item.city['latitude'],
+          item.city['longitude'],
+          item.city['population']
+        );
+        co.populateSelect(co.cityCtrl);
+        co.keys.push({ [Community.createCityFromClass(item.city)]: item.key });
+        co.lastKey = item.key;
+      });
+      co.createRightCardShow(co.select.options[co.select.selectedIndex]);
+      co.cityCtrl.changeCommunityName('Group 1');
+    }
+    //console.log(co.cityCtrl);
+    //console.log(co.keys);
+    return co.cityCtrl;
   },
 
   async postData(url = '', data = {}) {
@@ -90,11 +142,11 @@ export const co = {
     return btn;
   },
 
-  createAddCityUI() {
-    // create generic wrapper
+  createAddCityUI(text) {
+    // HTML creating element functions have all been tested by running this func
     let rc = co.createDiv('new-city', 'new-city');
     co.rightPanel.appendChild(rc);
-    rc.appendChild(co.createH2('Adding New City'));
+    rc.appendChild(co.createH2(text));
     rc.appendChild(co.createLabel('Name: '));
     rc.appendChild(co.createInput('in-name', 'text'));
     rc.appendChild(document.createElement('br'));
@@ -111,8 +163,127 @@ export const co = {
     rc.appendChild(co.createButton('cancel'));
   },
 
-  addNewCity() {
-    co.createAddCityUI();
-    return co.cityCtrl.createCity();
+  // check repeated names
+  duplicateCity: city => {
+    let dup = false;
+    co.cityCtrl.getCities().forEach(item => {
+      if (item.show() === city.show()) {
+        dup = true;
+      }
+    });
+    return dup;
+  },
+
+  // populate select once accounts are added
+  populateSelect: cityCtrl => {
+    let cityList = co.leftPanel.querySelector('#cities');
+    let city = cityCtrl.getCities()[cityCtrl.getCities().length - 1];
+    let opt = document.createElement('option');
+    opt.text = city.getName();
+    opt.value = city.getName().replace(/\s/g, '');
+    opt.id = city.getName().replace(/\s/g, '');
+    cityList.insertBefore(opt, cityList.children[0]);
+    cityList.children[0].selected = 'selected';
+    return opt;
+  },
+
+  // remove right side once user submit new acc info
+  removeRightSide: rightPanel => {
+    while (rightPanel.firstChild) {
+      rightPanel.removeChild(rightPanel.firstChild);
+    }
+  },
+
+  toggleDisableAdd: add => {
+    if (add.disabled) {
+      add.disabled = false;
+    } else {
+      add.disabled = true;
+    }
+    return add.disabled;
+  },
+
+  async storeCityInfo(right) {
+    let cityName = right.querySelector('#in-name');
+    let cityLat = right.querySelector('#in-lat');
+    let cityLong = right.querySelector('#in-long');
+    let cityPop = right.querySelector('#in-pop');
+    let newCity = new City(
+      cityName.value,
+      parseFloat(cityLat.value) || 0,
+      parseFloat(cityLong.value) || 0,
+      parseFloat(cityPop.value) || 0
+    );
+    if (cityName.value === '') {
+      alert('Must enter valid name!');
+      return;
+    }
+    // check duplicate cities
+    if (co.duplicateCity(newCity)) {
+      alert('City already exists!');
+      return;
+    }
+    if ((parseFloat(cityPop.value) || 0) < 0) {
+      alert(`Can't go negative on population!`);
+      return;
+    }
+    co.cityCtrl.createCity(
+      cityName.value,
+      parseFloat(cityLat.value) || 0,
+      parseFloat(cityLong.value) || 0,
+      parseFloat(cityPop.value) || 0
+    );
+    co.populateSelect(co.cityCtrl);
+    co.toggleHidden();
+    // remove right portion
+    co.removeRightSide(co.rightPanel);
+    co.toggleDisableAdd(co.addCity);
+    let cityAdded = co.cityCtrl.getCities()[co.cityCtrl.getCities().length - 1];
+    // write to server
+    co.saveToServer(co.cityCtrl, cityAdded);
+    console.log(co.keys);
+    return co.cityCtrl;
+  },
+
+  async saveToServer(cityCtrl, lastCity) {
+    console.log(lastCity);
+    let toSave = { key: co.lastKey + 1, city: lastCity };
+    co.lastKey += 1;
+    console.log(toSave);
+    await co.postData(co.url + 'add', toSave);
+  },
+
+  // get account by name
+  getAccByName: cName => {
+    return co.cityCtrl.getCities().filter(city => {
+      return city.name === cName;
+    })[0];
+  },
+
+  // create right card to display account info
+  createRightCardShow: cityOpt => {
+    // get account
+    let cityToShow = co.getAccByName(cityOpt.text);
+    // create generic wrapper
+    let rc = co.createDiv('show-city-r', 'show-city-r');
+    co.rightPanel.appendChild(rc);
+    rc.appendChild(co.createH2(`${cityOpt.text}`));
+    rc.appendChild(co.createLabel(`Latitude: ${cityToShow.getLat()}`));
+    rc.appendChild(document.createElement('br'));
+    rc.appendChild(co.createLabel(`Longitude: ${cityToShow.getLong()}`));
+    rc.appendChild(document.createElement('br'));
+    rc.appendChild(co.createLabel(`Population: ${cityToShow.getPop()}`));
+    rc.appendChild(document.createElement('br'));
+    rc.appendChild(co.createLabel(`Move out: `));
+    rc.appendChild(co.createInput('city-out-num', 'number'));
+    rc.appendChild(document.createElement('br'));
+    rc.appendChild(co.createButton('confirm'));
+    rc.appendChild(document.createElement('br'));
+    rc.appendChild(co.createLabel(`Move in: `));
+    rc.appendChild(co.createInput('city-in-num', 'number'));
+    //rc.appendChild(document.createElement('br'));
+    rc.appendChild(document.createElement('br'));
+    rc.appendChild(co.createButton('confirm'));
+    return rc;
   }
 };
