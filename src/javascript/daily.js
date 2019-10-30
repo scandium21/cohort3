@@ -1,6 +1,25 @@
 // Write the function after this comment ---
 const functions = {
   /*
+  2019 - 10 -29
+  Use only the JavaScript built-in functions listed below 
+  to complete this exercise. Make sure you write your tests first.
+
+  1. write a function to receive the same array (staff) 
+  and return the total of balances
+  2. write a function to receive the same array (staff) 
+  and return the average the balances
+
+  */
+
+  getTotalBal: arr => {
+    return arr.reduce((acc, i) => acc + i.balance, 0);
+  },
+  getAvgBal: arr => {
+    return Math.round((functions.getTotalBal(arr) / arr.length) * 100) / 100;
+  },
+
+  /*
     2019 - 10 -25
     loopStaff each / map 
     Do the same assignment again, but this time use callback functions. Use the ‘forEach’ and ‘map’ built-in functions.
