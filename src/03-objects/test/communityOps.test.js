@@ -3,15 +3,15 @@ import { co } from '../communityOps.js';
 
 global.fetch = require('node-fetch');
 
-let div = document.createElement('div');
-let divr = document.createElement('div');
-let divl = document.createElement('div');
-let sel = document.createElement('select');
+const div = document.createElement('div');
+const divr = document.createElement('div');
+const divl = document.createElement('div');
+const sel = document.createElement('select');
 sel.id = 'cities';
-let addNewCityBtn = document.createElement('button');
+const addNewCityBtn = document.createElement('button');
 addNewCityBtn.id = 'add-city';
 addNewCityBtn.disabled = false;
-let cityCtrl;
+const cityCtrl;
 const beijing = new City('beijing', 39.913818, 116.363625, 20035455);
 const calgary = new City('calgary', 51.04427, -114.062019, 1267344);
 const sydney = new City('sydney', -33.865143, 151.2099, 4627000);
