@@ -16,12 +16,12 @@ class App extends React.Component {
       taco: 'taco',
       dd: 'daruma-doll'
     };
-    this.state = {};
+    this.state = { iconName: '' };
     this.onClickIcon = this.onClickIcon.bind(this);
   }
 
   onClickIcon = e => {
-    console.log(e.target.props);
+    console.log(e.target);
   };
 
   render() {

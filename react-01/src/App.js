@@ -9,7 +9,6 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.counter = 21;
-    this.state = {};
     this.onPushMe = this.onPushMe.bind(this);
   }
 
