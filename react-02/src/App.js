@@ -16,41 +16,37 @@ class App extends React.Component {
       taco: 'taco',
       dd: 'daruma-doll'
     };
-    this.state = { iconName: '' };
+    this.state = { iconClicked: null };
     this.onClickIcon = this.onClickIcon.bind(this);
   }
 
   onClickIcon = e => {
-    console.log(e.target);
+    this.setState({
+      iconClicked: e.target.alt
+    });
   };
 
   render() {
+    const clicked = <p>{this.state.iconClicked} was clicked!</p>;
     return (
       <div className="App">
         <div className="Title">
           <h1>Hello World</h1>
-          <Icon
-            onClick={this.onClickIcon}
-            source={wa}
-            alt={this.iconName[wa]}
-          />
+          <Icon onClick={this.onClickIcon} source={wa} alt={this.iconName.wa} />
           <Icon
             onClick={this.onClickIcon}
             source={fold}
-            alt={this.iconName[fold]}
+            alt={this.iconName.fold}
           />
           <Icon
             onClick={this.onClickIcon}
             source={taco}
-            alt={this.iconName[taco]}
+            alt={this.iconName.taco}
           />
-          <Icon
-            onClick={this.onClickIcon}
-            source={dd}
-            alt={this.iconName[dd]}
-          />
+          <Icon onClick={this.onClickIcon} source={dd} alt={this.iconName.dd} />
         </div>
-        {/* {this.iconName} was clicked! */}
+        {this.state.iconClicked && clicked}
+
         <header className="App-header">
           <img src={logo} className="App-logo" alt="logo" />
           <p>
