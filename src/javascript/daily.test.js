@@ -93,14 +93,21 @@ const testArrLoopFunc = (
 /*
   2019 - 11 - 08
 
-  Hypothetically; You are working for a private company who looks after demographics of people living in BC and Alberta only.  The data you received is from the 4 Western provinces. You want to write a generalized function that loops through the data and only does a “callback” for the people from BC or Alberta.
+  Hypothetically; You are working for a private company who looks after demographics of people 
+  living in BC and Alberta only.  The data you received is from the 4 Western provinces. 
+  You want to write a generalized function that loops through the data and only does a 
+  “callback” for the people from BC or Alberta.
 
   Write two functions: 
-  1. a generic function to process all of the people from the Western 4 provinces and only “callback” for people from BC or Alberta.  This is a generic function that will be used over and over again. How will we test this?
+  1. a generic function to process all of the people from the Western 4 provinces and only
+   “callback” for people from BC or Alberta.  
+   This is a generic function that will be used over and over again. How will we test this?
 
-  2. a function that will be the “callback” function that will create an array of full names (first and last together). How will we test this?
+  2. a function that will be the “callback” function that will create an array of 
+  full names (first and last together). How will we test this?
 
-  Your tests should ensure each function works on it’s own and then that they work properly together.
+  Your tests should ensure each function works on it’s own and then that they 
+  work properly together.
 
 */
 
@@ -133,7 +140,7 @@ test('2019-11-08 testing general func getBCandAB()', () => {
   ]);
 });
 
-test('2019-11-08 testing callback for the general func', () => {
+test('2019-11-08 testing getFullName()', () => {
   expect(functions.getFullName(people[0])).toEqual('Alex Smith');
   expect(functions.getFullName(people[2])).toEqual('Anne Bird');
   expect(functions.getFullName(people[5])).toEqual('Carrie Ramirez');
