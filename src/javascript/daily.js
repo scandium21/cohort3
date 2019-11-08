@@ -1,5 +1,30 @@
 // Write the function after this comment ---
 const functions = {
+  /*
+    2019 - 11 - 08
+
+    Hypothetically; You are working for a private company who looks after demographics of people living in BC and Alberta only.  The data you received is from the 4 Western provinces. You want to write a generalized function that loops through the data and only does a “callback” for the people from BC or Alberta.
+
+    Write two functions: 
+    1. a generic function to process all of the people from the Western 4 provinces and only “callback” for people from BC or Alberta.  This is a generic function that will be used over and over again. How will we test this?
+
+    2. a function that will be the “callback” function that will create an array of full names (first and last together). How will we test this?
+
+    Your tests should ensure each function works on it’s own and then that they work properly together.
+
+  */
+  getBCandAB: (arr, callback) => {
+    const result = [];
+    arr.forEach(item => {
+      if (item.province === 'BC' || item.province === 'AB')
+        result.push(callback(item));
+    });
+    return result;
+  },
+
+  getFullName: item => {
+    return `${item.fname} ${item.lname}`;
+  },
   /* 
     2019 - 11- 05
     create a new array for balances >= 1000 from the staff data. 
@@ -122,11 +147,11 @@ const functions = {
   // arr.forEach(callback(currentValue [, index [, array]])[, thisArg]);
   arrForEachModify: arr => {
     arr.forEach(student => {
-      if (student.grade >= 90) student.grade = "a";
-      else if (student.grade >= 80) student.grade = "b";
-      else if (student.grade >= 70) student.grade = "c";
-      else if (student.grade >= 60) student.grade = "d";
-      else student.grade = "f";
+      if (student.grade >= 90) student.grade = 'a';
+      else if (student.grade >= 80) student.grade = 'b';
+      else if (student.grade >= 70) student.grade = 'c';
+      else if (student.grade >= 60) student.grade = 'd';
+      else student.grade = 'f';
     });
     return arr;
   },
@@ -138,11 +163,11 @@ const functions = {
     */
   arrMap: arr => {
     let newArr = arr.map(student => {
-      if (student.grade >= 90) return { ...student, grade: "a" };
-      else if (student.grade >= 80) return { ...student, grade: "b" };
-      else if (student.grade >= 70) return { ...student, grade: "c" };
-      else if (student.grade >= 60) return { ...student, grade: "d" };
-      else return { ...student, grade: "f" };
+      if (student.grade >= 90) return { ...student, grade: 'a' };
+      else if (student.grade >= 80) return { ...student, grade: 'b' };
+      else if (student.grade >= 70) return { ...student, grade: 'c' };
+      else if (student.grade >= 60) return { ...student, grade: 'd' };
+      else return { ...student, grade: 'f' };
     });
     return newArr;
   },
@@ -182,14 +207,14 @@ const functions = {
     */
   arrLoopsFuncs: [
     {
-      Monica: "chef",
-      Rachel: "Personal Buyer",
-      Phoebe: "Masseuse",
-      Chandler: "Manager",
-      Ross: "Paleontologist",
-      Joey: "Actor"
+      Monica: 'chef',
+      Rachel: 'Personal Buyer',
+      Phoebe: 'Masseuse',
+      Chandler: 'Manager',
+      Ross: 'Paleontologist',
+      Joey: 'Actor'
     },
-    ["fire", "earth", "air", "water"],
+    ['fire', 'earth', 'air', 'water'],
     function forFunc(arr) {
       let newArr = [];
       for (let i = 0; i < arr.length; i++) {
@@ -218,14 +243,14 @@ const functions = {
     function forOfLoop(arr) {
       let newArr = [];
       for (let item of arr) {
-        newArr.push(item + "-");
+        newArr.push(item + '-');
       }
       return newArr;
     },
     function forInLoop(arr) {
       let newArr = [];
       for (let i in arr) {
-        newArr.push(arr[i] + "_");
+        newArr.push(arr[i] + '_');
       }
       return newArr;
     }
@@ -237,8 +262,8 @@ const functions = {
     */
   makeEmailObj: name => {
     let names = [];
-    names.push(name["fname"].toLowerCase());
-    names.push(name["lname"].toLowerCase());
+    names.push(name['fname'].toLowerCase());
+    names.push(name['lname'].toLowerCase());
     let string = `${names[0]}.${names[1]}@evolveu.ca`;
     return string;
   },
@@ -249,7 +274,7 @@ const functions = {
     */
   makeEmailArr: name => {
     let string =
-      name[0].toLowerCase() + "." + name[1].toLowerCase() + "@evolveu.ca";
+      name[0].toLowerCase() + '.' + name[1].toLowerCase() + '@evolveu.ca';
     return string;
   },
 
@@ -274,11 +299,11 @@ const functions = {
 
 // and before this comment ---
 
-functions.assertEquals("a", "b");
-functions.assertEquals("a", "a");
+functions.assertEquals('a', 'b');
+functions.assertEquals('a', 'a');
 functions.assertEquals(1, 2);
 functions.assertEquals(2, 2);
-functions.assertEquals("2", 2);
-functions.assertEquals("This value", "This value");
+functions.assertEquals('2', 2);
+functions.assertEquals('This value', 'This value');
 
 export default functions;
