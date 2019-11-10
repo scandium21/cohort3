@@ -111,33 +111,28 @@ const testArrLoopFunc = (
 
 */
 
+expect.extend({
+  toBeABorBC(received) {
+    const pass = received === 'AB' || received === 'BC';
+    if (pass)
+      return {
+        message: () => `expected ${received} to be either 'AB' or 'BC'`,
+        pass: true
+      };
+    else
+      return {
+        message: () => `expected ${received} to be either 'AB' or 'BC'`,
+        pass: false
+      };
+  }
+});
+
 test('2019-11-08 testing general func getBCandAB()', () => {
   const callback = item => item;
   expect(functions.getBCandAB(people, callback).length).toEqual(22);
-  expect(functions.getBCandAB(people, callback)).toEqual([
-    { fname: 'Alex', lname: 'Smith', province: 'BC', age: 33 },
-    { fname: 'Angela', lname: 'Jones', province: 'AB', age: 61 },
-    { fname: 'Byron', lname: 'Cardenas', province: 'BC', age: 38 },
-    { fname: 'Carrie', lname: 'Ramirez', province: 'AB', age: 89 },
-    { fname: 'Dustin', lname: 'Bullock', province: 'BC', age: 59 },
-    { fname: 'Eva', lname: 'Keiths', province: 'AB', age: 24 },
-    { fname: 'Forest', lname: 'Vaughn', province: 'BC', age: 52 },
-    { fname: 'Giovanni', lname: 'Browning', province: 'AB', age: 32 },
-    { fname: 'Ian', lname: 'Fitzgerald', province: 'BC', age: 16 },
-    { fname: 'James', lname: 'Kramer', province: 'AB', age: 57 },
-    { fname: 'Jinbong', lname: 'Robinson', province: 'BC', age: 26 },
-    { fname: 'Jingnan', lname: 'Hatfield', province: 'AB', age: 71 },
-    { fname: 'Latora', lname: 'Matthews', province: 'BC', age: 25 },
-    { fname: 'Lauren', lname: 'McClure', province: 'AB', age: 42 },
-    { fname: 'Luis', lname: 'Price', province: 'BC', age: 23 },
-    { fname: 'Marcela', lname: 'Perez', province: 'AB', age: 20 },
-    { fname: 'Monica', lname: 'Giles', province: 'BC', age: 34 },
-    { fname: 'Niloufar', lname: 'Carson', province: 'AB', age: 29 },
-    { fname: 'Roman', lname: 'Swanson', province: 'BC', age: 21 },
-    { fname: 'Seun', lname: 'Kelly', province: 'AB', age: 60 },
-    { fname: 'Thomas', lname: 'Hart', province: 'BC', age: 14 },
-    { fname: 'Trent', lname: 'Kerr', province: 'AB', age: 12 }
-  ]);
+  functions.getBCandAB(people, callback).forEach(item => {
+    expect(item.province).toBeABorBC();
+  });
 });
 
 test('2019-11-08 testing getFullName()', () => {
