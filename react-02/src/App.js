@@ -17,25 +17,29 @@ class App extends React.Component {
       taco: 'taco',
       dd: 'daruma-doll'
     };
-    this.state = { iconClicked: null, toRender: null };
+    this.state = { iconClicked: null, toRender: null, heading: 'Welcome!' };
     this.handleClickIcon = this.handleClickIcon.bind(this);
   }
 
   handleClickIcon = e => {
     let toRender;
+    let heading = 'Hello World';
     switch (e.target.alt) {
       case 'wood-age':
         toRender = this.renderDefaultReact;
+        heading = 'Hello World';
         break;
       case 'fold':
         toRender = this.renderTicTacToe;
+        heading = 'Tic Tac Toe';
         break;
       default:
         toRender = null;
     }
     this.setState({
       iconClicked: e.target.alt,
-      toRender: toRender
+      toRender: toRender,
+      heading: heading
     });
   };
 
@@ -49,7 +53,7 @@ class App extends React.Component {
     return (
       <div className="App">
         <div className="Title">
-          <h1>Hello World</h1>
+          <h1>{this.state.heading}</h1>
           {this.renderIcon(
             this.state.iconClicked === this.iconName.wa ? style : {},
             this.handleClickIcon,
@@ -84,7 +88,7 @@ class App extends React.Component {
     return (
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
-        <p>Welcome!</p>
+        <p>Hello World!</p>
         <a
           className="App-link"
           href="https://reactjs.org"

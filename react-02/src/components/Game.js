@@ -51,9 +51,24 @@ class Game extends React.Component {
           squares: Array(9).fill(null)
         }
       ],
+      playComp: false,
       stepNumber: 0,
       xIsNext: true
     };
+  }
+
+  renderStartingUI() {
+    return (
+      <div className="game">
+        <div className="game-info">
+          <div>
+            Playing with Computer?
+            <input type="checkbox" name="playComp" value="playComp" />
+            Yes
+          </div>
+        </div>
+      </div>
+    );
   }
 
   handleClick(i) {
@@ -82,7 +97,7 @@ class Game extends React.Component {
     });
   }
 
-  render() {
+  renderPlayerVSPlayerBoard() {
     const history = this.state.history;
     const current = history[this.state.stepNumber];
     const winner = calculateWinner(current.squares);
@@ -113,6 +128,10 @@ class Game extends React.Component {
         </div>
       </div>
     );
+  }
+
+  render() {
+    return <div>{this.renderStartingUI()}</div>;
   }
 }
 
