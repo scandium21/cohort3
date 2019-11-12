@@ -34,6 +34,9 @@
 .game {
   display: flex;
   flex-direction: row;
+  font: 18px 'Century Gothic', Futura, sans-serif;
+  justify-content: center;
+  margin: 30px;
 }
 
 .game-info {

@@ -1,48 +1,7 @@
 import React from 'react';
-import './Game.css';
+import Board from './Board';
 
-export const Square = props => {
-  return (
-    <button className="square" onClick={props.onClick}>
-      {props.value}
-    </button>
-  );
-};
-
-export class Board extends React.Component {
-  renderSquare(i) {
-    return (
-      <Square
-        value={this.props.squares[i]}
-        onClick={() => this.props.onClick(i)}
-      />
-    );
-  }
-
-  render() {
-    return (
-      <div>
-        <div className="board-row">
-          {this.renderSquare(0)}
-          {this.renderSquare(1)}
-          {this.renderSquare(2)}
-        </div>
-        <div className="board-row">
-          {this.renderSquare(3)}
-          {this.renderSquare(4)}
-          {this.renderSquare(5)}
-        </div>
-        <div className="board-row">
-          {this.renderSquare(6)}
-          {this.renderSquare(7)}
-          {this.renderSquare(8)}
-        </div>
-      </div>
-    );
-  }
-}
-
-class Game extends React.Component {
+class PlayerVSPlayer extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -51,24 +10,11 @@ class Game extends React.Component {
           squares: Array(9).fill(null)
         }
       ],
-      playComp: false,
+      playOption: '',
       stepNumber: 0,
       xIsNext: true
     };
-  }
-
-  renderStartingUI() {
-    return (
-      <div className="game">
-        <div className="game-info">
-          <div>
-            Playing with Computer?
-            <input type="checkbox" name="playComp" value="playComp" />
-            Yes
-          </div>
-        </div>
-      </div>
-    );
+    this.handleClick = this.handleClick.bind(this);
   }
 
   handleClick(i) {
@@ -97,7 +43,7 @@ class Game extends React.Component {
     });
   }
 
-  renderPlayerVSPlayerBoard() {
+  render() {
     const history = this.state.history;
     const current = history[this.state.stepNumber];
     const winner = calculateWinner(current.squares);
@@ -129,10 +75,6 @@ class Game extends React.Component {
       </div>
     );
   }
-
-  render() {
-    return <div>{this.renderStartingUI()}</div>;
-  }
 }
 
 function calculateWinner(squares) {
@@ -155,4 +97,4 @@ function calculateWinner(squares) {
   return null;
 }
 
-export default Game;
+export default PlayerVSPlayer;
