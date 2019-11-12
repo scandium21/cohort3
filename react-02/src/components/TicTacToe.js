@@ -1,14 +1,15 @@
-import React from 'react';
-import GameStartingUI from './GameStartingUI';
-import PlayerVSPlayer from './PlayerVSPlayer';
-import './Game.css';
+import React from "react";
+import GameStartingUI from "./GameStartingUI";
+import PlayerVSPlayer from "./PlayerVSPlayer";
+import "./Game.css";
+import PlayerVSComp from "./PlayerVSComp";
 
 class TicTacToe extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      playOption: '',
-      moveFirst: ''
+      playOption: "",
+      moveFirst: ""
     };
 
     this.handlePlayerPick = this.handlePlayerPick.bind(this);
@@ -17,19 +18,19 @@ class TicTacToe extends React.Component {
 
   handlePlayerPick(e) {
     const item = e.target.value;
-    if (item === 'playHuman') {
-      this.setState({ playOption: 'playHuman' });
+    if (item === "playHuman") {
+      this.setState({ playOption: "playHuman" });
     } else {
-      this.setState({ playOption: 'playComp' });
+      this.setState({ playOption: "playComp" });
     }
   }
 
   whoMovesFirst(e) {
     const item = e.target.value;
-    if (item === 'humanFirst') {
-      this.setState({ moveFirst: 'humanFirst' });
+    if (item === "humanFirst") {
+      this.setState({ moveFirst: "humanFirst" });
     } else {
-      this.setState({ moveFirst: 'compFirst' });
+      this.setState({ moveFirst: "compFirst" });
     }
   }
 
@@ -47,7 +48,7 @@ class TicTacToe extends React.Component {
         />
 
         {this.state.playOption &&
-          (this.state.playOption === 'playComp' ? (
+          (this.state.playOption === "playComp" ? (
             <GameStartingUI
               handleRadioClick={this.whoMovesFirst}
               playOption={this.state.moveFirst}
@@ -60,7 +61,9 @@ class TicTacToe extends React.Component {
           ) : (
             <PlayerVSPlayer />
           ))}
-        {/* {this.state.moveFirst && ()} */}
+        {this.state.moveFirst === "compFirst" && (
+          <PlayerVSComp moveFirst={this.state.moveFirst} />
+        )}
       </div>
     );
   }
