@@ -1,7 +1,7 @@
 import React from 'react';
 import Board from './Board';
 
-class PlayerVSPlayer extends React.Component {
+class PlayerVSComp extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -11,9 +11,8 @@ class PlayerVSPlayer extends React.Component {
         }
       ],
       stepNumber: 0,
-      xIsNext: true
+      compIsNext: this.props.moveFirst === 'compFirst'
     };
-    this.handleClick = this.handleClick.bind(this);
   }
 
   handleClick(i) {
@@ -96,4 +95,4 @@ function calculateWinner(squares) {
   return null;
 }
 
-export default PlayerVSPlayer;
+export default PlayerVSComp;
