@@ -1,6 +1,6 @@
 import React from 'react';
 import Board from './Board';
-import compMove from './compMoveHelper';
+import minimax from './minimax';
 
 class PlayerVSComp extends React.Component {
   constructor(props) {
@@ -19,69 +19,7 @@ class PlayerVSComp extends React.Component {
   }
 
   componentDidMount() {
-    if (this.state.compIsNext) this.checkCurrentBoard();
-  }
-
-  forkSquare(squares) {
-    // won patterns
-    const occupied = [];
-    squares.forEach((s, index) => {
-      if (s !== null) {
-        occupied.push(index);
-      }
-    });
-    // console.log('occupied:', occupied);
-    let forkedLines = [];
-    let spot = [];
-    let chosen;
-    this.lines.forEach(item => {
-      let [a, b, c] = item;
-      if (
-        !occupied.includes(a) &&
-        !occupied.includes(b) &&
-        !occupied.includes(c)
-      ) {
-        forkedLines.push(item);
-      }
-    });
-    // console.log('selected lanes to fork', forkedLines);
-    let [l1, l2, l3] = forkedLines;
-    console.log('fork lines:', l1, l2, l3);
-    for (let i = 0; i < 3; i += 1) {
-      for (let k = 0; k < 3; k += 1) {
-        if (l1[i] === l2[k]) {
-          spot.push(l1[i]);
-          break;
-        }
-      }
-      if (spot.length > 0) break;
-    }
-    if (l3) {
-      for (let i = 0; i < 3; i += 1) {
-        for (let k = 0; k < 3; k += 1) {
-          if (l2[i] === l3[k]) {
-            spot.push(l2[i]);
-            break;
-          }
-        }
-        if (spot.length > 1) break;
-      }
-      for (let i = 0; i < 3; i += 1) {
-        for (let k = 0; k < 3; k += 1) {
-          if (l1[i] === l3[k]) {
-            spot.push(l1[i]);
-            break;
-          }
-        }
-        if (spot.length > 1) break;
-      }
-    }
-    console.log('fork spot', spot);
-    if (spot.length > 1) {
-      if (Math.random() > 0.5) chosen = spot[0];
-      else chosen = spot[1];
-    }
-    return chosen ? chosen : spot[0];
+    //if (this.state.compIsNext) this.checkCurrentBoard();
   }
 
   handleClick(i) {
@@ -119,11 +57,8 @@ class PlayerVSComp extends React.Component {
     const history = this.state.history.slice(0, this.state.stepNumber + 1);
     const current = history[history.length - 1];
     let squares = current.squares.slice();
-    squares = compMove.checkBoard(
-      squares,
-      this.state.stepNumber,
-      this.state.compIsNext
-    );
+    let spot = minimax.findBestMove(squares, this.state.compIsNext);
+    squares[spot] = this.state.compIsNext ? 'X' : 'O';
     this.setState({
       history: history.concat([
         {
