@@ -1,9 +1,11 @@
-import React from "react";
-import Board from "./Board";
+import React from 'react';
+import Board from './Board';
+import compMove from './compMoveHelper';
 
 class PlayerVSComp extends React.Component {
   constructor(props) {
     super(props);
+
     this.state = {
       history: [
         {
@@ -11,80 +13,75 @@ class PlayerVSComp extends React.Component {
         }
       ],
       stepNumber: 0,
-      compIsNext: this.props.moveFirst === "compFirst"
+      compIsNext: this.props.moveFirst === 'compFirst'
     };
     this.checkCurrentBoard = this.checkCurrentBoard.bind(this);
-    this.makeCompMove = this.makeCompMove.bind(this);
   }
 
   componentDidMount() {
     if (this.state.compIsNext) this.checkCurrentBoard();
   }
 
-  makeCompMove(type) {
-    // winning patterns
-    const lines = [
-      [0, 1, 2],
-      [3, 4, 5],
-      [6, 7, 8],
-      [0, 3, 6],
-      [1, 4, 7],
-      [2, 5, 8],
-      [0, 4, 8],
-      [2, 4, 6]
-    ];
-    const history = this.state.history.slice(0, this.state.stepNumber + 1);
-    const current = history[history.length - 1];
-    const squares = current.squares.slice();
+  forkSquare(squares) {
+    // won patterns
     const occupied = [];
     squares.forEach((s, index) => {
       if (s !== null) {
         occupied.push(index);
       }
     });
-    switch (type) {
-      case "empty":
-        squares[4] = this.state.compIsNext ? "X" : "O";
-        break;
-      case "fork":
-        let forkedLines = [];
-        let spot;
-        lines.forEach(item => {
-          let [a, b, c] = item;
-          if (
-            !occupied.includes(a) &&
-            !occupied.includes(b) &&
-            !occupied.includes(c)
-          ) {
-            forkedLines.push(item);
-          }
-        });
-        let [line1, line2, line3] = forkedLines;
-        for (let i in line1) {
-          if (line1[i] === line2[i]) {
-            spot = i;
-          } else if (line3 && line2[i] === line3[i]) {
-            spot = i;
-          } else if (line3 && line1[i] === line3[i]) {
-            spot = i;
-          }
-        }
-        squares[spot] = this.state.compIsNext ? "X" : "O";
-        break;
-      case "two-in-a-row":
-        break;
-      default:
-        break;
-    }
-    this.setState({
-      history: history.concat([
-        {
-          squares: squares
-        }
-      ]),
-      stepNumber: history.length,
-      compIsNext: !this.state.compIsNext
+    // console.log('occupied:', occupied);
+    let forkedLines = [];
+    let spot = [];
+    let chosen;
+    this.lines.forEach(item => {
+      let [a, b, c] = item;
+      if (
+        !occupied.includes(a) &&
+        !occupied.includes(b) &&
+        !occupied.includes(c)
+      ) {
+        forkedLines.push(item);
+      }
     });
+    // console.log('selected lanes to fork', forkedLines);
+    let [l1, l2, l3] = forkedLines;
+    console.log('fork lines:', l1, l2, l3);
+    for (let i = 0; i < 3; i += 1) {
+      for (let k = 0; k < 3; k += 1) {
+        if (l1[i] === l2[k]) {
+          spot.push(l1[i]);
+          break;
+        }
+      }
+      if (spot.length > 0) break;
+    }
+    if (l3) {
+      for (let i = 0; i < 3; i += 1) {
+        for (let k = 0; k < 3; k += 1) {
+          if (l2[i] === l3[k]) {
+            spot.push(l2[i]);
+            break;
+          }
+        }
+        if (spot.length > 1) break;
+      }
+      for (let i = 0; i < 3; i += 1) {
+        for (let k = 0; k < 3; k += 1) {
+          if (l1[i] === l3[k]) {
+            spot.push(l1[i]);
+            break;
+          }
+        }
+        if (spot.length > 1) break;
+      }
+    }
+    console.log('fork spot', spot);
+    if (spot.length > 1) {
+      if (Math.random() > 0.5) chosen = spot[0];
+      else chosen = spot[1];
+    }
+    return chosen ? chosen : spot[0];
   }
 
   handleClick(i) {
@@ -94,7 +91,7 @@ class PlayerVSComp extends React.Component {
     if (calculateWinner(squares) || squares[i]) {
       return;
     }
-    squares[i] = this.state.compIsNext ? "X" : "O";
+    squares[i] = this.state.compIsNext ? 'X' : 'O';
     this.setState({
       history: history.concat([
         {
@@ -114,24 +111,28 @@ class PlayerVSComp extends React.Component {
     this.setState({
       stepNumber: step,
       compIsNext:
-        this.props.moveFirst === "compFirst" ? step % 2 === 0 : step % 2 === 1
+        this.props.moveFirst === 'compFirst' ? step % 2 === 0 : step % 2 === 1
     });
   }
 
   checkCurrentBoard() {
     const history = this.state.history.slice(0, this.state.stepNumber + 1);
     const current = history[history.length - 1];
-    const squares = current.squares.slice();
-
-    // empty board
-    if (this.state.stepNumber === 0) {
-      return this.makeCompMove("empty");
-    }
-    // fork situation
-    if (this.state.stepNumber === 2 || this.stepNumber === 1)
-      return this.makeCompMove("fork");
-    // two-in-a-roll
-
+    let squares = current.squares.slice();
+    squares = compMove.checkBoard(
+      squares,
+      this.state.stepNumber,
+      this.state.compIsNext
+    );
+    this.setState({
+      history: history.concat([
+        {
+          squares: squares
+        }
+      ]),
+      stepNumber: history.length,
+      compIsNext: !this.state.compIsNext
+    });
     return null;
   }
 
@@ -141,7 +142,7 @@ class PlayerVSComp extends React.Component {
     const winner = calculateWinner(current.squares);
 
     const moves = history.map((step, move) => {
-      const desc = move ? "Go to move #" + move : "Go to game start";
+      const desc = move ? 'Go to move #' + move : 'Go to game start';
       return (
         <li key={move}>
           <button onClick={() => this.jumpTo(move)}>{desc}</button>
@@ -151,9 +152,9 @@ class PlayerVSComp extends React.Component {
 
     let status;
     if (winner) {
-      status = "Winner: " + winner;
+      status = 'Winner: ' + winner;
     } else {
-      status = "Next player: " + (this.state.compIsNext ? "X" : "O");
+      status = 'Next player: ' + (this.state.compIsNext ? 'X' : 'O');
     }
     return (
       <div className="game">
