@@ -34,7 +34,8 @@
 .game {
   display: flex;
   flex-direction: row;
-  font: 18px 'Century Gothic', Futura, sans-serif;
+  font: 19px 'Century Gothic', Futura, sans-serif;
+  font-weight: bold;
   justify-content: center;
   margin: 30px;
 }

@@ -13,13 +13,16 @@ class PlayerVSComp extends React.Component {
         }
       ],
       stepNumber: 0,
-      compIsNext: this.props.moveFirst === 'compFirst'
+      xIsNext: true,
+      compIsX: this.props.moveFirst === 'compFirst'
     };
     this.checkCurrentBoard = this.checkCurrentBoard.bind(this);
   }
 
   componentDidMount() {
-    //if (this.state.compIsNext) this.checkCurrentBoard();
+    if (this.state.xIsNext === this.state.compIsX) {
+      this.checkCurrentBoard();
+    }
   }
 
   handleClick(i) {
@@ -29,7 +32,7 @@ class PlayerVSComp extends React.Component {
     if (calculateWinner(squares) || squares[i]) {
       return;
     }
-    squares[i] = this.state.compIsNext ? 'X' : 'O';
+    squares[i] = this.state.xIsNext === this.state.compIsX ? 'X' : 'O';
     this.setState({
       history: history.concat([
         {
@@ -37,19 +40,20 @@ class PlayerVSComp extends React.Component {
         }
       ]),
       stepNumber: history.length,
-      compIsNext: !this.state.compIsNext
+      xIsNext: !this.state.xIsNext
     });
   }
 
   componentDidUpdate() {
-    if (this.state.compIsNext) this.checkCurrentBoard();
+    if (this.state.xIsNext === this.state.compIsX) {
+      this.checkCurrentBoard();
+    }
   }
 
   jumpTo(step) {
     this.setState({
       stepNumber: step,
-      compIsNext:
-        this.props.moveFirst === 'compFirst' ? step % 2 === 0 : step % 2 === 1
+      xIsNext: step % 2 === 0
     });
   }
 
@@ -57,8 +61,12 @@ class PlayerVSComp extends React.Component {
     const history = this.state.history.slice(0, this.state.stepNumber + 1);
     const current = history[history.length - 1];
     let squares = current.squares.slice();
-    let spot = minimax.findBestMove(squares, this.state.compIsNext);
-    squares[spot] = this.state.compIsNext ? 'X' : 'O';
+    let spot = minimax.findBestMove(
+      squares,
+      this.state.xIsNext === this.state.compIsX
+    );
+    squares[spot] = this.state.xIsNext === this.state.compIsX ? 'X' : 'O';
+
     this.setState({
       history: history.concat([
         {
@@ -66,7 +74,7 @@ class PlayerVSComp extends React.Component {
         }
       ]),
       stepNumber: history.length,
-      compIsNext: !this.state.compIsNext
+      xIsNext: !this.state.xIsNext
     });
     return null;
   }
@@ -89,7 +97,7 @@ class PlayerVSComp extends React.Component {
     if (winner) {
       status = 'Winner: ' + winner;
     } else {
-      status = 'Next player: ' + (this.state.compIsNext ? 'X' : 'O');
+      status = 'Next player: ' + (this.state.xIsNext ? 'X' : 'O');
     }
     return (
       <div className="game">

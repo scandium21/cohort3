@@ -3,11 +3,12 @@ import React from 'react';
 import DefaultReact from './components/DefaultReact';
 import Icon from './components/Icon';
 import TicTacToe from './components/TicTacToe';
+import Test from './components/test-minimax';
 //---- imported images ----------------------------
-import wa from './assets/icons/woodage.svg';
-import fold from './assets/icons/fold.svg';
-import taco from './assets/icons/taco.svg';
-import dd from './assets/icons/Daruma.svg';
+import react from './assets/icons/react.svg';
+import tictactoe from './assets/icons/tictactoe.svg';
+import money from './assets/icons/money.svg';
+import city from './assets/icons/city.svg';
 import './App.css';
 //-------------------------------------------------
 
@@ -17,10 +18,10 @@ class App extends React.Component {
     // iconData contains: source of the icon image,
     // content to render, heading to display when that icon is clicked
     this.iconData = {
-      wa: [wa, <DefaultReact />, 'Hello World from React'],
-      fold: [fold, <TicTacToe />, 'Tic Tac Toe'],
-      taco: [taco, null, `Hi I'm a taco`],
-      dd: [dd, null, `I'm a Daruma doll`]
+      react: [react, <DefaultReact />, 'Hello World from React'],
+      tictactoe: [tictactoe, <TicTacToe />, 'Tic Tac Toe'],
+      money: [money, <Test />, `Accounts`],
+      city: [city, null, `City & Community`]
     };
     this.state = { iconClicked: null };
     this.handleClickIcon = this.handleClickIcon.bind(this);

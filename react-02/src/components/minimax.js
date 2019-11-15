@@ -1,3 +1,5 @@
+const maxdep = 4;
+
 const minimax = {
   calculateWinner: squares => {
     const lines = [
@@ -22,38 +24,35 @@ const minimax = {
     }
     return null;
   },
-  findBestMove: (board, compIsNext) => {
+  findBestMove: (board, compIsNextX) => {
     if (minimax.calculateWinner(board)) {
       return;
     }
     let bestMove = null;
-    let bestVal = compIsNext
+    let bestVal = compIsNextX
       ? Number.MIN_SAFE_INTEGER
       : Number.MAX_SAFE_INTEGER;
     for (let i = 0; i < board.length; i += 1) {
       // loop through board, find empty spots
       if (board[i] === null) {
         // move to the empty spot
-        board[i] = compIsNext ? 'X' : 'O';
+        board[i] = compIsNextX ? 'X' : 'O';
         // calculate the value as a result of this move
-        let val = minimax.minimax(
-          board,
-          0,
-          board[i] === 'X' ? !compIsNext : compIsNext
-        );
+        let val = minimax.minimax(board, 0, !compIsNextX);
         // undo move
         board[i] = null;
         // reset bestVal and bestMove if:
-        if (compIsNext && val > bestVal) {
+        if (compIsNextX && val > bestVal) {
           bestVal = val;
           bestMove = i;
         }
-        if (!compIsNext && val < bestVal) {
+        if (!compIsNextX && val < bestVal) {
           bestVal = val;
           bestMove = i;
         }
       }
     }
+    console.log('best move', bestMove);
     return bestMove;
   },
 
@@ -61,7 +60,8 @@ const minimax = {
     // check the current score
     let score = minimax.evaluate(board);
     // X won or O won, return respective scores
-    if (score === 10 || score === -10) return score;
+    if (score === 100) return score - depth;
+    if (score === -100) return score + depth;
     if (minimax.noMovesLeft(board)) return 0;
     // X is maximazer and X is computer
     if (compIsNext) {
@@ -111,8 +111,8 @@ const minimax = {
         squares[a] === squares[b] &&
         squares[a] === squares[c]
       ) {
-        if (squares[a] === 'X') return 10;
-        return -10;
+        if (squares[a] === 'X') return 100;
+        return -100;
       }
     }
   },
@@ -124,7 +124,7 @@ const minimax = {
         result = false;
       }
     });
-    console.log('no move left?', result);
+    // console.log('no move left?', result);
     return result;
   }
 };
