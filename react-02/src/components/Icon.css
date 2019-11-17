@@ -1,0 +1,11 @@
+.Icon {
+  padding: 3px 10px;
+  margin: 0px 3px;
+  width: 80px;
+  height: 80px;
+  border-radius: 10%;
+}
+
+.Icon:hover {
+  box-shadow: 7px 10px 12px -5px rgba(0, 0, 0, 0.56);
+}

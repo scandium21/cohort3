@@ -20,7 +20,7 @@ class App extends React.Component {
     this.iconData = {
       react: [react, <DefaultReact />, 'Hello World from React'],
       tictactoe: [tictactoe, <TicTacToe />, 'Tic Tac Toe'],
-      money: [money, <Test />, `Accounts`],
+      accounts: [money, <Test />, `Accounts`],
       city: [city, null, `City & Community`]
     };
     this.state = { iconClicked: null };
@@ -45,6 +45,7 @@ class App extends React.Component {
           source={this.iconData[prop][0]}
           alt={prop}
           key={prop}
+          title={prop}
         />
       );
       icons.push(icon);

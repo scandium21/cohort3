@@ -1,4 +1,5 @@
 import React from 'react';
+import './Icon.css';
 
 class Icon extends React.Component {
   render() {
@@ -9,6 +10,7 @@ class Icon extends React.Component {
         src={this.props.source}
         className="Icon"
         alt={this.props.alt}
+        title={this.props.title}
       />
     );
   }
