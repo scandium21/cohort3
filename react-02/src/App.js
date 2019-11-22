@@ -1,15 +1,15 @@
 //---- imported react components ------------------
-import React from 'react';
-import DefaultReact from './components/DefaultReact';
-import Icon from './components/Icon';
-import TicTacToe from './components/TicTacToe';
-import Test from './components/test-minimax';
+import React from "react";
+import DefaultReact from "./components/DefaultReact";
+import Icon from "./components/Icon";
+import TicTacToe from "./components/TicTacToe";
+import AccountCtrl from "./components/AccountCtrl";
 //---- imported images ----------------------------
-import react from './assets/icons/react.svg';
-import tictactoe from './assets/icons/tictactoe.svg';
-import money from './assets/icons/money.svg';
-import city from './assets/icons/city.svg';
-import './App.css';
+import react from "./assets/icons/react.svg";
+import tictactoe from "./assets/icons/tictactoe.svg";
+import money from "./assets/icons/money.svg";
+import city from "./assets/icons/city.svg";
+import "./App.css";
 //-------------------------------------------------
 
 class App extends React.Component {
@@ -18,9 +18,9 @@ class App extends React.Component {
     // iconData contains: source of the icon image,
     // content to render, heading to display when that icon is clicked
     this.iconData = {
-      react: [react, <DefaultReact />, 'Hello World from React'],
-      tictactoe: [tictactoe, <TicTacToe />, 'Tic Tac Toe'],
-      accounts: [money, <Test />, `Accounts`],
+      react: [react, <DefaultReact />, "Hello World from React"],
+      tictactoe: [tictactoe, <TicTacToe />, "Tic Tac Toe"],
+      accounts: [money, <AccountCtrl />, `Accounts`],
       city: [city, null, `City & Community`]
     };
     this.state = { iconClicked: null };
@@ -36,7 +36,7 @@ class App extends React.Component {
 
   renderIcons() {
     const icons = [];
-    const style = { backgroundColor: '#e1ffa8', borderRadius: '10%' };
+    const style = { backgroundColor: "#e1ffa8", borderRadius: "10%" };
     for (let prop in this.iconData) {
       let icon = (
         <Icon
@@ -60,7 +60,7 @@ class App extends React.Component {
           <h1>
             {this.state.iconClicked
               ? this.iconData[this.state.iconClicked][2]
-              : 'Welcome!'}
+              : "Welcome!"}
           </h1>
           {this.renderIcons()}
         </div>
