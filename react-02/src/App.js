@@ -37,15 +37,15 @@ class App extends React.Component {
   renderIcons() {
     const icons = [];
     const style = { backgroundColor: "#e1ffa8", borderRadius: "10%" };
-    for (let prop in this.iconData) {
+    for (let item in this.iconData) {
       let icon = (
         <Icon
-          style={this.state.iconClicked === prop ? style : null}
+          style={this.state.iconClicked === item ? style : null}
           onClick={this.handleClickIcon}
-          source={this.iconData[prop][0]}
-          alt={prop}
-          key={prop}
-          title={prop}
+          source={this.iconData[item][0]}
+          alt={item}
+          key={item}
+          title={item}
         />
       );
       icons.push(icon);
