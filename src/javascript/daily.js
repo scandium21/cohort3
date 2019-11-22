@@ -14,6 +14,9 @@ const functions = {
     };
   },
 
+  // another way to write the generic func:
+  getBCandAB2: (arr, callback) =>
+    callback(arr.filter(i => i.province === "AB" || i.province === "BC")),
   /*
     2019 - 11 - 08
 

@@ -18,6 +18,11 @@ test("2019-11-21 testing getCalcData()", () => {
     avgAge: 838 / 22,
     totalPop: 22
   });
+  expect(functions.getCalcData(functions.getBCandAB2(people, i => i))).toEqual({
+    totalAge: 838,
+    avgAge: 838 / 22,
+    totalPop: 22
+  });
 });
 
 /*
