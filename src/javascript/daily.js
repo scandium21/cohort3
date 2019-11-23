@@ -34,7 +34,10 @@ const functions = {
     console.log("myArray = ", myArray);
   */
 
-  anonymousNumAscending: arr => arr.sort((a, b) => a.num - b.num),
+  anonymousNumAscending: arr =>
+    arr.sort(function(a, b) {
+      return a.num - b.num;
+    }),
   namedAlphabetic: arr => arr.sort(sortAlphabet),
   arrowReverseAlphabetic: arr => arr.sort(sortReverseAlphabet),
   /*
