@@ -1,5 +1,78 @@
 import functions from "./daily";
 /*
+    2019 - 11 - 22
+    Write 3 functions:  1) Anonymous function 2) Named function, 3) Arrow function.
+    Write these functions to complete the following exercise.  
+    Sort the array:
+      1. By number ascending, using anonymous function
+      2. By fruit alphabetic, using named function
+      3. By origin reverse alphabetic, using arrow function
+
+    let myArray = [
+      {num: 5,str: "apples", origin:"BC"},
+      {num: 7,str: "oranges", origin:"Florida"},
+      {num: 2,str: "lemons", origin:"Mexico"},
+      {num: 8,str: "bananas", origin:"Ecuador"},
+      {num: 6,str: "avocados", origin:"Mexico"},
+      {num: 4,str: "pineapple", origin:"Brazil"},
+      {num: 3,str: "blueberries", origin:"Chile"},
+      {num: 9,str: "pears", origin:"Oregon"},
+      {num: 1,str: "cantaloupe", origin:"California"}
+    ];
+    //
+    // Do the statements below 3 times, one for each type of function
+    //
+    myArray.sort(.....enter code here
+    );
+    console.log("myArray = ", myArray);
+*/
+test("2019-11-22 testing 3 forms of funcs for array.sort(func)", () => {
+  let myArray = [
+    { num: 5, str: "apples", origin: "BC" },
+    { num: 7, str: "oranges", origin: "Florida" },
+    { num: 2, str: "lemons", origin: "Mexico" },
+    { num: 8, str: "bananas", origin: "Ecuador" },
+    { num: 6, str: "avocados", origin: "Mexico" },
+    { num: 4, str: "pineapple", origin: "Brazil" },
+    { num: 3, str: "blueberries", origin: "Chile" },
+    { num: 9, str: "pears", origin: "Oregon" },
+    { num: 1, str: "cantaloupe", origin: "California" }
+  ];
+  expect(functions.anonymousNumAscending(myArray)).toEqual([
+    { num: 1, str: "cantaloupe", origin: "California" },
+    { num: 2, str: "lemons", origin: "Mexico" },
+    { num: 3, str: "blueberries", origin: "Chile" },
+    { num: 4, str: "pineapple", origin: "Brazil" },
+    { num: 5, str: "apples", origin: "BC" },
+    { num: 6, str: "avocados", origin: "Mexico" },
+    { num: 7, str: "oranges", origin: "Florida" },
+    { num: 8, str: "bananas", origin: "Ecuador" },
+    { num: 9, str: "pears", origin: "Oregon" }
+  ]);
+  expect(functions.namedAlphabetic(myArray)).toEqual([
+    { num: 5, str: "apples", origin: "BC" },
+    { num: 6, str: "avocados", origin: "Mexico" },
+    { num: 8, str: "bananas", origin: "Ecuador" },
+    { num: 3, str: "blueberries", origin: "Chile" },
+    { num: 1, str: "cantaloupe", origin: "California" },
+    { num: 2, str: "lemons", origin: "Mexico" },
+    { num: 7, str: "oranges", origin: "Florida" },
+    { num: 9, str: "pears", origin: "Oregon" },
+    { num: 4, str: "pineapple", origin: "Brazil" }
+  ]);
+  expect(functions.arrowReverseAlphabetic(myArray)).toEqual([
+    { num: 9, str: "pears", origin: "Oregon" },
+    { num: 6, str: "avocados", origin: "Mexico" },
+    { num: 2, str: "lemons", origin: "Mexico" },
+    { num: 7, str: "oranges", origin: "Florida" },
+    { num: 8, str: "bananas", origin: "Ecuador" },
+    { num: 3, str: "blueberries", origin: "Chile" },
+    { num: 1, str: "cantaloupe", origin: "California" },
+    { num: 4, str: "pineapple", origin: "Brazil" },
+    { num: 5, str: "apples", origin: "BC" }
+  ]);
+});
+/*
     2019 - 11- 21
     Based on callback exercise, part 1, now write a function using the generic callback function
      which returns an object of the total number of people, total age, and the average age of people from BC and Alberta only. 

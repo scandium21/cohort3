@@ -1,5 +1,42 @@
 // Write the function after this comment ---
+function sortAlphabet(a, b) {
+  return a.str > b.str ? 1 : a.str === b.str ? 0 : -1;
+}
+const sortReverseAlphabet = (a, b) =>
+  a.origin > b.origin ? -1 : a.origin < b.origin ? 1 : 0;
+
 const functions = {
+  /*
+    2019 - 11 - 22
+    Write 3 functions:  1) Anonymous function 2) Named function, 3) Arrow function.
+    Write these functions to complete the following exercise.  
+    Sort the array:
+      1. By number ascending, using anonymous function
+      2. By fruit alphabetic, using named function
+      3. By origin reverse alphabetic, using arrow function
+
+    let myArray = [
+      {num: 5,str: "apples", origin:"BC"},
+      {num: 7,str: "oranges", origin:"Florida"},
+      {num: 2,str: "lemons", origin:"Mexico"},
+      {num: 8,str: "bananas", origin:"Ecuador"},
+      {num: 6,str: "avocados", origin:"Mexico"},
+      {num: 4,str: "pineapple", origin:"Brazil"},
+      {num: 3,str: "blueberries", origin:"Chile"},
+      {num: 9,str: "pears", origin:"Oregon"},
+      {num: 1,str: "cantaloupe", origin:"California"}
+    ];
+    //
+    // Do the statements below 3 times, one for each type of function
+    //
+    myArray.sort(.....enter code here
+    );
+    console.log("myArray = ", myArray);
+  */
+
+  anonymousNumAscending: arr => arr.sort((a, b) => a.num - b.num),
+  namedAlphabetic: arr => arr.sort(sortAlphabet),
+  arrowReverseAlphabetic: arr => arr.sort(sortReverseAlphabet),
   /*
     2019 - 11- 21
     Based on callback exercise, part 1, now write a function using the generic callback function
