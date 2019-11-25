@@ -49,6 +49,7 @@ export class SinglyLinkedList {
   addFront(subject, amount) {
     let newNode = new ListNode(subject, amount, this.head);
     this.head = newNode;
+    this.length += 1;
     return this.head;
   }
   insert(position, subject = "", amount = 0) {
