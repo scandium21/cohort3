@@ -63,8 +63,10 @@ export class SinglyLinkedList {
     while (p.next !== position) {
       p = p.next;
     }
-    p.next = null;
-    return p;
+    p.next = position.next;
+    this.length -= 1;
+    // returning the node after position, if it's null, return the last node
+    return p.next === null ? p : p.next;
   }
   sumAmount() {
     return this.sumAmountHelper(this.head);
