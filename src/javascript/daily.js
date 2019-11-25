@@ -1,10 +1,4 @@
 // Write the function after this comment ---
-function sortAlphabet(a, b) {
-  return a.str > b.str ? 1 : a.str === b.str ? 0 : -1;
-}
-const sortReverseAlphabet = (a, b) =>
-  a.origin > b.origin ? -1 : a.origin < b.origin ? 1 : 0;
-
 const functions = {
   /*
     2019 - 11 - 22
@@ -38,8 +32,17 @@ const functions = {
     arr.sort(function(a, b) {
       return a.num - b.num;
     }),
-  namedAlphabetic: arr => arr.sort(sortAlphabet),
-  arrowReverseAlphabetic: arr => arr.sort(sortReverseAlphabet),
+  namedAlphabetic: arr => {
+    function sortAlphabet(a, b) {
+      return a.str > b.str ? 1 : a.str === b.str ? 0 : -1;
+    }
+    return arr.sort(sortAlphabet);
+  },
+  arrowReverseAlphabetic: arr => {
+    const sortReverseAlphabet = (a, b) =>
+      a.origin > b.origin ? -1 : a.origin < b.origin ? 1 : 0;
+    return arr.sort(sortReverseAlphabet);
+  },
   /*
     2019 - 11- 21
     Based on callback exercise, part 1, now write a function using the generic callback function
