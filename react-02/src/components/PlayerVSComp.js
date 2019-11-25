@@ -1,6 +1,6 @@
-import React from 'react';
-import Board from './Board';
-import minimax from './minimax';
+import React from "react";
+import Board from "./Board";
+import minimax from "./minimax";
 
 class PlayerVSComp extends React.Component {
   constructor(props) {
@@ -14,7 +14,7 @@ class PlayerVSComp extends React.Component {
       ],
       stepNumber: 0,
       xIsNext: true,
-      compIsX: this.props.moveFirst === 'compFirst'
+      compIsX: this.props.moveFirst === "compFirst"
     };
     this.checkCurrentBoard = this.checkCurrentBoard.bind(this);
   }
@@ -32,7 +32,7 @@ class PlayerVSComp extends React.Component {
     if (calculateWinner(squares) || squares[i]) {
       return;
     }
-    squares[i] = this.state.xIsNext === this.state.compIsX ? 'X' : 'O';
+    squares[i] = this.state.xIsNext && !this.state.compIsX ? "X" : "O";
     this.setState({
       history: history.concat([
         {
@@ -65,7 +65,7 @@ class PlayerVSComp extends React.Component {
       squares,
       this.state.xIsNext === this.state.compIsX
     );
-    squares[spot] = this.state.xIsNext === this.state.compIsX ? 'X' : 'O';
+    squares[spot] = this.state.xIsNext && this.state.compIsX ? "X" : "O";
 
     this.setState({
       history: history.concat([
@@ -85,7 +85,7 @@ class PlayerVSComp extends React.Component {
     const winner = calculateWinner(current.squares);
 
     const moves = history.map((step, move) => {
-      const desc = move ? 'Go to move #' + move : 'Go to game start';
+      const desc = move ? "Go to move #" + move : "Go to game start";
       return (
         <li key={move}>
           <button onClick={() => this.jumpTo(move)}>{desc}</button>
@@ -95,9 +95,9 @@ class PlayerVSComp extends React.Component {
 
     let status;
     if (winner) {
-      status = 'Winner: ' + winner;
+      status = "Winner: " + winner;
     } else {
-      status = 'Next player: ' + (this.state.xIsNext ? 'X' : 'O');
+      status = "Next player: " + (this.state.xIsNext ? "X" : "O");
     }
     return (
       <div className="game">

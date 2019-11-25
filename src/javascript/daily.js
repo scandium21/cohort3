@@ -1,5 +1,62 @@
 // Write the function after this comment ---
+function sortAlphabet(a, b) {
+  return a.str > b.str ? 1 : a.str === b.str ? 0 : -1;
+}
+const sortReverseAlphabet = (a, b) =>
+  a.origin > b.origin ? -1 : a.origin < b.origin ? 1 : 0;
+
 const functions = {
+  /*
+    2019 - 11 - 22
+    Write 3 functions:  1) Anonymous function 2) Named function, 3) Arrow function.
+    Write these functions to complete the following exercise.  
+    Sort the array:
+      1. By number ascending, using anonymous function
+      2. By fruit alphabetic, using named function
+      3. By origin reverse alphabetic, using arrow function
+
+    let myArray = [
+      {num: 5,str: "apples", origin:"BC"},
+      {num: 7,str: "oranges", origin:"Florida"},
+      {num: 2,str: "lemons", origin:"Mexico"},
+      {num: 8,str: "bananas", origin:"Ecuador"},
+      {num: 6,str: "avocados", origin:"Mexico"},
+      {num: 4,str: "pineapple", origin:"Brazil"},
+      {num: 3,str: "blueberries", origin:"Chile"},
+      {num: 9,str: "pears", origin:"Oregon"},
+      {num: 1,str: "cantaloupe", origin:"California"}
+    ];
+    //
+    // Do the statements below 3 times, one for each type of function
+    //
+    myArray.sort(.....enter code here
+    );
+    console.log("myArray = ", myArray);
+  */
+
+  anonymousNumAscending: arr =>
+    arr.sort(function(a, b) {
+      return a.num - b.num;
+    }),
+  namedAlphabetic: arr => arr.sort(sortAlphabet),
+  arrowReverseAlphabetic: arr => arr.sort(sortReverseAlphabet),
+  /*
+    2019 - 11- 21
+    Based on callback exercise, part 1, now write a function using the generic callback function
+     which returns an object of the total number of people, total age, and the average age of people from BC and Alberta only. 
+  */
+
+  getCalcData: arr => {
+    return {
+      totalAge: arr.reduce((acc, i) => acc + i.age, 0),
+      avgAge: arr.reduce((acc, i) => acc + i.age, 0) / arr.length,
+      totalPop: arr.length
+    };
+  },
+
+  // another way to write the generic func:
+  getBCandAB2: (arr, callback) =>
+    callback(arr.filter(i => i.province === "AB" || i.province === "BC")),
   /*
     2019 - 11 - 08
 
@@ -23,7 +80,7 @@ const functions = {
   getBCandAB: (arr, callback) => {
     const result = [];
     arr.forEach(item => {
-      if (item.province === 'BC' || item.province === 'AB')
+      if (item.province === "BC" || item.province === "AB")
         result.push(callback(item));
     });
     return result;
@@ -154,11 +211,11 @@ const functions = {
   // arr.forEach(callback(currentValue [, index [, array]])[, thisArg]);
   arrForEachModify: arr => {
     arr.forEach(student => {
-      if (student.grade >= 90) student.grade = 'a';
-      else if (student.grade >= 80) student.grade = 'b';
-      else if (student.grade >= 70) student.grade = 'c';
-      else if (student.grade >= 60) student.grade = 'd';
-      else student.grade = 'f';
+      if (student.grade >= 90) student.grade = "a";
+      else if (student.grade >= 80) student.grade = "b";
+      else if (student.grade >= 70) student.grade = "c";
+      else if (student.grade >= 60) student.grade = "d";
+      else student.grade = "f";
     });
     return arr;
   },
@@ -170,11 +227,11 @@ const functions = {
     */
   arrMap: arr => {
     let newArr = arr.map(student => {
-      if (student.grade >= 90) return { ...student, grade: 'a' };
-      else if (student.grade >= 80) return { ...student, grade: 'b' };
-      else if (student.grade >= 70) return { ...student, grade: 'c' };
-      else if (student.grade >= 60) return { ...student, grade: 'd' };
-      else return { ...student, grade: 'f' };
+      if (student.grade >= 90) return { ...student, grade: "a" };
+      else if (student.grade >= 80) return { ...student, grade: "b" };
+      else if (student.grade >= 70) return { ...student, grade: "c" };
+      else if (student.grade >= 60) return { ...student, grade: "d" };
+      else return { ...student, grade: "f" };
     });
     return newArr;
   },
@@ -214,14 +271,14 @@ const functions = {
     */
   arrLoopsFuncs: [
     {
-      Monica: 'chef',
-      Rachel: 'Personal Buyer',
-      Phoebe: 'Masseuse',
-      Chandler: 'Manager',
-      Ross: 'Paleontologist',
-      Joey: 'Actor'
+      Monica: "chef",
+      Rachel: "Personal Buyer",
+      Phoebe: "Masseuse",
+      Chandler: "Manager",
+      Ross: "Paleontologist",
+      Joey: "Actor"
     },
-    ['fire', 'earth', 'air', 'water'],
+    ["fire", "earth", "air", "water"],
     function forFunc(arr) {
       let newArr = [];
       for (let i = 0; i < arr.length; i++) {
@@ -250,14 +307,14 @@ const functions = {
     function forOfLoop(arr) {
       let newArr = [];
       for (let item of arr) {
-        newArr.push(item + '-');
+        newArr.push(item + "-");
       }
       return newArr;
     },
     function forInLoop(arr) {
       let newArr = [];
       for (let i in arr) {
-        newArr.push(arr[i] + '_');
+        newArr.push(arr[i] + "_");
       }
       return newArr;
     }
@@ -269,8 +326,8 @@ const functions = {
     */
   makeEmailObj: name => {
     let names = [];
-    names.push(name['fname'].toLowerCase());
-    names.push(name['lname'].toLowerCase());
+    names.push(name["fname"].toLowerCase());
+    names.push(name["lname"].toLowerCase());
     let string = `${names[0]}.${names[1]}@evolveu.ca`;
     return string;
   },
@@ -281,7 +338,7 @@ const functions = {
     */
   makeEmailArr: name => {
     let string =
-      name[0].toLowerCase() + '.' + name[1].toLowerCase() + '@evolveu.ca';
+      name[0].toLowerCase() + "." + name[1].toLowerCase() + "@evolveu.ca";
     return string;
   },
 
@@ -306,11 +363,11 @@ const functions = {
 
 // and before this comment ---
 
-functions.assertEquals('a', 'b');
-functions.assertEquals('a', 'a');
+functions.assertEquals("a", "b");
+functions.assertEquals("a", "a");
 functions.assertEquals(1, 2);
 functions.assertEquals(2, 2);
-functions.assertEquals('2', 2);
-functions.assertEquals('This value', 'This value');
+functions.assertEquals("2", 2);
+functions.assertEquals("This value", "This value");
 
 export default functions;
