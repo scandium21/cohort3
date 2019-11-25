@@ -1,10 +1,10 @@
-import React, { Component } from 'react';
+import React, { Component } from "react";
 
 class NewCityForm extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      cityName: '',
+      cityName: "",
       cityPop: null
     };
   }
@@ -14,7 +14,7 @@ class NewCityForm extends Component {
         <form>
           <label htmlFor="newCity">Add New City: </label>
           <input type="text" name="cityName" id="newCity" />
-          <button>Create</button>
+          <button onClick={this.handleCreate}>Create</button>
         </form>
       </div>
     );

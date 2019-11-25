@@ -45,7 +45,9 @@ class NewAccountForm extends Component {
               type="number"
               id="initDep"
               name="balance"
-              value={this.state.balance && this.state.balance}
+              min={0}
+              max={Number.MAX_SAFE_INTEGER}
+              value={this.state.balance}
               onChange={this.handleChange}
             />
           </label>

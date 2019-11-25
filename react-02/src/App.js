@@ -4,6 +4,7 @@ import DefaultReact from "./components/DefaultReact";
 import Icon from "./components/Icon";
 import TicTacToe from "./components/TicTacToe";
 import AccountCtrl from "./components/AccountCtrl";
+import Community from "./components/Community";
 //---- imported images ----------------------------
 import react from "./assets/icons/react.svg";
 import tictactoe from "./assets/icons/tictactoe.svg";
@@ -21,7 +22,7 @@ class App extends React.Component {
       react: [react, <DefaultReact />, "Hello World from React"],
       tictactoe: [tictactoe, <TicTacToe />, "Tic Tac Toe"],
       accounts: [money, <AccountCtrl />, `Accounts`],
-      city: [city, null, `City & Community`]
+      city: [city, <Community />, `City & Community`]
     };
     this.state = { iconClicked: null };
     this.handleClickIcon = this.handleClickIcon.bind(this);
