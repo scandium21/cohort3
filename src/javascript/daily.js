@@ -46,7 +46,7 @@ const functions = {
     let max = null;
     let person = null;
     for (let [key, value] of Object.entries(salaries)) {
-      if (value > max) {
+      if (value >= max) {
         max = value;
         person = key;
       }
