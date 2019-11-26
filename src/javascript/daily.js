@@ -1,5 +1,59 @@
 // Write the function after this comment ---
 const functions = {
+  /* 2019 -11 -26 
+    We have an object:
+
+    let user = {
+      name: "John",
+      years: 30
+    };
+    Write the destructuring assignment that reads:
+
+    name property into the variable name.
+    years property into the variable age.
+    isAdmin property into the variable isAdmin (false, if no such property)
+    Here’s an example of the values after your assignment:
+
+    let user = { name: "John", years: 30 };
+
+    // your code to the left side:
+    // ... = user
+
+    alert( name ); // John
+    alert( age ); // 30
+    alert( isAdmin ); // false
+  */
+  destructuringObj: obj => {
+    let { name, years: age, isAdmin = false } = obj;
+    return [name, age, isAdmin];
+  },
+
+  /* 2019 - 11 - 26
+      There is a salaries object:
+
+      let salaries = {
+        "John": 100,
+        "Pete": 300,
+        "Mary": 250
+      };
+      Create the function topSalary(salaries) that returns the name of the top-paid person.
+
+      If salaries is empty, it should return null.
+      If there are multiple top-paid persons, return any of them.
+      P.S. Use Object.entries and destructuring to iterate over key/value pairs.
+    */
+  topSalary: salaries => {
+    let max = null;
+    let person = null;
+    for (let [key, value] of Object.entries(salaries)) {
+      if (value > max) {
+        max = value;
+        person = key;
+      }
+    }
+    return person;
+  },
+
   /*
     2019 - 11 - 22
     Write 3 functions:  1) Anonymous function 2) Named function, 3) Arrow function.

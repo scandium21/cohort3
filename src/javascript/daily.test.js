@@ -1,5 +1,29 @@
 import functions from "./daily";
 /*
+    2019 - 11 - 26
+  */
+test("2019-11-26 testing destructuringObj()", () => {
+  let user = {
+    name: "John",
+    years: 30
+  };
+  let user2 = {
+    name: "Lucy",
+    years: 22,
+    isAdmin: true
+  };
+  expect(functions.destructuringObj(user)).toEqual(["John", 30, false]);
+  expect(functions.destructuringObj(user2)).toEqual(["Lucy", 22, true]);
+});
+test("2019-11-26 testing topSalaries()", () => {
+  let salaries = {
+    John: 100,
+    Pete: 300,
+    Mary: 250
+  };
+  expect(functions.topSalary(salaries)).toEqual("Pete");
+});
+/*
     2019 - 11 - 22
     Write 3 functions:  1) Anonymous function 2) Named function, 3) Arrow function.
     Write these functions to complete the following exercise.  
