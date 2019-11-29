@@ -53,14 +53,7 @@ export class AccountController {
   }
 
   removeAccount(id) {
-    let toRemove = [];
-    this.accList.forEach((acc, index) => {
-      if (acc.id === id) {
-        toRemove.push(acc, index);
-      }
-    });
-    if (toRemove.length === 0) return null;
-    this.accList.splice(toRemove[1], 1);
+    this.accList = this.accList.filter(acc => acc.id !== id);
   }
 
   getTotal() {
