@@ -36,8 +36,7 @@ export class AccountController {
   }
 
   makeCopy() {
-    let newAccCtrl = new AccountController(this.holder, this.accList);
-    return newAccCtrl;
+    return new AccountController(this.holder, this.accList);
   }
 
   getAccByID(id) {

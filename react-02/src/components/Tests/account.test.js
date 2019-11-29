@@ -1,4 +1,4 @@
-import { AccountController } from './account';
+import { AccountController } from '../Accounts/account';
 
 test('testing AccountController', () => {
   const accC = new AccountController();
