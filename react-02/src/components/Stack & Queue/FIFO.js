@@ -1,4 +1,4 @@
-import { SinglyLinkedList } from "./SinglyLinkedList";
+import { SinglyLinkedList } from "../Linked List/SinglyLinkedList";
 
 export class FIFO extends SinglyLinkedList {
   constructor(subject, amount) {

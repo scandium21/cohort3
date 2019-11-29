@@ -1,10 +1,10 @@
 //---- imported react components ------------------
 import React from "react";
-import DefaultReact from "./components/DefaultReact";
+import DefaultReact from "./components/React Default/DefaultReact";
 import Icon from "./components/Icon";
-import TicTacToe from "./components/TicTacToe";
-import AccountCtrl from "./components/AccountCtrl";
-import Community from "./components/Community";
+import TicTacToe from "./components/Tic Tac Toe/TicTacToe";
+import AccountCtrl from "./components/Accounts/AccountCtrl";
+import Community from "./components/City & Community/Community";
 //---- imported images ----------------------------
 import react from "./assets/icons/react.svg";
 import tictactoe from "./assets/icons/tictactoe.svg";

@@ -1,5 +1,3 @@
-const maxdep = 4;
-
 const minimax = {
   calculateWinner: squares => {
     const lines = [

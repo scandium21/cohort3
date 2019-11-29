@@ -1,4 +1,4 @@
-import { FIFO } from "./FIFO";
+import { FIFO } from "../Stack & Queue/FIFO";
 
 test("testing FI FO", () => {
   const nF = new FIFO("Chemistry", 2);

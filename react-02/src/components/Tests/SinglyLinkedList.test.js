@@ -1,4 +1,4 @@
-import { SinglyLinkedList, ListNode } from "./SinglyLinkedList.js";
+import { SinglyLinkedList, ListNode } from "../Linked List/SinglyLinkedList";
 
 test("testing SinglyLinkedList methods", () => {
   const sl1 = new SinglyLinkedList("math", 10);

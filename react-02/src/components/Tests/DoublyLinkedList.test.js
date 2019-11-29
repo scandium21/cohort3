@@ -1,4 +1,4 @@
-import { DoublyLinkedList } from "./DoublyLinkedList.js";
+import { DoublyLinkedList } from "../Linked List/DoublyLinkedList";
 
 test("testing DoublyLinkedList methods", () => {
   const dl = new DoublyLinkedList("math", 10);
