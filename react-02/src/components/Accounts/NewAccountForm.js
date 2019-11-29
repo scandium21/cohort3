@@ -19,7 +19,7 @@ class NewAccountForm extends Component {
   };
   handleSubmit = e => {
     e.preventDefault();
-    this.props.submit({ ...this.state, id: uuid() });
+    this.props.handleCreateAcc({ ...this.state, id: uuid() });
     this.setState({
       accName: "",
       balance: ""

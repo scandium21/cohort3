@@ -1,55 +1,103 @@
-import React, { Component } from "react";
-
-class Account extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      changeAmt: 0,
-      isChanging: false
-    };
+export class Account {
+  constructor(name, initbalance = 0, id) {
+    this.name = name;
+    this.balance = initbalance || 0;
+    this.id = id;
   }
-  handleChangeAmt = e => {
-    this.setState({
-      changeAmt: parseFloat(e.target.value)
-    });
-  };
-  deposit = e => {
-    e.preventDefault();
-    this.props.onDeposit(this.state.changeAmt, this.props.acc.id);
-  };
-  withdraw = e => {
-    e.preventDefault();
-    this.props.onWithdraw(this.state.changeAmt, this.props.acc.id);
-  };
-  delAcc = e => {
-    this.props.delAcc(this.props.acc.id);
-  };
-  render() {
-    return (
-      <div className="Account-container">
-        <div>
-          {this.props.acc.accName}
-          <span>Total On Deposit: {this.props.acc.balance}</span>
-        </div>
 
-        <div>
-          <form>
-            <label htmlFor="changeBal"></label>
-            <div>
-              <input
-                type="Number"
-                value={this.state.changeAmt !== 0 && this.state.changeAmt}
-                onChange={this.handleChangeAmt}
-              />
-              <button onClick={this.deposit}>Deposit</button>
-              <button onClick={this.withdraw}>Withdraw</button>
-            </div>
-          </form>
-          <button onClick={this.delAcc}>Delete</button>
-        </div>
-      </div>
-    );
+  deposit(amt) {
+    this.balance += amt;
+    return amt;
+  }
+
+  withdraw(amt) {
+    let remaining = this.balance;
+    if (amt >= remaining) {
+      this.balance = 0;
+      return remaining;
+    }
+    this.balance -= amt;
+    return amt;
+  }
+
+  getBalance() {
+    return this.balance;
+  }
+
+  getAccID() {
+    return this.id;
   }
 }
 
-export default Account;
+export class AccountController {
+  constructor(holder = 'Default', accList = []) {
+    this.holder = holder;
+    this.accList = accList;
+  }
+
+  makeCopy() {
+    let newAccCtrl = new AccountController(this.holder, this.accList);
+    return newAccCtrl;
+  }
+
+  getAccByID(id) {
+    return this.accList.filter(acc => acc.id === id)[0];
+  }
+
+  checkAccounts() {
+    return this.accList;
+  }
+
+  addAccount(name, initbalance = 0, id) {
+    let newAcc = new Account(name, initbalance, id);
+    this.accList.push(newAcc);
+  }
+
+  removeAccount(id) {
+    let toRemove = [];
+    this.accList.forEach((acc, index) => {
+      if (acc.id === id) {
+        toRemove.push(acc, index);
+      }
+    });
+    if (toRemove.length === 0) return null;
+    this.accList.splice(toRemove[1], 1);
+  }
+
+  getTotal() {
+    let sum = this.accList.reduce((acc, b) => {
+      return acc + b.getBalance();
+    }, 0);
+    return sum;
+  }
+
+  getHighestAcc() {
+    if (this.accList.length === 0) {
+      return 'No account found';
+    }
+    let max = 0;
+    let accIndex = 0;
+    this.accList.forEach((acc, index) => {
+      if (acc.getBalance() > max) {
+        max = acc.getBalance();
+        accIndex = index;
+      }
+    });
+    return this.accList[accIndex];
+  }
+
+  getLowestAcc() {
+    if (this.accList.length === 0) {
+      return 'No account found';
+    }
+    let min = this.accList[0].getBalance();
+    let accIndex = 0;
+    this.accList.forEach((acc, index) => {
+      if (acc.getBalance() < min) {
+        min = acc.getBalance();
+        accIndex = index;
+      }
+    });
+    return this.accList[accIndex];
+  }
+}

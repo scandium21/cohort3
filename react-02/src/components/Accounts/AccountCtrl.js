@@ -1,83 +1,52 @@
-import React, { Component } from "react";
-import Account from "./Account";
-import NewAccountForm from "./NewAccountForm";
+import React, { Component } from 'react';
+import AccountComp from './AccountComp';
+import { AccountController } from './account';
+import NewAccountForm from './NewAccountForm';
 
 class AccountCtrl extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      accounts: [],
-      total: null,
-      highest: null,
-      lowest: null,
-      showtotal: false,
-      showhighest: false,
-      showlowest: false
+      accounts: new AccountController()
     };
     this.createAcc = this.createAcc.bind(this);
   }
   createAcc(acc) {
-    this.setState(
-      {
-        accounts: [...this.state.accounts, acc]
-      },
-      () => {
-        this.setState({
-          total: this.state.accounts.reduce((acc, i) => acc + i.balance, 0),
-          highest: this.state.accounts.reduce(
-            (acc, i) => (acc > i.balance ? acc : i.balance),
-            0
-          ),
-          lowest: this.state.accounts.reduce(
-            (acc, i) => (acc < i.balance ? acc : i.balance),
-            Number.MAX_SAFE_INTEGER
-          )
-        });
-      }
-    );
+    let newAccCtrl = this.state.accounts.makeCopy();
+    newAccCtrl.addAccount(acc.accName, acc.balance, acc.id);
+    this.setState({
+      accounts: newAccCtrl
+    });
   }
   onDeposit = (amt, id) => {
+    let newAccCtrl = this.state.accounts.makeCopy();
+    let acc = newAccCtrl.getAccByID(id);
+    acc.deposit(amt);
     this.setState({
-      accounts: this.state.accounts.map(acc => {
-        if (acc.id === id) return { ...acc, balance: acc.balance + amt };
-        return acc;
-      })
+      accounts: newAccCtrl
     });
   };
   onWithdraw = (amt, id) => {
+    let newAccCtrl = this.state.accounts.makeCopy();
+    let acc = newAccCtrl.getAccByID(id);
+    acc.withdraw(amt);
     this.setState({
-      accounts: this.state.accounts.map(acc => {
-        if (acc.id === id) return { ...acc, balance: acc.balance - amt };
-        return acc;
-      })
+      accounts: newAccCtrl
     });
   };
   delAcc = id => {
+    let newAccCtrl = this.state.accounts.makeCopy();
+    newAccCtrl.removeAccount(id);
     this.setState({
-      accounts: this.state.accounts.filter(acc => acc.id !== id)
+      accounts: newAccCtrl
     });
   };
 
-  showTotal = () => {
-    this.setState({
-      showtotal: !this.state.showtotal
-    });
-  };
-  showHighest = () => {
-    this.setState({
-      showhighest: !this.state.showhighest
-    });
-  };
-  showLowest = () => {
-    this.setState({
-      showlowest: !this.state.showlowest
-    });
-  };
   render() {
     const showCurrAcc = (
       <div>
-        {this.state.accounts.map(acc => (
-          <Account
+        {this.state.accounts.checkAccounts().map(acc => (
+          <AccountComp
             acc={acc}
             key={acc.id}
             onDeposit={this.onDeposit}
@@ -87,25 +56,16 @@ class AccountCtrl extends Component {
         ))}
       </div>
     );
-    const showStat = (
-      <div>
-        <button onClick={this.showTotal}>Show Total Balance</button>
-        <button onClick={this.showHighest}>Show Highest Balance</button>
-        <button onClick={this.showLowest}>Show Lowest Balance</button>
-      </div>
-    );
+    let total = this.state.accounts.getTotal();
+    let highBal = this.state.accounts.getHighestAcc().balance;
+    let lowBal = this.state.accounts.getLowestAcc().balance;
     return (
       <div className="Account-container">
         <h1>Welcome to Your Accounts!</h1>
-        <NewAccountForm submit={this.createAcc} />
-        {this.state.accounts.length > 0 ? showStat : null}
-        {this.state.showtotal && <div>Total balance: {this.state.total}</div>}
-        {this.state.showhighest && (
-          <div>Highest balance: {this.state.highest}</div>
-        )}
-        {this.state.showlowest && (
-          <div>Lowest balance: {this.state.lowest}</div>
-        )}
+        <NewAccountForm handleCreateAcc={this.createAcc} />
+        <div>Total balance: {total === 0 ? 0 : total}</div>
+        <div>Highest balance: {highBal || 0}</div>
+        <div>Lowest balance: {lowBal || 0}</div>
         {showCurrAcc}
       </div>
     );
