@@ -63,7 +63,7 @@ class AccountCtrl extends Component {
       <div className="Account-container">
         <h1>Welcome to Your Accounts!</h1>
         <NewAccountForm handleCreateAcc={this.createAcc} />
-        <div>Total balance: {total === 0 ? 0 : total}</div>
+        <div>Total balance: {0 || total}</div>
         <div>Highest balance: {highBal || 0}</div>
         <div>Lowest balance: {lowBal || 0}</div>
         {showCurrAcc}
