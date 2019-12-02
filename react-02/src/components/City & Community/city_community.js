@@ -105,17 +105,21 @@ export class Community {
   }
 
   getMostNorthern() {
-    return this.cities.reduce((acc, i) => {
-      if (acc.getLat() < i.getLat()) acc = i;
-      return acc;
-    });
+    return this.cities.length === 0
+      ? null
+      : this.cities.reduce((acc, i) => {
+          if (acc.getLat() < i.getLat()) acc = i;
+          return acc;
+        });
   }
 
   getMostSouthern() {
-    return this.cities.reduce((acc, i) => {
-      if (acc.getLat() > i.getLat()) acc = i;
-      return acc;
-    });
+    return this.cities.length === 0
+      ? null
+      : this.cities.reduce((acc, i) => {
+          if (acc.getLat() > i.getLat()) acc = i;
+          return acc;
+        });
   }
 
   getPopulation() {
