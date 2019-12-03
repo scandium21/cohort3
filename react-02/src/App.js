@@ -5,11 +5,14 @@ import Icon from "./components/Icon";
 import TicTacToe from "./components/Tic Tac Toe/TicTacToe";
 import AccountCtrl from "./components/Accounts/AccountCtrl";
 import Community from "./components/City & Community/Community";
+import List from "./components/Linked List/List";
 //---- imported images ----------------------------
 import react from "./assets/icons/react.svg";
 import tictactoe from "./assets/icons/tictactoe.svg";
 import money from "./assets/icons/money.svg";
 import city from "./assets/icons/city.svg";
+import link from "./assets/icons/link.svg";
+import stack from "./assets/icons/stack.svg";
 import "./App.css";
 //-------------------------------------------------
 
@@ -22,7 +25,9 @@ class App extends React.Component {
       react: [react, <DefaultReact />, "Hello World from React"],
       tictactoe: [tictactoe, <TicTacToe />, "Tic Tac Toe"],
       accounts: [money, <AccountCtrl />, `Accounts`],
-      city: [city, <Community />, `City & Community`]
+      city: [city, <Community />, `City & Community`],
+      ll: [link, <List />, "Linked List"],
+      stack: [stack, null, "Stack & Queue"]
     };
     this.state = { iconClicked: null };
     this.handleClickIcon = this.handleClickIcon.bind(this);
