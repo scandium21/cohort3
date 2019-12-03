@@ -1,7 +1,8 @@
 export class ListNode {
-  constructor(subject = "", amount = 0, next = null) {
+  constructor(subject = "", amount = 0, id, next = null) {
     this.subject = subject;
     this.amount = amount;
+    this.id = id;
     this.next = next;
   }
   show() {
@@ -19,9 +20,16 @@ export class ListNode {
 
 */
 export class SinglyLinkedList {
-  constructor(subject, amount) {
-    this.head = new ListNode(subject, amount);
+  constructor(subject, amount, id) {
+    this.head = new ListNode(subject, amount, id);
     this.length = 1;
+  }
+  getNodeById(id) {
+    let p = this.head;
+    while (p.id !== id) {
+      p = p.next;
+    }
+    return p;
   }
   first() {
     return this.head;
@@ -33,6 +41,29 @@ export class SinglyLinkedList {
       p = p.next;
     }
     return p;
+  }
+  makeCopy() {
+    let currNode = this.head;
+    const newList = new SinglyLinkedList(
+      currNode.subject,
+      currNode.amount,
+      currNode.id
+    );
+    currNode = currNode.next;
+    let p = newList.head;
+    while (currNode) {
+      newList.insert(p, currNode.subject, currNode.amount, currNode.id);
+      currNode = currNode.next;
+      p = p.next;
+    }
+    return newList;
+  }
+  moveToPos(position) {
+    let pos = this.head;
+    while (pos !== position) {
+      pos = pos.next;
+    }
+    return pos;
   }
   next(position) {
     if (!position) return position;
@@ -46,26 +77,39 @@ export class SinglyLinkedList {
     }
     return p;
   }
-  addFront(subject, amount) {
-    let newNode = new ListNode(subject, amount, this.head);
+  addFront(subject, amount, id) {
+    let newNode = new ListNode(subject, amount, id, this.head);
     this.head = newNode;
     this.length += 1;
     return this.head;
   }
-  insert(position, subject = "", amount = 0) {
-    let newNode = new ListNode(subject, amount, position.next);
+  insert(position, subject = "", amount = 0, id) {
+    let newNode = new ListNode(subject, amount, id, position.next);
     position.next = newNode;
     this.length += 1;
     return newNode;
   }
   delete(position) {
-    if (!position) return position;
+    console.log("position?", position);
+    console.log("position===this.head?", position === this.head);
+    if (position === null) return position;
+    this.length -= 1;
     let p = this.head;
+    // if head is to be deleted
+    if (p === position) {
+      if (this.head.next) {
+        this.head = this.head.next;
+        console.log(this.head);
+      } else {
+        this.head = null;
+        console.log("this.head", this.head);
+        return this.head;
+      }
+    }
     while (p.next !== position) {
       p = p.next;
     }
     p.next = position.next;
-    this.length -= 1;
     // returning the node after position, if it's null, return the last node
     return p.next === null ? p : p.next;
   }

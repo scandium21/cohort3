@@ -22,7 +22,11 @@ const LLform = props => {
           Amount:
           <input type="text" id="amount" value={amt} onChange={setAmt} />
         </label>
-        <button>{props.list ? "Add Node" : "Create Head Node"}</button>
+        <button>
+          {props.list && props.list.length !== 0
+            ? "Add Node"
+            : "Create Head Node"}
+        </button>
       </form>
     </div>
   );
