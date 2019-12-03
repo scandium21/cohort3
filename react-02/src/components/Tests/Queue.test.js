@@ -1,7 +1,7 @@
-import { FIFO } from "../Stack & Queue/FIFO";
+import { Queue } from "../Stack & Queue/Queue";
 
-test("testing FI FO", () => {
-  const nF = new FIFO("Chemistry", 2);
+test("testing Queue(FIFO)", () => {
+  const nF = new Queue("Chemistry", 2);
   expect(nF.length).toBe(1);
   nF.push("Math", 9);
   expect(nF.length).toBe(2);

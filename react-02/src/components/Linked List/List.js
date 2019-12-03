@@ -1,19 +1,16 @@
 import React, { useState } from "react";
-import SLL from "./SLL";
-import DLL from "./DLL";
+import LL from "./LL";
 
 const List = () => {
   const [singly, setSingly] = useState(true);
-  // const toggle = () => {
-  //   setSingly(!singly);
-  // };
   return (
     <div>
       <h2>Your List Shows Here</h2>
       <form>
-        Choose a list:
+        <span style={{ display: "inline-block", width: "100px" }}>
+          Choose a list:
+        </span>
         <label htmlFor="singly">
-          Singly
           <input
             type="radio"
             name="singly"
@@ -23,9 +20,9 @@ const List = () => {
               setSingly(!singly);
             }}
           />
+          Singly Linked
         </label>
         <label htmlFor="doubly">
-          Doubly
           <input
             type="radio"
             name="doubly"
@@ -35,10 +32,10 @@ const List = () => {
               setSingly(!singly);
             }}
           />
+          Doubly Linked
         </label>
       </form>
-      {singly && <SLL />}
-      {!singly && <DLL />}
+      <LL type={singly ? "singly" : "doubly"} />
     </div>
   );
 };

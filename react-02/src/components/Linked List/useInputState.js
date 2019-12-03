@@ -1,12 +1,12 @@
-import React, { useState } from "react";
+import { useState } from "react";
 
 const useInputState = initVal => {
-  const [val, setVal] = useState(initVal);
+  const [val, setValState] = useState(initVal);
   const handleChange = e => {
-    setVal(e.target.value);
+    setValState(e.target.value);
   };
   const reset = e => {
-    setVal("");
+    setValState("");
   };
   return [val, handleChange, reset];
 };

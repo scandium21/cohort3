@@ -1,7 +1,7 @@
-import { LIFO } from "../Stack & Queue/LIFO";
+import { Stack } from "../Stack & Queue/Stack";
 
-test("testing LIFO", () => {
-  const nL = new LIFO("Chemistry", 2);
+test("testing Stack(LIFO)", () => {
+  const nL = new Stack("Chemistry", 2);
   expect(nL.length).toBe(1);
   nL.push("Math", 9);
   nL.push("Eggs", 6);

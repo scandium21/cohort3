@@ -85,4 +85,7 @@ export class SinglyLinkedList {
     }
     console.log(string);
   }
+  getLength() {
+    return this.length;
+  }
 }

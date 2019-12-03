@@ -77,4 +77,7 @@ export class DoublyLinkedList {
     this.head = newNode;
     return this.head;
   }
+  getLength() {
+    return this.length;
+  }
 }
