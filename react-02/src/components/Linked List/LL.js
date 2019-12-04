@@ -20,7 +20,6 @@ const LL = props => {
         ? new singly(sub, amt, id)
         : new doubly(sub, amt, id)
     );
-    setUserNodeSt(list && list.getLength() === 1 && list.head);
   };
   useEffect(() => {
     setUserNodeSt(list && list.head);
