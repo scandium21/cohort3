@@ -10,10 +10,30 @@ const LLform = props => {
     rSub();
     rAmt();
   };
+  const handleInsertFront = () => {
+    props.insertFront(props.id, sub, amt);
+    rSub();
+    rAmt();
+  };
+  const handleAppend = () => {
+    props.append(props.id, sub, amt);
+    rSub();
+    rAmt();
+  };
+  const handleInsertBefore = () => {
+    props.insertBefore(props.id, sub, amt);
+    rSub();
+    rAmt();
+  };
+  const handleInsertAfter = () => {
+    props.insertAfter(props.id, sub, amt);
+    rSub();
+    rAmt();
+  };
   return (
     <div>
       <h3>Build your {`${props.type}`} linked list: </h3>
-      <form onSubmit={handleCreateNode}>
+      <form>
         <label htmlFor="subject">
           Subject:
           <input type="text" id="subject" value={sub} onChange={setSub} />
@@ -22,12 +42,24 @@ const LLform = props => {
           Amount:
           <input type="text" id="amount" value={amt} onChange={setAmt} />
         </label>
-        <button>
-          {props.list && props.list.length !== 0
-            ? "Add Node"
-            : "Create Head Node"}
-        </button>
       </form>
+      <div className="nodemanip-btns">
+        {(!props.list || props.list.length === 0) && (
+          <button onClick={handleCreateNode}>Create Head Node</button>
+        )}
+        {props.list && props.list.length > 0 && (
+          <button onClick={handleInsertFront}>Insert Front</button>
+        )}
+        {props.list && props.list.length > 0 && (
+          <button onClick={handleAppend}>Append Node</button>
+        )}
+        {props.list && props.list.length > 0 && (
+          <button onClick={handleInsertBefore}>Insert Before Curr Node</button>
+        )}
+        {props.list && props.list.length > 0 && (
+          <button onClick={handleInsertAfter}>Insert After Curr Node</button>
+        )}
+      </div>
     </div>
   );
 };

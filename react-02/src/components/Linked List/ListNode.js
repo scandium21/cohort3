@@ -12,7 +12,18 @@ const ListNode = props => {
     <div>
       <div>
         {!props.isSingly ? (
-          <div className="listnode-prev">{props.prev}</div> /*"↓"*/
+          <div
+            className="listnode-prev"
+            style={
+              !props.prev && {
+                backgroundColor: "#e4adff",
+                margin: "auto",
+                display: "inline-block"
+              }
+            }
+          >
+            {props.prev ? props.prev : "null"}
+          </div> /*"↓"*/
         ) : null}
         {!props.isSingly ? (
           <div className="listnode-uparrow">⬆</div> /*"↓"*/
@@ -20,7 +31,8 @@ const ListNode = props => {
         <div
           className="listnode-content"
           style={{
-            backgroundColor: "#eee",
+            backgroundColor:
+              props.currNode.id === props.id ? "#23efaa" : "#eee",
             margin: "auto",
             display: "inline-block"
           }}
@@ -28,13 +40,13 @@ const ListNode = props => {
           <div>
             {subject}{" "}
             <span>
-              <button onClick={handleMoveToNode}>Move To Here</button>
+              <button onClick={handleMoveToNode}>Move To Node</button>
             </span>
           </div>
           <div>
             {amount}{" "}
             <span>
-              <button onClick={handleDeleteNode}>Delete</button>
+              <button onClick={handleDeleteNode}>Delete Node</button>
             </span>
           </div>
         </div>

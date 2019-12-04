@@ -90,8 +90,6 @@ export class SinglyLinkedList {
     return newNode;
   }
   delete(position) {
-    console.log("position?", position);
-    console.log("position===this.head?", position === this.head);
     if (position === null) return position;
     this.length -= 1;
     let p = this.head;
@@ -99,10 +97,9 @@ export class SinglyLinkedList {
     if (p === position) {
       if (this.head.next) {
         this.head = this.head.next;
-        console.log(this.head);
+        return this.head;
       } else {
         this.head = null;
-        console.log("this.head", this.head);
         return this.head;
       }
     }
