@@ -76,6 +76,7 @@ export default ListNode;
 const toEmoji = (sub, amt) => {
   let cat = emojiObj[sub];
   // let randNum = Math.floor(Math.random() * cat.length);
+  if (amt < 0) amt = -amt;
   let idx = amt > cat.length ? amt % cat.length : amt;
   let emoji = cat[idx].emoji;
   // if (code.length > 5) {
