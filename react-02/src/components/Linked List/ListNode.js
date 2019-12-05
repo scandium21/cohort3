@@ -82,7 +82,7 @@ const toEmoji = (sub, amt) => {
   let cat = emojiObj[sub];
   // let randNum = Math.floor(Math.random() * cat.length);
   if (amt < 0) amt = -amt;
-  let idx = amt > cat.length ? amt % cat.length : amt;
+  let idx = amt > cat.length - 1 ? amt % (cat.length - 1) : amt;
   let emoji = cat[idx].emoji;
   let alt = cat[idx].alt;
   // if (code.length > 5) {
