@@ -14,27 +14,27 @@ const LLform = props => {
   const handleCreateNode = e => {
     e.preventDefault();
     if (!isValidInput()) return;
-    props.createNode(sub, amt);
+    props.createNode(sub, parseFloat(amt));
     rAmt();
   };
   const handleInsertFront = () => {
     if (!isValidInput()) return;
-    props.insertFront(props.userNode.id, sub, amt);
+    props.insertFront(props.userNode.id, sub, parseFloat(amt));
     rAmt();
   };
   const handleAppend = () => {
     if (!isValidInput()) return;
-    props.append(props.userNode.id, sub, amt);
+    props.append(props.userNode.id, sub, parseFloat(amt));
     rAmt();
   };
   const handleInsertBefore = () => {
     if (!isValidInput()) return;
-    props.insertBefore(props.userNode.id, sub, amt);
+    props.insertBefore(props.userNode.id, sub, parseFloat(amt));
     rAmt();
   };
   const handleInsertAfter = () => {
     if (!isValidInput()) return;
-    props.insertAfter(props.userNode.id, sub, amt);
+    props.insertAfter(props.userNode.id, sub, parseFloat(amt));
     rAmt();
   };
   return (
