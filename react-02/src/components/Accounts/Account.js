@@ -30,7 +30,7 @@ export class Account {
 }
 
 export class AccountController {
-  constructor(holder = 'Default', accList = []) {
+  constructor(holder = "Default", accList = []) {
     this.holder = holder;
     this.accList = accList;
   }
@@ -65,7 +65,7 @@ export class AccountController {
 
   getHighestAcc() {
     if (this.accList.length === 0) {
-      return 'No account found';
+      return "No account found";
     }
     let max = 0;
     let accIndex = 0;
@@ -80,7 +80,7 @@ export class AccountController {
 
   getLowestAcc() {
     if (this.accList.length === 0) {
-      return 'No account found';
+      return "No account found";
     }
     let min = this.accList[0].getBalance();
     let accIndex = 0;

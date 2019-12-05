@@ -1,7 +1,7 @@
-import React, { Component } from 'react';
-import AccountComp from './AccountComp';
-import { AccountController } from './Account';
-import NewAccountForm from './NewAccountForm';
+import React, { Component } from "react";
+import AccountComp from "./AccountComp";
+import { AccountController } from "./Account";
+import NewAccountForm from "./NewAccountForm";
 
 class AccountCtrl extends Component {
   constructor(props) {

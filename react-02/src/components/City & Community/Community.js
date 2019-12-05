@@ -1,7 +1,7 @@
-import React, { Component } from 'react';
-import NewCityForm from './NewCityForm';
-import City from './City';
-import { Community as Cities } from './city_community';
+import React, { Component } from "react";
+import NewCityForm from "./NewCityForm";
+import City from "./City";
+import { Community as Cities } from "./city_community";
 
 class Community extends Component {
   constructor(props) {
@@ -57,15 +57,15 @@ class Community extends Component {
     let total = this.state.cities.getPopulation();
     let north = this.state.cities.getMostNorthern()
       ? this.state.cities.getMostNorthern().name
-      : 'No cities yet';
+      : "No cities yet";
     let south = this.state.cities.getMostSouthern()
       ? this.state.cities.getMostSouthern().name
-      : 'No cities yet';
+      : "No cities yet";
     return (
       <div>
         <h1>Welcome to the Community!</h1>
         <NewCityForm create={this.create} />
-        <div>Total population: {total || 'No cities yet'}</div>
+        <div>Total population: {total || "No cities yet"}</div>
         <div>Most Northern City: {north}</div>
         <div>Most Southern City: {south}</div>
         {cities}

@@ -1,6 +1,6 @@
 export class City {
   constructor(
-    name = 'Default',
+    name = "Default",
     latitude = 0,
     longitude = 0,
     population = 0,
@@ -29,17 +29,17 @@ export class City {
   }
 
   howBig() {
-    if (this.population > 100000) return 'City';
-    else if (this.population > 20000) return 'Large town';
-    else if (this.population > 1000) return 'Town';
-    else if (this.population > 100) return 'Village';
-    else return 'Hamlet';
+    if (this.population > 100000) return "City";
+    else if (this.population > 20000) return "Large town";
+    else if (this.population > 1000) return "Town";
+    else if (this.population > 100) return "Village";
+    else return "Hamlet";
   }
 
   whichSphere() {
-    if (this.latitude > 0) return 'Northern Hemisphere';
-    else if (this.latitude < 0) return 'Southern Hemisphere';
-    else return 'The Equator';
+    if (this.latitude > 0) return "Northern Hemisphere";
+    else if (this.latitude < 0) return "Southern Hemisphere";
+    else return "The Equator";
   }
 
   getPop() {
@@ -60,7 +60,7 @@ export class City {
 }
 
 export class Community {
-  constructor(name = 'Empty', cities = []) {
+  constructor(name = "Empty", cities = []) {
     this.name = name;
     this.cities = cities;
   }

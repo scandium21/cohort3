@@ -1,13 +1,13 @@
-import React, { Component } from 'react';
+import React, { Component } from "react";
 
 class NewCityForm extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      cityName: '',
-      cityPop: '',
-      cityLat: '',
-      cityLong: ''
+      cityName: "",
+      cityPop: "",
+      cityLat: "",
+      cityLong: ""
     };
     this.id = 0;
   }
@@ -15,22 +15,22 @@ class NewCityForm extends Component {
     e.preventDefault();
     for (let prop of Object.keys(this.state)) {
       if (!this.state[prop]) {
-        alert('Please enter all required info');
+        alert("Please enter all required info");
         return;
       }
     }
     this.props.create({ ...this.state, id: ++this.id });
     this.setState({
-      cityName: '',
-      cityPop: '',
-      cityLat: '',
-      cityLong: ''
+      cityName: "",
+      cityPop: "",
+      cityLat: "",
+      cityLong: ""
     });
   };
   handleChange = e => {
     this.setState({
       [e.target.name]:
-        e.target.name === 'cityPop' ? parseInt(e.target.value) : e.target.value
+        e.target.name === "cityPop" ? parseInt(e.target.value) : e.target.value
     });
   };
   render() {

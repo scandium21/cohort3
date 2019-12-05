@@ -1,5 +1,5 @@
-import React from 'react';
-import RadioInput from './RadioInput';
+import React from "react";
+import RadioInput from "./RadioInput";
 
 const GameStartingUI = props => {
   return (

@@ -45,7 +45,12 @@ const ListNode = props => {
             </span>
           </div>
           <div>
-            <span style={{ fontSize: "3em" }}>{toEmoji(subject, amount)}</span>
+            <span
+              style={{ fontSize: "3em" }}
+              title={toEmoji(subject, amount)[1]}
+            >
+              {toEmoji(subject, amount)[0]}
+            </span>
             <span>
               <button onClick={handleDeleteNode}>Delete Node</button>
             </span>
@@ -79,11 +84,12 @@ const toEmoji = (sub, amt) => {
   if (amt < 0) amt = -amt;
   let idx = amt > cat.length ? amt % cat.length : amt;
   let emoji = cat[idx].emoji;
+  let alt = cat[idx].alt;
   // if (code.length > 5) {
   //   code = code.split(" ");
   //   code = code.reduce((acc, c) => acc + `u{${c}}`, "");
   // } else {
   //   code = `u{${code}}`;
   // }
-  return emoji;
+  return [emoji, alt];
 };

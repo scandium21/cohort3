@@ -16,7 +16,8 @@ eGroups.forEach((g, idx) => {
     const code = l.slice(0, 43).trim();
     const frags = l.split("#");
     const emoji = frags[1].trim().split(" ")[0];
-    cat.push({ code: code, emoji: emoji });
+    const alt = frags[1].trim().split("E")[1];
+    cat.push({ code: code, emoji: emoji, alt: alt });
   });
 });
 fs.writeFile("./emojiCodes.json", JSON.stringify(emojiCodes), err => {

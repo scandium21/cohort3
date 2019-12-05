@@ -1,5 +1,5 @@
-import React from 'react';
-import './Icon.css';
+import React from "react";
+import "./Icon.css";
 
 class Icon extends React.Component {
   render() {
