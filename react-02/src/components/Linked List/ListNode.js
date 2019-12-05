@@ -45,7 +45,7 @@ const ListNode = props => {
             </span>
           </div>
           <div>
-            {toEmoji(subject, amount)}
+            <span style={{ fontSize: "3em" }}>{toEmoji(subject, amount)}</span>
             <span>
               <button onClick={handleDeleteNode}>Delete Node</button>
             </span>

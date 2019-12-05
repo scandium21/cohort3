@@ -140,6 +140,7 @@ export class SinglyLinkedList {
     return this.sumAmountHelper(this.head);
   }
   sumAmountHelper(node) {
+    if (!node) return node;
     if (node.next === null) return node.amount;
     return this.sumAmountHelper(node.next) + node.amount;
   }
