@@ -1,4 +1,5 @@
 import React from "react";
+import { emojiObj } from "./Emoji";
 
 const ListNode = props => {
   const { subject, amount, next, prev } = props.node;
@@ -44,7 +45,7 @@ const ListNode = props => {
             </span>
           </div>
           <div>
-            {amount}{" "}
+            {toEmoji(subject, amount)}
             <span>
               <button onClick={handleDeleteNode}>Delete Node</button>
             </span>
@@ -71,3 +72,17 @@ const ListNode = props => {
 };
 
 export default ListNode;
+
+const toEmoji = (sub, amt) => {
+  let cat = emojiObj[sub];
+  // let randNum = Math.floor(Math.random() * cat.length);
+  let idx = amt > cat.length ? amt % cat.length : amt;
+  let emoji = cat[idx].emoji;
+  // if (code.length > 5) {
+  //   code = code.split(" ");
+  //   code = code.reduce((acc, c) => acc + `u{${c}}`, "");
+  // } else {
+  //   code = `u{${code}}`;
+  // }
+  return emoji;
+};

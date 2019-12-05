@@ -2,45 +2,63 @@ import useInputState from "./useInputState";
 import React from "react";
 
 const LLform = props => {
-  const [sub, setSub, rSub] = useInputState("");
+  const [sub, setSub, rSub] = useInputState("Smileys & Emotion");
   const [amt, setAmt, rAmt] = useInputState("");
+  const isValidInput = () => {
+    if (!sub || !amt) {
+      alert("Please fill in all fields!");
+      return false;
+    }
+    return true;
+  };
   const handleCreateNode = e => {
     e.preventDefault();
+    if (!isValidInput()) return;
     props.createNode(sub, amt);
-    rSub();
     rAmt();
   };
   const handleInsertFront = () => {
-    props.insertFront(props.id, sub, amt);
-    rSub();
+    if (!isValidInput()) return;
+    props.insertFront(props.userNode.id, sub, amt);
     rAmt();
   };
   const handleAppend = () => {
-    props.append(props.id, sub, amt);
-    rSub();
+    if (!isValidInput()) return;
+    props.append(props.userNode.id, sub, amt);
     rAmt();
   };
   const handleInsertBefore = () => {
-    props.insertBefore(props.id, sub, amt);
-    rSub();
+    if (!isValidInput()) return;
+    props.insertBefore(props.userNode.id, sub, amt);
     rAmt();
   };
   const handleInsertAfter = () => {
-    props.insertAfter(props.id, sub, amt);
-    rSub();
+    if (!isValidInput()) return;
+    props.insertAfter(props.userNode.id, sub, amt);
     rAmt();
   };
   return (
     <div>
-      <h3>Build your {`${props.type}`} linked list: </h3>
+      <h3>
+        Build your {`${props.type}`} linked {`🦧`} list:{" "}
+      </h3>
       <form>
         <label htmlFor="subject">
           Subject:
-          <input type="text" id="subject" value={sub} onChange={setSub} />
+          <select name="subject" id="subject" value={sub} onChange={setSub}>
+            <option value="Smileys & Emotion">Smileys & Emotion</option>
+            <option value="People & Body">People & Body</option>
+            <option value="Animals & Nature">Animals & Nature</option>
+            <option value="Food & Drink">Food & Drink</option>
+            <option value="Travel & Places">Travel & Places</option>
+            <option value="Activities">Activities</option>
+            <option value="Objects">Objects</option>
+            <option value="Symbols">Symbols</option>
+          </select>
         </label>
         <label htmlFor="amount">
-          Amount:
-          <input type="text" id="amount" value={amt} onChange={setAmt} />
+          Enter a Number:
+          <input type="number" id="amount" value={amt} onChange={setAmt} />
         </label>
       </form>
       <div className="nodemanip-btns">

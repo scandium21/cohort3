@@ -5,7 +5,7 @@ const List = () => {
   const [singly, setSingly] = useState(true);
   return (
     <div>
-      <h2>Your List Shows Here</h2>
+      <h2>🎄 Emoji List 🎄</h2>
       <form>
         <span style={{ display: "inline-block", width: "100px" }}>
           Choose a list:

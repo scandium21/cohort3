@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import LLform from "./LLform";
-import useListState from "./useListState";
 import ListNode from "./ListNode";
 import uuid from "uuid/v4";
 import { SinglyLinkedList as singly } from "./SinglyLinkedList";
@@ -8,41 +7,55 @@ import { DoublyLinkedList as doubly } from "./DoublyLinkedList";
 
 const LL = props => {
   let isSingly = props.type === "singly";
-  const [list, setListSt] = useListState(null);
+  const [list, setListSt] = useState(null);
   const [type, setTypeSt] = useState(props.type);
   const [userNode, setUserNodeSt] = useState(list ? list.head : null);
-  const createNewNode = (sub, amt) => {
-    let id = uuid();
-    setListSt(
-      list !== null && list.length !== 0
-        ? list.makeCopy()
-        : isSingly
-        ? new singly(sub, amt, id)
-        : new doubly(sub, amt, id)
-    );
-  };
   useEffect(() => {
-    setUserNodeSt(list && list.head);
+    if (!list) return;
+    else if (list.length > 1) return;
+    setUserNodeSt(list.first());
   }, [list]);
+  const createNewNode = (sub, amt) => {
+    const id = uuid();
+    setListSt(isSingly ? new singly(sub, amt, id) : new doubly(sub, amt, id));
+  };
   const moveToNode = position => {
     setUserNodeSt(list.moveToPos(position));
   };
   const deleteNode = id => {
-    let newList = list.makeCopy();
-    let node = newList.getNodeById(id);
-    let newPos = newList.delete(node);
+    const newList = list.makeCopy();
+    const node = newList.getNodeById(id);
+    const newPos = newList.delete(node);
     setListSt(newList);
     setUserNodeSt(newPos);
   };
   const insertFront = (id, sub, amt) => {
-    let nid = uuid();
+    console.log("in LL insertFront amt", amt, "type of amt", typeof amt);
+    const nid = uuid();
     const newList = list.makeCopy();
     newList.addFront(sub, amt, nid);
     setListSt(newList);
   };
-  const append = (id, sub, amt) => {};
-  const insertBefore = (id, sub, amt) => {};
-  const insertAfter = (id, sub, amt) => {};
+  const append = (id, sub, amt) => {
+    const nid = uuid();
+    const newList = list.makeCopy();
+    newList.append(sub, amt, nid);
+    setListSt(newList);
+  };
+  const insertBefore = (id, sub, amt) => {
+    const nid = uuid();
+    const newList = list.makeCopy();
+    const node = newList.getNodeById(id);
+    newList.insertBefore(node, sub, amt, nid);
+    setListSt(newList);
+  };
+  const insertAfter = (id, sub, amt) => {
+    const nid = uuid();
+    const newList = list.makeCopy();
+    const node = newList.getNodeById(id);
+    newList.insert(node, sub, amt, nid);
+    setListSt(newList);
+  };
   const mapNodesToComp = list => {
     if (type !== props.type && list !== null) {
       setListSt(null);
@@ -55,7 +68,7 @@ const LL = props => {
     }
     if (type === props.type && list === null) return null;
     let currNode = list.first();
-    let nodes = [];
+    const nodes = [];
     while (currNode) {
       nodes.push(
         <ListNode
@@ -82,6 +95,8 @@ const LL = props => {
         insertBefore={insertBefore}
         insertAfter={insertAfter}
         append={append}
+        userNode={userNode}
+        emoji={props.emoji[2]}
       />
       {mapNodesToComp(list)}
       <div>
@@ -89,8 +104,18 @@ const LL = props => {
         <div>Subject: {userNode ? userNode.subject : "N/A"}</div>
         <div>Amt: {userNode ? userNode.amount : "N/A"}</div>
       </div>
+      <div>Total amount: {list ? list.sumAmount() : "N/A"}</div>
+      <br />
+      <div>
+        <button>Sort by Subject</button>
+        <button>Sort by Amount</button>
+      </div>
     </div>
   );
 };
 
 export default LL;
+
+LL.defaultProps = {
+  emoji: ["🎄", "🎅", "🤶🏻", "😍"]
+};

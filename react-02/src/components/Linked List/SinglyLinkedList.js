@@ -26,7 +26,7 @@ export class SinglyLinkedList {
   }
   getNodeById(id) {
     let p = this.head;
-    while (p.id !== id) {
+    while (p && p.id !== id) {
       p = p.next;
     }
     return p;
@@ -83,10 +83,36 @@ export class SinglyLinkedList {
     this.length += 1;
     return this.head;
   }
+  append(subject = "", amount = 0, id) {
+    let newNode = new ListNode(subject, amount, id, null);
+    let p = this.head;
+    if (!p) {
+      this.head = newNode;
+      return newNode;
+    }
+    while (p.next) {
+      p = p.next;
+    }
+    p.next = newNode;
+    return newNode;
+  }
   insert(position, subject = "", amount = 0, id) {
     let newNode = new ListNode(subject, amount, id, position.next);
     position.next = newNode;
     this.length += 1;
+    return newNode;
+  }
+  insertBefore(position, subject = "", amount = 0, id) {
+    let newNode = new ListNode(subject, amount, id, position);
+    let p = this.head;
+    // insert before head
+    if (p === position) {
+      return this.addFront(subject, amount, id);
+    }
+    while (p && p.next !== position) {
+      p = p.next;
+    }
+    p.next = newNode;
     return newNode;
   }
   delete(position) {
