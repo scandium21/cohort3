@@ -16,29 +16,29 @@ const compMove = {
     let occupiedOwnSign;
     let occupiedOppSign;
     squares.forEach((s, index) => {
-      if (compIsNext && s === 'X') {
+      if (compIsNext && s === "X") {
         occupiedOwnIndex.push(index);
-        occupiedOwnSign = 'X';
-      } else if (compIsNext && s === 'O') {
+        occupiedOwnSign = "X";
+      } else if (compIsNext && s === "O") {
         occupiedOppIndex.push(index);
-        occupiedOppSign = 'O';
-      } else if (!compIsNext && s === 'X') {
+        occupiedOppSign = "O";
+      } else if (!compIsNext && s === "X") {
         occupiedOppIndex.push(index);
-        occupiedOppSign = 'X';
-      } else if (!compIsNext && s === 'O') {
+        occupiedOppSign = "X";
+      } else if (!compIsNext && s === "O") {
         occupiedOwnIndex.push(index);
-        occupiedOwnSign = 'O';
+        occupiedOwnSign = "O";
       }
     });
     const occupied = occupiedOwnIndex.concat(occupiedOppIndex);
     // empty board
     if (stepNumber === 0) {
       // center - 40% chance, corners - 15% chance each
-      if (ran > 0.6) squares[4] = compIsNext ? 'X' : 'O';
-      else if (ran < 0.15) squares[0] = compIsNext ? 'X' : 'O';
-      else if (ran < 0.25) squares[2] = compIsNext ? 'X' : 'O';
-      else if (ran < 0.35) squares[6] = compIsNext ? 'X' : 'O';
-      else squares[8] = compIsNext ? 'X' : 'O';
+      if (ran > 0.6) squares[4] = compIsNext ? "X" : "O";
+      else if (ran < 0.15) squares[0] = compIsNext ? "X" : "O";
+      else if (ran < 0.25) squares[2] = compIsNext ? "X" : "O";
+      else if (ran < 0.35) squares[6] = compIsNext ? "X" : "O";
+      else squares[8] = compIsNext ? "X" : "O";
       return squares;
     }
 

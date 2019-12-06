@@ -34,7 +34,7 @@ const minimax = {
       // loop through board, find empty spots
       if (board[i] === null) {
         // move to the empty spot
-        board[i] = compIsNextX ? 'X' : 'O';
+        board[i] = compIsNextX ? "X" : "O";
         // calculate the value as a result of this move
         let val = minimax.minimax(board, 0, !compIsNextX);
         // undo move
@@ -50,7 +50,7 @@ const minimax = {
         }
       }
     }
-    console.log('best move', bestMove);
+    console.log("best move", bestMove);
     return bestMove;
   },
 
@@ -68,7 +68,7 @@ const minimax = {
         // loop through board, find empty spots
         if (board[i] === null) {
           // move to the empty spot
-          board[i] = 'X';
+          board[i] = "X";
           // calculate the resulting value
           best = Math.max(best, minimax.minimax(board, depth + 1, !compIsNext));
           board[i] = null;
@@ -81,7 +81,7 @@ const minimax = {
         // loop through board, find empty spots
         if (board[i] === null) {
           // move to the empty spot
-          board[i] = 'O';
+          board[i] = "O";
           // calculate the resulting value
           best = Math.min(best, minimax.minimax(board, depth + 1, !compIsNext));
           board[i] = null;
@@ -109,7 +109,7 @@ const minimax = {
         squares[a] === squares[b] &&
         squares[a] === squares[c]
       ) {
-        if (squares[a] === 'X') return 100;
+        if (squares[a] === "X") return 100;
         return -100;
       }
     }
