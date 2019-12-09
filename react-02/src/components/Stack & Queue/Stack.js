@@ -14,3 +14,5 @@ export class Stack extends SinglyLinkedList {
     super.addFront(subject, amount);
   }
 }
+
+export default Stack;

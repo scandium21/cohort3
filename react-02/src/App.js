@@ -6,6 +6,7 @@ import TicTacToe from "./components/Tic Tac Toe/TicTacToe";
 import AccountCtrl from "./components/Accounts/AccountCtrl";
 import Community from "./components/City & Community/Community";
 import ListMain from "./components/Linked List/ListMain";
+import SQMain from "./components/Stack & Queue/SQMain";
 //---- imported images ----------------------------
 import react from "./assets/icons/react.svg";
 import tictactoe from "./assets/icons/tictactoe.svg";
@@ -27,7 +28,7 @@ class App extends React.Component {
       accounts: [money, <AccountCtrl />, `Accounts`],
       city: [city, <Community />, `City & Community`],
       ll: [link, <ListMain />, "Linked List"],
-      stack: [stack, null, "Stack & Queue"]
+      stack: [stack, <SQMain />, "Stack & Queue"]
     };
     this.state = { iconClicked: null };
     this.handleClickIcon = this.handleClickIcon.bind(this);
