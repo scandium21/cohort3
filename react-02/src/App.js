@@ -43,7 +43,7 @@ class App extends React.Component {
 
   renderIcons() {
     const icons = [];
-    const style = { backgroundColor: "#e1ffa8", borderRadius: "10%" };
+    const style = { backgroundColor: "#e1ffa899", borderRadius: "10%" };
     for (let item in this.iconData) {
       let icon = (
         <Icon
@@ -80,9 +80,93 @@ class App extends React.Component {
       <div>
         {this.renderHeading()}
         {this.state.iconClicked && this.iconData[this.state.iconClicked][1]}
+        {this.props.iconCredit[this.state.iconClicked]}
       </div>
     );
   }
 }
 
 export default App;
+
+App.defaultProps = {
+  iconCredit: {
+    react: (
+      <div>
+        Icons made by{" "}
+        <a href="https://www.flaticon.com/authors/freepik" title="Freepik">
+          Freepik
+        </a>{" "}
+        from{" "}
+        <a href="https://www.flaticon.com/" title="Flaticon">
+          www.flaticon.com
+        </a>
+      </div>
+    ),
+    tictactoe: (
+      <div>
+        Icons made by{" "}
+        <a href="https://www.flaticon.com/authors/freepik" title="Freepik">
+          Freepik
+        </a>{" "}
+        from{" "}
+        <a href="https://www.flaticon.com/" title="Flaticon">
+          www.flaticon.com
+        </a>
+      </div>
+    ),
+    accounts: (
+      <div>
+        Icons made by{" "}
+        <a href="https://www.flaticon.com/authors/pause08" title="Pause08">
+          Pause08
+        </a>{" "}
+        from{" "}
+        <a href="https://www.flaticon.com/" title="Flaticon">
+          www.flaticon.com
+        </a>
+      </div>
+    ),
+    city: (
+      <div>
+        Icons made by{" "}
+        <a
+          href="https://www.flaticon.com/authors/smalllikeart"
+          title="smalllikeart"
+        >
+          smalllikeart
+        </a>{" "}
+        from{" "}
+        <a href="https://www.flaticon.com/" title="Flaticon">
+          www.flaticon.com
+        </a>
+      </div>
+    ),
+    ll: (
+      <div>
+        Icons made by{" "}
+        <a
+          href="https://www.flaticon.com/authors/kiranshastry"
+          title="Kiranshastry"
+        >
+          Kiranshastry
+        </a>{" "}
+        from{" "}
+        <a href="https://www.flaticon.com/" title="Flaticon">
+          www.flaticon.com
+        </a>
+      </div>
+    ),
+    stack: (
+      <div>
+        Icons made by{" "}
+        <a href="https://www.flaticon.com/authors/eucalyp" title="Eucalyp">
+          Eucalyp
+        </a>{" "}
+        from{" "}
+        <a href="https://www.flaticon.com/" title="Flaticon">
+          www.flaticon.com
+        </a>
+      </div>
+    )
+  }
+};

@@ -34,9 +34,9 @@ export class SinglyLinkedList {
   first() {
     return this.head;
   }
-  last(position) {
-    if (!position) return position;
-    let p = position;
+  last() {
+    if (!this.head) return null;
+    let p = this.head;
     while (p.next != null) {
       p = p.next;
     }
