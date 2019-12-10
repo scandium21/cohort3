@@ -6,15 +6,19 @@ import Queue from "./Queue";
 
 const StackComp = props => {
   let { faces, fruits, type } = props;
+  let emojiObj = [];
   const [val, setVal] = useSorQ(null, type);
+  const [idx, setIdx] = useState(0);
   const SorQ = {
-    stack: (emoji, code) => new Stack(emoji, code),
-    queue: (emoji, code) => new Queue(emoji, code)
+    stack: (emoji, color) => new Stack(emoji, color),
+    queue: (emoji, color) => new Queue(emoji, color)
   };
   const push = () => {
-    let emojiObj = getEmoji(type === "stack" ? faces : fruits);
+    emojiObj = getEmoji(type === "stack" ? faces : fruits);
     if (!emojiObj) {
-      alert("No more faces in the stock!");
+      alert(
+        `No more ${type === "stack" ? `animals!` : `fruit!`} in the stock!`
+      );
       return;
     }
     setVal(
@@ -44,6 +48,7 @@ const StackComp = props => {
           node={currNode}
           face={currNode.subject}
           key={currNode.subject}
+          id={currNode.id}
           bkgc={currNode.amount}
         />
       );
@@ -51,10 +56,14 @@ const StackComp = props => {
     }
     return nodes;
   };
+  const reset = () => {
+    emojiObj = type === "stack" ? faces.slice() : fruits.slice();
+    return emojiObj;
+  };
   return (
     <div className="SorQ-container" style={{ margin: "2%", width: "200px" }}>
       <h2>
-        A {`${type}`} of {`${type === "stack" ? `animals!` : `fruits!`}`}
+        A {`${type}`} of {`${type === "stack" ? `animals!` : `fruit!`}`}
       </h2>
       {mapStackToComp()}
       <div className="SorQ-btns" style={{ marginTop: "5%" }}>

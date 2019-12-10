@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 
 export default (init, t) => {
   const [stack, setStack] = useState(init);

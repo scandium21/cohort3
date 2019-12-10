@@ -1,8 +1,8 @@
 import { SinglyLinkedList } from "../Linked List/SinglyLinkedList";
 
 class Stack extends SinglyLinkedList {
-  constructor(subject, amount) {
-    super(subject, amount);
+  constructor(subject, amount, id) {
+    super(subject, amount, id);
   }
   /**
    * Removes the value at the end of the stack and returns it
@@ -19,12 +19,12 @@ class Stack extends SinglyLinkedList {
    * @param {*} subject
    * @param {*} amount
    */
-  push(subject, amount) {
+  push(subject, amount, id) {
     let currNode = this.head;
     while (currNode.next) {
       currNode = currNode.next;
     }
-    super.insert(currNode, subject, amount);
+    super.insert(currNode, subject, amount, id);
     return this;
   }
   makeCopy() {

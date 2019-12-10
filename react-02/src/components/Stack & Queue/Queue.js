@@ -1,8 +1,8 @@
 import { SinglyLinkedList } from "../Linked List/SinglyLinkedList";
 
 class Queue extends SinglyLinkedList {
-  constructor(subject, amount) {
-    super(subject, amount);
+  constructor(subject, amount, id) {
+    super(subject, amount, id);
   }
   pop() {
     if (!this.head) return this;
@@ -11,12 +11,12 @@ class Queue extends SinglyLinkedList {
     this.length -= 1;
     return deleted;
   }
-  push(subject, amount) {
+  push(subject, amount, id) {
     let currNode = this.head;
     while (currNode.next) {
       currNode = currNode.next;
     }
-    super.insert(currNode, subject, amount);
+    super.insert(currNode, subject, amount, id);
     return this;
   }
   makeCopy() {
