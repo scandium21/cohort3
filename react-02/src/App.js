@@ -14,6 +14,7 @@ import money from "./assets/icons/money.svg";
 import city from "./assets/icons/city.svg";
 import link from "./assets/icons/link.svg";
 import stack from "./assets/icons/stack.svg";
+import style from "./assets/icons/style.svg";
 import "./App.css";
 //-------------------------------------------------
 
@@ -28,7 +29,8 @@ class App extends React.Component {
       accounts: [money, <AccountCtrl />, `Accounts`],
       city: [city, <Community />, `City & Community`],
       ll: [link, <ListMain />, "Linked List"],
-      stack: [stack, <SQMain />, "Stack & Queue"]
+      stack: [stack, <SQMain />, "Stack & Queue"],
+      style: [style, null, "Style Settings"]
     };
     this.state = { iconClicked: null };
     this.handleClickIcon = this.handleClickIcon.bind(this);
@@ -161,6 +163,18 @@ App.defaultProps = {
         Icons made by{" "}
         <a href="https://www.flaticon.com/authors/eucalyp" title="Eucalyp">
           Eucalyp
+        </a>{" "}
+        from{" "}
+        <a href="https://www.flaticon.com/" title="Flaticon">
+          www.flaticon.com
+        </a>
+      </div>
+    ),
+    style: (
+      <div>
+        Icons made by{" "}
+        <a href="https://www.flaticon.com/authors/freepik" title="Freepik">
+          Freepik
         </a>{" "}
         from{" "}
         <a href="https://www.flaticon.com/" title="Flaticon">
