@@ -17,6 +17,7 @@ import stack from "./assets/icons/stack.svg";
 import style from "./assets/icons/style.svg";
 import "./App.css";
 //-------------------------------------------------
+import ThemeContext from "./components/ThemeContext";
 
 class App extends React.Component {
   constructor(props) {
@@ -79,11 +80,13 @@ class App extends React.Component {
 
   render() {
     return (
-      <div>
-        {this.renderHeading()}
-        {this.state.iconClicked && this.iconData[this.state.iconClicked][1]}
-        {this.props.iconCredit[this.state.iconClicked]}
-      </div>
+      <ThemeContext.Provider value={"light"}>
+        <div>
+          {this.renderHeading()}
+          {this.state.iconClicked && this.iconData[this.state.iconClicked][1]}
+          {this.props.iconCredit[this.state.iconClicked]}
+        </div>
+      </ThemeContext.Provider>
     );
   }
 }
