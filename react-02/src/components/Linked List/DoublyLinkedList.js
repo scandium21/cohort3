@@ -22,6 +22,7 @@ export class DoublyLinkedList {
   constructor(subject, amount) {
     let newNode = new ListNode(subject, amount, null, null);
     this.head = newNode;
+    this.current = null;
     this.length = 1;
   }
   first() {
