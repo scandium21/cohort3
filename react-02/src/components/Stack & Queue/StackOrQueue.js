@@ -4,7 +4,7 @@ import Card from "./Card";
 import Stack from "./Stack";
 import Queue from "./Queue";
 
-const StackComp = props => {
+const StackOrQueue = props => {
   let { faces, fruits, type } = props;
   let emojiObj = [];
   const [val, setVal] = useSorQ(null, type);
@@ -74,7 +74,7 @@ const StackComp = props => {
   );
 };
 
-export default StackComp;
+export default StackOrQueue;
 
 StackComp.defaultProps = {
   faces: [
