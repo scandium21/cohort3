@@ -6,21 +6,21 @@ import numbers
         boolean
         array
         dictionary / objects
-        undefined
+        None
     sample if / else
     functions
         parameters
         returns
-    arrays
+    lists
         add to the front
         add to the end
         update values
+        comprehension
     loops 
         for
         for/in
         while
         do while
-        forEach (with array and function)
     Objects / Dictionaries
         declare object
         lookup key to retrieve value
@@ -43,12 +43,12 @@ def divide(num, divisor):
 def multiply(num1,num2):
     return num1 * num2
 
-def stringLen(string):
+def string_len(string):
     if type(string) is str: 
         return len(string)
     raise UseTypeException(string, str) 
 
-def ifGreaterThanFive(num):
+def if_greater_than_five(num):
     if isinstance(num, numbers.Number):
         return num > 5
     raise UseTypeException(num, numbers.Number)
