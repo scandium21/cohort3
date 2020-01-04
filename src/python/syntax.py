@@ -100,12 +100,12 @@ def print_dict_prop(dict):
 
 # while loop
 def while_loop(list1, list2):
-    concat = zip(list1,list2)
-    next_one = concat.__next__()
+    zipped = zip(list1,list2)
+    next_one = zipped.__next__()
     try: 
         while(isinstance(next_one, tuple)):
             print(f"items: {next_one}")
-            next_one = concat.__next__()
+            next_one = zipped.__next__()
     except StopIteration:
         return
 
