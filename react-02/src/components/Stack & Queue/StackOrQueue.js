@@ -76,7 +76,7 @@ const StackOrQueue = props => {
 
 export default StackOrQueue;
 
-StackComp.defaultProps = {
+StackOrQueue.defaultProps = {
   faces: [
     { code: "1F435", emoji: "🐵", alt: "2.0 monkey face" },
     { code: "1F436", emoji: "🐶", alt: "2.0 dog face" },

@@ -7,6 +7,8 @@ import AccountCtrl from "./components/Accounts/AccountCtrl";
 import Community from "./components/City & Community/Community";
 import ListMain from "./components/Linked List/ListMain";
 import SQMain from "./components/Stack & Queue/SQMain";
+import ThemeSetting from "./components/ThemeSetting";
+import PageContent from "./components/PageContent";
 //---- imported images ----------------------------
 import react from "./assets/icons/react.svg";
 import tictactoe from "./assets/icons/tictactoe.svg";
@@ -17,9 +19,10 @@ import stack from "./assets/icons/stack.svg";
 import style from "./assets/icons/style.svg";
 import "./App.css";
 //-------------------------------------------------
-import ThemeContext from "./components/ThemeContext";
+import { ThemeProvider, ThemeContext } from "./components/ThemeContext";
 
 class App extends React.Component {
+  static contextType = ThemeContext;
   constructor(props) {
     super(props);
     // iconData contains: source of the icon image,
@@ -31,10 +34,9 @@ class App extends React.Component {
       city: [city, <Community />, `City & Community`],
       ll: [link, <ListMain />, "Linked List"],
       stack: [stack, <SQMain />, "Stack & Queue"],
-      style: [style, null, "Style Settings"]
+      style: [style, <ThemeSetting />, "Style Settings"]
     };
     this.state = { iconClicked: null };
-    this.handleClickIcon = this.handleClickIcon.bind(this);
   }
 
   handleClickIcon = e => {
@@ -80,19 +82,22 @@ class App extends React.Component {
 
   render() {
     return (
-      <ThemeContext.Provider value={"light"}>
-        <div>
-          {this.renderHeading()}
-          {this.state.iconClicked && this.iconData[this.state.iconClicked][1]}
-          {this.props.iconCredit[this.state.iconClicked]}
-        </div>
-      </ThemeContext.Provider>
+      <ThemeProvider>
+        <PageContent>
+          <div>{this.renderHeading()}</div>
+          <div>
+            {this.state.iconClicked && this.iconData[this.state.iconClicked][1]}
+          </div>
+          <footer>{this.props.iconCredit[this.state.iconClicked]}</footer>
+        </PageContent>
+      </ThemeProvider>
     );
   }
 }
 
 export default App;
 
+// acknowledging icon credits
 App.defaultProps = {
   iconCredit: {
     react: (
