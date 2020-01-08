@@ -1,0 +1,24 @@
+======================= Calculation by CLASS =========================
+
+Sub Category                  Number of Lines in File       Sum of RES_CNT
+
+Residential                   208                           1263734
+Industrial                    42                            922
+Major Park                    4                             0
+Residual Sub Area             49                            0
+======================= Calculation by SECTOR =========================
+
+Sub Category                  Number of Lines in File       Sum of RES_CNT
+
+CENTRE                        62                            199977
+SOUTH                         58                            227345
+NORTHEAST                     44                            185534
+NORTHWEST                     30                            174126
+NORTH                         30                            160502
+SOUTHEAST                     23                            135009
+EAST                          23                            57666
+WEST                          33                            124497
+
+
+csv file sourse: https://data.calgary.ca/Demographics/Census-by-Community-2018/cc4n-ndvs;
+file name: Census by Community 2018.csv
