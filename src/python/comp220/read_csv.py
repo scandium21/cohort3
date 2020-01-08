@@ -54,7 +54,8 @@ def create_report_str(cat, target):
 
 final_string = create_report_str('CLASS', 'RES_CNT') + create_report_str(
     'SECTOR', 'RES_CNT')
-final_string += f'\n\ncsv file sourse: https://data.calgary.ca/Demographics/Census-by-Community-2018/cc4n-ndvs' + f'\nfile name: Census by Community 2018.csv'
+final_string += f'\n\ncsv file sourse: https://data.calgary.ca/Demographics/Census-by-Community-2018/cc4n-ndvs' + 
+f'\nfile name: Census by Community 2018.csv'
 
 try:
     csv_report = open('csv_report.txt', 'w')
