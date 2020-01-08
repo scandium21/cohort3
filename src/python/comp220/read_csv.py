@@ -60,4 +60,4 @@ try:
     csv_report = open('csv_report.txt', 'w')
     csv_report.write(final_string)
 finally:
-    csv_file.close()
+    csv_report.close()
