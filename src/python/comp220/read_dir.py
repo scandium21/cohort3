@@ -19,7 +19,7 @@ def print_dir_report(dir_info):
 
 
 print_dir_report(get_dir_info())
-# Number of files in directory "./" is 6. Total size is 2888015 bytes.
+# Number of files in directory "./" is 6. Total size is 2887700 bytes.
 
 # reference: https://www.programiz.com/python-programming/directory
 # https://stackoverflow.com/questions/1392413/calculating-a-directorys-size-using-python
