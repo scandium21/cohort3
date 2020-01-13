@@ -1,0 +1,23 @@
+-------------------------------------  Invoice -------------------------------------
+
+First Name     Last Name      Date           Amount ($)     Product                  Quantity       
+Allen          Butterfield    2019-03-02     500            Cardio II                1              
+Allen          Butterfield    2019-03-02     500            Strength Training II     1              
+
+
+
+-------------------------------------  Invoice -------------------------------------
+
+First Name     Last Name      Date           Amount ($)     Product                  Quantity       
+Yvonne         Watkins        2019-03-22     500            Boxing                   1              
+
+
+
+-------------------------------------  Invoice -------------------------------------
+
+First Name     Last Name      Date           Amount ($)     Product                  Quantity       
+Sally          Pierce         2019-03-05     500            Strength Training II     1              
+Sally          Pierce         2019-03-05     300            Yoga                     1              
+
+
+
