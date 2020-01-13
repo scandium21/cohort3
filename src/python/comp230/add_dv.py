@@ -40,7 +40,7 @@ non_prime_ids = {
     'products': ''
 }
 
-wb = load_workbook('sample_db.xlsx')
+wb = load_workbook('sample_db_1.xlsx')
 
 for sheetname in wb.sheetnames:
     ws = wb[sheetname]
@@ -91,4 +91,4 @@ for dv in dvs:
         dv.error = f'Need to enter data of type: {dv.type}. ' + f'And its value needs to: {dv.operator} {dv.formula1}' + (
             f' and {dv.formula2}' if dv.formula2 != None else '')
 
-wb.save('sample_db.xlsx')
+wb.save('sample_db_1.xlsx')
