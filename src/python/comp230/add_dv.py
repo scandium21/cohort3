@@ -1,8 +1,5 @@
 from openpyxl.worksheet.datavalidation import DataValidation
-from openpyxl import Workbook
-from openpyxl.utils import quote_sheetname
 from openpyxl import load_workbook
-import datetime
 
 # prime ids: non-negative whole numbers and no duplicates
 # prices and payments: non-negative numbers
