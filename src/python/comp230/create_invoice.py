@@ -37,14 +37,16 @@ def print_invoice(re):
                 item.get(i)).ljust(15) if i != 'product_name' else str(
                     item.get(i)).ljust(25)
         string += '\n'
-    return string + '\n\n\n'
+    print(string + '\n\n\n')
 
 
 content = ['f_name', 'l_name', 'date']
 sub_content = ['price', 'product_name', 'quantity']
 
 
-def generate_invoice(iid, db='merged_sample_db.xlsx'):
+def generate_invoice(db='merged_sample_db.xlsx'):
+    iid = input('Please enter an invoice id to print: ')
+    iid = int(iid)
     wb = load_workbook(db)
     result = {}
     invoice_info = retrieve_info_from_id(iid, 'i_id', wb['invoices'])[0]
@@ -66,17 +68,16 @@ def generate_invoice(iid, db='merged_sample_db.xlsx'):
             'quantity': item.get('quantity'),
             'price': price
         })
-    print(result)
     return print_invoice(result)
 
 
-try:
-    invoice_report = open('invoice_report.txt', 'w')
-    invoice_report.write(
-        generate_invoice(4) + generate_invoice(26) + generate_invoice(10))
-finally:
-    invoice_report.close()
-print(generate_invoice(4))
+# try:
+#     invoice_report = open('invoice_report.txt', 'w')
+#     invoice_report.write(
+#         generate_invoice(4) + generate_invoice(26) + generate_invoice(10))
+# finally:
+#     invoice_report.close()
+generate_invoice()
 
 # -------------------------------------  Invoice -------------------------------------
 
