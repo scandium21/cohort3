@@ -25,7 +25,6 @@ def retrieve_info_from_id(id, id_type, ws):
 
 
 def print_invoice(re):
-    # {'date': datetime.datetime(2019, 3, 2, 0, 0), 'f_name': 'Allen', 'l_name': 'Butterfield', 'products': [{'product_name': 'Cardio II', 'quantity': 1, 'price': 500}, {'product_name': 'Strength Training II', 'quantity': 1, 'price': 500}]}
     string = f'-------------------------------------  Invoice -------------------------------------\n\n'
     string += 'First Name'.ljust(15) + 'Last Name'.ljust(15) + 'Date'.ljust(
         15) + 'Amount ($)'.ljust(15) + 'Product'.ljust(25) + 'Quantity'.ljust(
