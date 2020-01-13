@@ -1,5 +1,4 @@
 from openpyxl import load_workbook
-from openpyxl import Workbook
 
 
 class DiffSheetNums(Exception):
@@ -16,7 +15,6 @@ class DiffSheetNames(Exception):
 
 def merge_files(file_des, main_file, *rest_files_to_merge):
     wb1 = load_workbook(main_file)
-    merged = Workbook()
     for f in rest_files_to_merge:
         wb_to_merge = load_workbook(f)
         if len(wb1.sheetnames) != len(wb_to_merge.sheetnames):
@@ -24,14 +22,14 @@ def merge_files(file_des, main_file, *rest_files_to_merge):
         elif wb1.sheetnames != wb_to_merge.sheetnames:
             raise DiffSheetNames(main_file, f)
         for name in wb1.sheetnames:
-            print("now accessing sheet: ", name)
+            # print("now accessing sheet: ", name)
             ws1 = wb1[name]
             ws_to_merge = wb_to_merge[name]
             for row_to_merge, row1 in zip(
                     list(ws_to_merge.rows)[1:],
                     list(ws1.rows)[1:]):
                 if row_to_merge[0].value == row1[0].value:
-                    print(row_to_merge[0], row_to_merge[0].value)
+                    # print(row_to_merge[0], row_to_merge[0].value)
                     continue
                 ws1.append((cell.value for cell in row_to_merge))
     wb1.save(file_des)
