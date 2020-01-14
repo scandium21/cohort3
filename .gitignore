@@ -1,11 +1,9 @@
-#
-# A very simple ignore file
-#
 
 # these directories will be ignored
 
 /coverage
 /node_modules
+.DS_Store
 
 # For python
 # Byte-compiled / optimized / DLL files
