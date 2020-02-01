@@ -1,5 +1,7 @@
 from openpyxl import load_workbook
 
+### Old file, use "generate_invoice.py" instead
+
 
 def get_col_let_by_header(header, ws):
     for h in ws[1]:
