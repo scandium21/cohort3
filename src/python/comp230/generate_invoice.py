@@ -68,11 +68,11 @@ def get_products_price_from_pid(pids):
 
 def get_invoice_content():
     iid = get_user_input(get_iid_range())
-    if iid > get_iid_range():
-        return {}
+    if iid > get_iid_range() or iid < get_iid_range():
+        return "No record found"
     cid = get_cid_from_iid(iid)
     if cid == 'no c_id found':
-        return {}
+        return "No record found"
     invoice_date = get_invoice_date_from_iid(iid)
     [firstname, lastname] = get_customer_names(cid)
     [pids, quantity] = get_pid_quantity_from_iid(iid)
@@ -92,6 +92,9 @@ def print_invoice(obj):
     s = 15
     l = 25
     string = f'-------------------------------------  Invoice -------------------------------------\n\n'
+    if obj == "No record found":
+        return string + obj
+
     string += 'First Name'.ljust(s) + 'Last Name'.ljust(s) + 'Date'.ljust(
         s) + 'Amount ($)'.ljust(s) + 'Product'.ljust(l) + 'Quantity'.ljust(
             s) + '\n'
