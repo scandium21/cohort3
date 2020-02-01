@@ -37,6 +37,6 @@ def map_wb_to_dict(db='merged_sample_db.xlsx'):
 
 try:
     wb_dict = open('wb_dict.json', 'w')
-    json.dump(map_wb_to_dict(), wb_dict)
+    json.dump(map_wb_to_dict(), wb_dict, indent="\t", separators=(',', ': '))
 finally:
     wb_dict.close()
