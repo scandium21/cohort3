@@ -1,3 +1,4 @@
+# jsonify converts a dict to json, its input has to be a dict
 from flask import Flask, jsonify, request, render_template
 
 app = Flask(__name__)
@@ -23,8 +24,10 @@ def home():
 # POST /store data: {name:}
 @app.route('/store', methods=['POST'])
 def create_store():
+    # request is the request that's made to this endpoint
+    # get_json() converts json to python dict
     request_data = request.get_json()
-    new_store = {'name': request_data['name'], 'item': []}
+    new_store = {'name': request_data['name'], 'items': []}
     stores.append(new_store)
     return jsonify(new_store)
 
