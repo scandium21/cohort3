@@ -6,6 +6,7 @@ from db import db
 from security import authenticate, identity
 from resources.user import UserRegister
 from resources.item import Item, ItemList
+from resources.store import Store, StoreList
 
 # Api works with Resource, every Resource has to be a class.
 # Flast-JWT: json web token. Obfuscation of data, encoding of data
@@ -19,6 +20,12 @@ app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///data.db"
 app.secret_key = "scandium"
 api = Api(app)
 
+# will run the method before the first request for the app
+@app.before_first_request
+def create_tables():
+    db.create_all()
+
+
 # JWT creates an endpoint - /auth
 # when call /auth, send it a username and a password
 # jwt passes them on to authenticate func
@@ -28,7 +35,9 @@ api = Api(app)
 jwt = JWT(app, authenticate, identity)
 
 api.add_resource(Item, "/item/<string:name>")
+api.add_resource(Store, "/store/<string:name>")
 api.add_resource(ItemList, "/items")
+api.add_resource(StoreList, "/stores")
 api.add_resource(UserRegister, "/register")
 
 if __name__ == "__main__":
