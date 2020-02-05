@@ -24,7 +24,7 @@
   <body>
     <div class="container">
       <h1>Workbook content</h1>
-      {% if not results %} No Results. {% else %} {% for wsname, ws in
+      {% if not results %} No Results. {% else %} {% for wsname,ws in
       results.items() %}
       <div class="table-1">
         <p class="cap">
@@ -40,7 +40,7 @@
 
             {% for item in ws %}
             <tr>
-              {% for key,val in item.items() %}
+              {% for val in item.values() %}
               <td>{{val}}</td>
               {% endfor%}
             </tr>

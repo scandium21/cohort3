@@ -1,4 +1,4 @@
-from flask import Flask, jsonify, request, render_template
+from flask import Flask, render_template
 
 from read_data import map_wb_to_dict
 
