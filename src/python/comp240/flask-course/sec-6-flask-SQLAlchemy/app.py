@@ -2,6 +2,7 @@ from flask import Flask
 from flask_restful import Api
 from flask_jwt import JWT
 
+from db import db
 from security import authenticate, identity
 from resources.user import UserRegister
 from resources.item import Item, ItemList
@@ -10,6 +11,11 @@ from resources.item import Item, ItemList
 # Flast-JWT: json web token. Obfuscation of data, encoding of data
 
 app = Flask(__name__)
+# turns off flask sqlalchemy tracker to save resources
+# sqlalchemy has its own modificaton tracker
+app.config["SQLALCHEMY_TRACK_MODIFICTIONS"] = False
+# doen't have to be sqlite, can be postgresql, mySQL ...
+app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///data.db"
 app.secret_key = "scandium"
 api = Api(app)
 
@@ -26,4 +32,5 @@ api.add_resource(ItemList, "/items")
 api.add_resource(UserRegister, "/register")
 
 if __name__ == "__main__":
+    db.init_app(app)
     app.run(port=5000, debug=True)
