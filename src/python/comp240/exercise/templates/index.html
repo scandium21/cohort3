@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Python Flask</title>
+    <style>
+      html,
+      body {
+        background-color: #333;
+        color: rgb(125, 147, 170);
+      }
+      table,
+      td {
+        border: 1px solid lightslategray;
+      }
+      .cap {
+        font-size: 20px;
+        font-weight: bold;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h1>Workbook content</h1>
+      {% if not results %} No Results. {% else %} {% for wsname, ws in
+      results.items() %}
+      <div class="table-1">
+        <p class="cap">
+          {{wsname}} table
+        </p>
+        <table>
+          <tbody>
+            <tr>
+              {% for header in ws_headers[wsname] %}
+              <th>{{header}}</th>
+              {% endfor %}
+            </tr>
+
+            {% for item in ws %}
+            <tr>
+              {% for key,val in item.items() %}
+              <td>{{val}}</td>
+              {% endfor%}
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+      {% endfor %}{% endif %}
+    </div>
+  </body>
+</html>
