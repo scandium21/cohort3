@@ -15,8 +15,8 @@ def get_info_by_category(target, cat):
                 line_data = line.split(',')
                 sub_cat = line_data[cat_idx]
                 target_val = int(line_data[target_idx])
-                sum_target[sub_cat] = (sum_target.get(sub_cat) or 0) + target_val
-                lines_num[sub_cat] = (lines_num.get(sub_cat) or 0) + 1
+                sum_target[sub_cat] = sum_target.get(sub_cat,0) + target_val
+                lines_num[sub_cat] = lines_num.get(sub_cat,0) + 1
     return {
         sub_cat: [num_line, target_sum]
         for sub_cat, num_line, target_sum in zip(
