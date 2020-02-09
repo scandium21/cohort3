@@ -9,7 +9,7 @@ def get_info_by_category(target, cat):
     with open("Census_by_Community_2018.csv", "r") as csv:
         for idx, line in enumerate(csv):
             if idx == 0:
-                header_idx = get_category_idx(line)
+                header_idx = get_category_idx_pair(line)
                 cat_idx = header_idx[cat]
                 target_idx = header_idx[target]
             else:
