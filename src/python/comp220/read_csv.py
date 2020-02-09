@@ -1,25 +1,22 @@
-try:
-    csv_file = open('Census_by_Community_2018.csv', 'r')
-    lines = csv_file.readlines()
-finally:
-    csv_file.close()
-
-
-def get_category_idx_pair():
-    return {cat.rstrip(): ind for ind, cat in enumerate(lines[0].split(','))}
+def get_category_idx_pair(header):
+    return {cat.rstrip(): ind for ind, cat in enumerate(header.split(','))}
 
 
 def get_info_by_category(target, cat):
-    cat_idx = get_category_idx_pair()[cat]
-    target_idx = get_category_idx_pair()[target]
     sum_target = {}
     lines_num = {}
-    for line in lines[1:]:
-        line_data = line.split(',')
-        sub_cat = line_data[cat_idx]
-        target_val = int(line_data[target_idx])
-        sum_target[sub_cat] = (sum_target.get(sub_cat) or 0) + target_val
-        lines_num[sub_cat] = (lines_num.get(sub_cat) or 0) + 1
+
+    with open('Census_by_Community_2018.csv', 'r') as csv:
+        for idx, line in enumerate(csv):
+            if idx == 0: 
+                cat_idx = get_category_idx_pair(line)[cat]
+                target_idx = get_category_idx_pair(line)[target]
+            else:
+                line_data = line.split(',')
+                sub_cat = line_data[cat_idx]
+                target_val = int(line_data[target_idx])
+                sum_target[sub_cat] = (sum_target.get(sub_cat) or 0) + target_val
+                lines_num[sub_cat] = (lines_num.get(sub_cat) or 0) + 1
     return {
         sub_cat: [num_line, target_sum]
         for sub_cat, num_line, target_sum in zip(
