@@ -35,7 +35,7 @@ def create_report_str(target, cats):
     string = ""
     sum_target, sum_lines = get_info_by_category(target, cats)
     for cat in cats:
-        string += f"======================= Calculation by {cat} =========================\n\n"
+        string += f" Calculation by {cat} ".center(70, "=") + "\n\n"
         string += (
             "Sub Category".ljust(30)
             + f"Number of Lines in File".ljust(30)

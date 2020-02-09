@@ -1,4 +1,4 @@
-======================= Calculation by CLASS =========================
+======================== Calculation by CLASS ========================
 
 Sub Category                  Number of Lines in File       Sum of RES_CNT
 
@@ -8,7 +8,7 @@ Major Park                    4                             0
 Residual Sub Area             49                            0
 
 
-======================= Calculation by SECTOR =========================
+======================= Calculation by SECTOR ========================
 
 Sub Category                  Number of Lines in File       Sum of RES_CNT
 
