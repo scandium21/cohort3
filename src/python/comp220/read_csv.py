@@ -31,7 +31,34 @@ def get_info_by_category(target, cats):
     return sum_target, lines_num
 
 
-# print(get_info_by_category("RES_CNT", ["CLASS", "SECTOR"]))
+def create_report_str(target, cats):
+    string = ""
+    sum_target, sum_lines = get_info_by_category(target, cats)
+    for cat in cats:
+        string += f"======================= Calculation by {cat} =========================\n\n"
+        string += (
+            "Sub Category".ljust(30)
+            + f"Number of Lines in File".ljust(30)
+            + f"Sum of {target}\n\n"
+        )
+        for sub_cat, target_sum, target_lines in zip(
+            sum_target[cat].keys(), sum_target[cat].values(), sum_lines[cat].values()
+        ):
+            string += (
+                f"{sub_cat}".ljust(30) + f"{target_lines}".ljust(30) + f"{target_sum}\n"
+            )
+        string += "\n\n"
+
+    string += f"\ncsv file sourse: https://data.calgary.ca/Demographics/Census-by-Community-2018/cc4n-ndvs"
+
+    with open("csv_report.txt", "w") as report:
+        report.write(string)
+    return string + "\n\n"
+
+
+if __name__ == "__main__":
+    create_report_str("RES_CNT", ["CLASS", "SECTOR"])
+
 # (
 #     {
 #         "CLASS": {
@@ -70,32 +97,3 @@ def get_info_by_category(target, cats):
 #         },
 #     },
 # )
-
-
-def create_report_str(target, cats):
-    string = ""
-    sum_target, sum_lines = get_info_by_category(target, cats)
-    for cat in cats:
-        string += f"======================= Calculation by {cat} =========================\n\n"
-        string += (
-            "Sub Category".ljust(30)
-            + f"Number of Lines in File".ljust(30)
-            + f"Sum of {target}\n\n"
-        )
-        for sub_cat, target_sum, target_lines in zip(
-            sum_target[cat].keys(), sum_target[cat].values(), sum_lines[cat].values()
-        ):
-            string += (
-                f"{sub_cat}".ljust(30) + f"{target_sum}".ljust(30) + f"{target_lines}\n"
-            )
-        string += "\n\n"
-
-    string += f"\ncsv file sourse: https://data.calgary.ca/Demographics/Census-by-Community-2018/cc4n-ndvs"
-
-    with open("csv_report.txt", "w") as report:
-        report.write(string)
-    return string + "\n\n"
-
-
-if __name__ == "__main__":
-    create_report_str("RES_CNT", ["CLASS", "SECTOR"])
