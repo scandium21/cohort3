@@ -9,6 +9,7 @@ from flask_jwt_extended import (
 
 from admin_required import admin_required
 from read_data import map_wb_to_dict
+from security import authenticated
 
 app = Flask(__name__)
 app.config["JWT_SECRET_KEY"] = "super-secret"  # Change this!
@@ -19,7 +20,7 @@ wb = map_wb_to_dict()
 
 @jwt.user_claims_loader
 def add_claims_to_access_token(identity):
-    if identity == "admin":
+    if identity == "admin1234":
         return {"roles": "admin"}
     else:
         return {"roles": "member"}
@@ -41,8 +42,10 @@ def login():
     #     return jsonify({"msg": "Bad username or password"}), 401
 
     # Identity can be any data that is json serializable
-    access_token = create_access_token(identity=username)
-    return jsonify(access_token=access_token), 200
+    if authenticated(username, password):
+        access_token = create_access_token(identity=username)
+        return jsonify(access_token=access_token), 200
+    return {"message": "wrong combination of username and password"}, 400
 
 
 @app.route("/protected", methods=["GET"])
