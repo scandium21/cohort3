@@ -9,7 +9,9 @@ class Product(Resource):
     parser.add_argument(
         "unit_price", type=float, required=True, help="Must contain price info!"
     )
-    parser.add_argument("name", type=str, required=True, help="Must have a name!")
+    parser.add_argument(
+        "name", type=str, required=True, help="Must have a name!", case_sensitive=False
+    )
 
     def get(self, name):
         product = ProductModel.find_by_name(name)
@@ -20,12 +22,12 @@ class Product(Resource):
     # @admin_required
     def post(self):
         data = Product.parser.parse_args()
-        if ProductModel.find_by_name(data["name"].lower()):
+        if ProductModel.find_by_name(data["name"]):
             return (
-                {"message": f"an item with name {data['name'].lower()} already exists"},
+                {"message": f"an item with name {data['name']} already exists"},
                 400,
             )
-        new_product = ProductModel(data["name"].lower(), data["unit_price"])
+        new_product = ProductModel(**data)
         try:
             new_product.save_to_db()
         except:
@@ -38,7 +40,7 @@ class Product(Resource):
     # @admin_required
     def delete(self):
         data = Product.parser.parse_args()
-        product = ProductModel.find_by_name(data["name"].lower())
+        product = ProductModel.find_by_name(data["name"])
         if product:
             product.delete_from_db()
             return {"message": "item deleted"}
@@ -46,11 +48,11 @@ class Product(Resource):
     # @admin_required
     def put(self):
         data = Product.parser.parse_args()
-        product = ProductModel.find_by_name(data["name"].lower())
+        product = ProductModel.find_by_name(data["name"])
         if product is None:
-            product = ProductModel(data["name"].lower(), data["unit_price"])
+            product = ProductModel(**data)
         else:
-            product.name = data["name"].lower()
+            product.name = data["name"]
             product.unit_price = data["unit_price"]
         product.save_to_db()
         return product.json()
