@@ -1,9 +1,7 @@
 from functools import wraps
 from flask import jsonify
 from flask_jwt_extended import (
-    JWTManager,
     verify_jwt_in_request,
-    create_access_token,
     get_jwt_claims,
 )
 
@@ -19,3 +17,4 @@ def admin_required(fn):
             return fn(*args, **kwargs)
 
     return wrapper
+

@@ -12,6 +12,7 @@ openpyxl = "*"
 flask = "*"
 flask-restful = "*"
 flask-jwt-extended = "*"
+flask-sqlalchemy = "*"
 
 [requires]
 python_version = "3.8"
