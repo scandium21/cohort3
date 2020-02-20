@@ -13,6 +13,7 @@ from read_data import map_wb_to_dict
 from security import authenticated
 
 from resources.product import Product, Products
+from resources.customer import Customer, Customers
 
 app = Flask(__name__)
 app.config["SQLALCHEMY_TRACK_MODIFICTIONS"] = False
@@ -31,6 +32,8 @@ def create_tables():
 
 api.add_resource(Product, "/product", "/product/<string:name>")
 api.add_resource(Products, "/products")
+api.add_resource(Customer, "/member", "/member/<string:name>")
+api.add_resource(Customers, "/members")
 
 # @jwt.user_claims_loader
 # def add_claims_to_access_token(identity):

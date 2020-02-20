@@ -8,7 +8,7 @@ class CustomerModel(db.Model):
     f_name = db.Column(db.String(80), nullable=False)
     l_name = db.Column(db.String(80), nullable=False)
     email = db.Column(db.String(200), nullable=False)
-    active = db.Column(db.Interger)
+    active = db.Column(db.Integer)
     created_at = db.Column(db.DateTime, nullable=False)
 
     def json(self):
@@ -17,12 +17,18 @@ class CustomerModel(db.Model):
             "l_name": self.l_name,
             "email": self.email,
             "active": self.active,
-            "created_at": self.created_at,
+            "created_at": self.created_at.strftime("%Y-%m-%d"),
         }
 
     @classmethod
     def find_by_name(cls, name):
-        return cls.query.filter_by(name=name).first()
+        results = cls.query.filter(CustomerModel.l_name.like(f"%{name}%")).all()
+        results.extend(cls.query.filter(CustomerModel.f_name.like(f"%{name}%")).all())
+        return results
+
+    @classmethod
+    def find_by_email(cls, email):
+        return cls.query.filter_by(email=email).first()
 
     def save_to_db(self):
         db.session.add(self)
