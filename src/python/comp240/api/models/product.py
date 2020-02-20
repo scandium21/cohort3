@@ -17,7 +17,7 @@ class ProductModel(db.Model):
 
     @classmethod
     def find_by_name(cls, name):
-        return cls.query.filter_by(name=name).first()
+        return cls.query.filter_by(name=name.lower()).first()
 
     def save_to_db(self):
         db.session.add(self)

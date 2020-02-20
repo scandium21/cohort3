@@ -27,6 +27,10 @@ class CustomerModel(db.Model):
         return results
 
     @classmethod
+    def find_by_full_name(cls, fname, lname):
+        return cls.query.filter_by(f_name=fname.lower(), l_name=lname.lower()).first()
+
+    @classmethod
     def find_by_email(cls, email):
         return cls.query.filter_by(email=email).first()
 
